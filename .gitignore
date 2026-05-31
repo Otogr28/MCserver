@@ -46,6 +46,17 @@ backups/
 *.zip
 *.tar.gz
 
+# ===== Runtime del servidor (NO lo necesitan los jugadores) =====
+libraries/
+/*.jar
+run.sh
+run.bat
+user_jvm_args.txt
+eula.txt
+.fabric/
+versions/
+# OJO: mods/*.jar SÍ se versiona (es el modpack). Solo se ignora el .jar de Forge en la raíz.
+
 # ===== Lo que SÍ se versiona (referencia, no borrar):
 #   mods/  config/  defaultconfigs/  kubejs/  scripts/
 #   server.properties  *.toml  resourcepacks/  datapacks de modpack
