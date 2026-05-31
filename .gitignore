@@ -38,6 +38,8 @@ ops.json
 whitelist.json
 .console_history
 *.dat_old
+# server.properties: solo del servidor (puede llevar rcon.password/IP). Los jugadores no lo necesitan.
+server.properties
 
 # ===== Backups / temporales =====
 backups/
