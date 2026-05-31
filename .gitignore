@@ -1,0 +1,52 @@
+# ===== Claves / secretos (NUNCA subir) =====
+mcserver_key
+mcserver_key.pub
+*.pem
+*.key
+id_ed25519*
+id_rsa*
+
+# ===== Mundo (cambia cada tick, NO se versiona) =====
+world/
+world_nether/
+world_the_end/
+DIM*/
+**/playerdata/
+**/stats/
+**/advancements/
+**/region/
+**/data/
+**/poi/
+**/entities/
+session.lock
+
+# ===== Logs y crashes =====
+logs/
+crash-reports/
+*.log
+*.log.gz
+debug/
+hs_err_pid*.log
+.mixin.out/
+
+# ===== Estado del servidor / cache (por instancia) =====
+usercache.json
+usernamecache.json
+banned-players.json
+banned-ips.json
+ops.json
+whitelist.json
+.console_history
+*.dat_old
+
+# ===== Backups / temporales =====
+backups/
+*.tmp
+*.bak
+*.zip
+*.tar.gz
+
+# ===== Lo que SÍ se versiona (referencia, no borrar):
+#   mods/  config/  defaultconfigs/  kubejs/  scripts/
+#   server.properties  *.toml  resourcepacks/  datapacks de modpack
+# =====
