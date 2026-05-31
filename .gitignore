@@ -2,6 +2,8 @@
 mcserver_key
 mcserver_key.pub
 CLAUDE.md
+# tooling/hooks de la laptop del admin (no es modpack)
+.claude/
 *.pem
 *.key
 id_ed25519*
