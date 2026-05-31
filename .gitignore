@@ -1,6 +1,7 @@
-# ===== Claves / secretos (NUNCA subir) =====
+# ===== Claves / secretos / contexto admin (NUNCA subir) =====
 mcserver_key
 mcserver_key.pub
+CLAUDE.md
 *.pem
 *.key
 id_ed25519*
