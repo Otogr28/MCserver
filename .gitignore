@@ -2,6 +2,11 @@
 mcserver_key
 mcserver_key.pub
 CLAUDE.md
+# secretos sueltos (ej. API key de DeepL para el sidecar de voicetrans)
+.secrete
+.secret
+.secret*
+*.secret
 # tooling/hooks de la laptop del admin (no es modpack)
 .claude/
 *.pem
@@ -43,6 +48,8 @@ whitelist.json
 *.dat_old
 # server.properties: solo del servidor (puede llevar rcon.password/IP). Los jugadores no lo necesitan.
 server.properties
+# translator.config: lleva API key de DeepL (secreto, personal). Se versiona la plantilla .example.
+config/translator.config
 
 # ===== Backups / temporales =====
 backups/
