@@ -1,0 +1,16 @@
+#Properties
+# PLANTILLA del mod translate. Copia este archivo a "translator.config" (mismo
+# directorio config/) y pon TU propia API key. No subas tu key al repo: es personal.
+#
+# DeepL (recomendado): crea una cuenta free en https://www.deepl.com/pro-api
+# y pega tu clave (termina en ":fx" si es la free) en api_key.
+# Quota free: ~500k caracteres/mes POR clave, por eso cada quien usa la suya.
+#
+# Alternativa OpenAI: pon selected_translator=gpt y tu gpt_api_key (sk-...).
+gpt_api_key=
+api_key=
+selected_translator=deepl
+native_lang=EN-US
+gpt_model=gpt-4
+lang=EN-US
+enabled=false

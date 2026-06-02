@@ -14,6 +14,12 @@ git clone https://github.com/Otogr28/MCserver.git
 
 Copia el contenido de `mods/` y `config/` a tu instancia de Forge 1.20.1.
 
+#### Mod de traducción (opcional)
+El mod **translate** traduce el chat usando tu propia clave de API (no se comparte).
+Si lo quieres usar: copia `config/translator.config.example` a `config/translator.config`
+y pon tu clave gratuita de DeepL (https://www.deepl.com/pro-api). Si no, el mod queda inactivo
+(`enabled=false`) y no molesta.
+
 ### Cuando cambie un mod o config
 Solo entra a la carpeta del repo y:
 

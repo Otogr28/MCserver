@@ -1,0 +1,10 @@
+# Mods SOLO de cliente: NO deben llegar al servidor (lo crashearían) pero
+# SÍ se distribuyen a los jugadores por GitHub dentro de mods/.
+#
+# mc-update (en el VPS) usa este archivo como --exclude-from al hacer rsync de
+# mods/ al server de Crafty, así que estos jars nunca llegan al servidor.
+#
+# Sintaxis: patrones rsync, uno por línea, relativos a mods/. Usa globs para
+# sobrevivir cambios de versión. Las líneas que empiezan con # se ignoran.
+
+translate-*.jar
