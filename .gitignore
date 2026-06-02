@@ -11,6 +11,10 @@ CLAUDE.md
 .claude/
 # ruta local de la instancia de cada jugador (la crea sync.ps1, es personal)
 .sync-target.txt
+# notas personales en markdown (Obsidian, etc.) — NO son modpack. README.md sí se versiona.
+*.md
+!README.md
+.obsidian/
 *.pem
 *.key
 id_ed25519*
