@@ -1,22 +1,22 @@
 
-#Voice Translate — player preferences (also editable from the in-game config screen).
-[languages]
-	#ISO code of the language YOU speak (e.g. es, en, fr). Used so the server can
-	#skip transcription entirely when nobody nearby needs a translation.
-	spokenLanguage = "es"
-	#ISO code you want to READ voice subtitles and text chat in (e.g. es, en, fr).
-	subtitleLanguage = "es"
-
-[toggles]
-	#Show translated voice subtitles above speakers.
-	voiceEnabled = true
-	#Translate text chat into your language.
-	chatEnabled = true
-
 [appearance]
 	#Subtitle text colour, RGB hex (e.g. FFFFFF white, FFD700 gold, 55FF55 green).
 	textColor = "FFFFFF"
 	#Subtitle background colour, ARGB hex (alpha first; e.g. 40000000 = ~25% black,
 	#00000000 = fully transparent / no background).
 	backgroundColor = "40000000"
+
+#Voice Translate — player preferences (also editable from the in-game config screen).
+[languages]
+	#ISO code of the language YOU speak (e.g. es, en, fr). Used so the server can
+	#skip transcription entirely when nobody nearby needs a translation.
+	spokenLanguage = "en"
+	#ISO code you want to READ voice subtitles and text chat in (e.g. es, en, fr).
+	subtitleLanguage = "en"
+
+[toggles]
+	#Show translated voice subtitles above speakers.
+	voiceEnabled = true
+	#Translate text chat into your language.
+	chatEnabled = true
 
