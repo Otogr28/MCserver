@@ -9,6 +9,8 @@ CLAUDE.md
 *.secret
 # tooling/hooks de la laptop del admin (no es modpack)
 .claude/
+# ruta local de la instancia de cada jugador (la crea sync.ps1, es personal)
+.sync-target.txt
 *.pem
 *.key
 id_ed25519*

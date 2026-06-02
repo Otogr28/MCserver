@@ -14,14 +14,29 @@ The world, logs and server files are **not** here (they change constantly).
 2. The mods and configs from this repo, copied into your Forge instance.
 3. The server address — **ask the admin** for it.
 
-### Option A — Download as a ZIP (easiest, no tools)
+### Option A (recommended) — One script (auto-install + auto-update)
+A single command installs Git (if needed), downloads the modpack, and copies `mods`/`config`
+into your Minecraft instance. Open **PowerShell** and paste:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/Otogr28/MCserver/master/install.ps1 | iex
+```
+
+The first run asks once where your Forge 1.20.1 instance is and remembers it. After that, to update
+whenever the admin says there's a new version, just **double-click `sync.bat`** in the folder it
+created (default `C:\Users\YOU\summerBuddies`). That's it.
+
+> The `mods` folder is mirrored to match the server exactly. If you keep your own client-only mods,
+> run `sync.ps1 -KeepExtraMods` instead.
+
+### Option B — Download as a ZIP (easiest, no tools)
 1. On this GitHub page, click the green **`<> Code`** button → **Download ZIP**.
 2. Unzip it.
 3. Copy the **`mods`** and **`config`** folders into your Forge 1.20.1 instance
    (the folder that already has a `mods` and `config` folder).
 4. When something changes, download the ZIP again and re-copy.
 
-### Option B — Git for Windows (graphical interface)
+### Option C — Git for Windows (graphical interface)
 This keeps the modpack updated with a couple of clicks instead of re-downloading every time.
 
 **Install Git for Windows**
