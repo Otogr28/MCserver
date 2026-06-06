@@ -14,7 +14,12 @@ CLAUDE.md
 # notas personales en markdown (Obsidian, etc.) — NO son modpack. README.md sí se versiona.
 *.md
 !README.md
+# guía operativa de dimensiones/portales (para futuras sesiones de Claude / admin)
+!howtoadddimensions.md
 .obsidian/
+# fichas de documentación de mods (Obsidian, generadas localmente) — NO son modpack
+infomods/
+gen_infomods.py
 *.pem
 *.key
 id_ed25519*
@@ -33,6 +38,8 @@ DIM*/
 **/poi/
 **/entities/
 session.lock
+# OJO: los datapacks del modpack SÍ se versionan; la regla world **/data/ de arriba no debe comérselos.
+!datapacks/**
 
 # ===== Logs y crashes =====
 logs/
