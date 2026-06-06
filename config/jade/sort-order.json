@@ -1,4 +1,5 @@
 {
+  "ars_nouveau:mob_jar": null,
   "balm:jade": null,
   "easy_villagers:breeder": null,
   "easy_villagers:converter": null,
@@ -49,6 +50,9 @@
   "minecraft:villager_profession": null,
   "minecraft:waxed": null,
   "minecraft:zombie_villager": null,
+  "supplementaries:hat_stand": null,
+  "supplementaries:present": null,
+  "supplementaries:safe": null,
   "tombstone:decorative_graves": null,
   "tombstone:player_graves": null,
   "waystones:waystone": null

@@ -51,6 +51,9 @@
     "painting": true,
     "chiseled_bookshelf": true
   },
+  "ars_nouveau": {
+    "mob_jar": true
+  },
   "tombstone": {
     "decorative_graves": true,
     "player_graves": true
@@ -59,6 +62,9 @@
     "villager": true,
     "converter": true,
     "breeder": true
+  },
+  "supplementaries": {
+    "hat_stand": true
   },
   "jade": {
     "coordinates.rel": false,
