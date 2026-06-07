@@ -1,0 +1,25 @@
+{
+  "mana": {
+    "base": 150,
+    "perLevel": 12,
+    "perIntPoint": 25,
+    "perBookTier": 50,
+    "regenSecondsAtIntZero": 20.0
+  },
+  "intelligence": {
+    "spellPowerPerPoint": 0.04,
+    "amplifyThreshold": 0.25
+  },
+  "bookTiers": {
+    "noviceUnlockLevel": 1,
+    "apprenticeUnlockLevel": 8,
+    "archmageUnlockLevel": 16
+  },
+  "spells": {
+    "castCooldownTicks": 25
+  },
+  "engagement": {
+    "projectileRange": 18.0,
+    "selfRange": 6.0
+  }
+}

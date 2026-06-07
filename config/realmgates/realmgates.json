@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "defaultPolicy": "deny",
+  "enforceNonPlayers": false,
+  "bootstrapVanilla": false,
+  "denyMessage": "You cannot travel from %from% to %to%.",
+  "loginRemediation": "teleport_to_spawn",
+  "spawnDimension": "realmgates:v1"
+}

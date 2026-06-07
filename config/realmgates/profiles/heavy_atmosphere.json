@@ -1,0 +1,12 @@
+{
+  "id": "heavy_atmosphere",
+  "environment": {
+    "graceTicks": 100,
+    "effects": [
+      { "effect": "minecraft:slowness", "amplifier": 0, "ambient": true },
+      { "effect": "minecraft:mining_fatigue", "amplifier": 0, "ambient": true }
+    ],
+    "mitigatedBy": { "type": "item_in_inventory", "item": "minecraft:diamond" }
+  },
+  "restrictions": { "elytra": false, "bed": false }
+}

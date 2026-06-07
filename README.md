@@ -15,19 +15,24 @@ The world, logs and server files are **not** here (they change constantly).
 3. The server address — **ask the admin** for it.
 
 ### Option A (recommended) — One script (auto-install + auto-update)
-A single command installs Git (if needed), downloads the modpack, and copies `mods`/`config`
-into your Minecraft instance. Open **PowerShell** and paste:
+A single command installs Git (if needed) and downloads the modpack into a folder. You then point
+your launcher's Forge 1.20.1 instance **at that folder** and launch from there. Open **PowerShell**
+and paste:
 
 ```powershell
 iwr -useb https://raw.githubusercontent.com/Otogr28/MCserver/master/install.ps1 | iex
 ```
 
-The first run asks once where your Forge 1.20.1 instance is and remembers it. After that, to update
-whenever the admin says there's a new version, just **double-click `sync.bat`** in the folder it
-created (default `C:\Users\YOU\summerBuddies`). That's it.
+This creates the modpack folder (default `C:\Users\YOU\summerBuddies`). In your launcher
+(Prism/CurseForge/Forge), set that folder as your instance's game directory and play.
 
-> The `mods` folder is mirrored to match the server exactly. If you keep your own client-only mods,
-> run `sync.ps1 -KeepExtraMods` instead.
+To update whenever the admin says there's a new version, just **double-click `sync.bat`** in that
+folder. It force-updates everything to match the server. That's it.
+
+> ⚠️ Updating resets the shared modpack files to the server's version, so don't hand-edit files in
+> this folder. **Your own settings are kept**: world/saves, screenshots, `options.txt`
+> (keybinds/video), and per-player `*-client` configs — including your **language** (voicetrans) and
+> **microphone / push-to-talk** (Simple Voice Chat) — survive every update.
 
 ### Option B — Download as a ZIP (easiest, no tools)
 1. On this GitHub page, click the green **`<> Code`** button → **Download ZIP**.
