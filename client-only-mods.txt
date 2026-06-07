@@ -9,3 +9,4 @@
 
 translate-*.jar
 Forgematica-*.jar
+MaFgLib-*.jar
