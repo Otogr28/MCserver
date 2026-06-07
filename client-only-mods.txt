@@ -10,3 +10,5 @@
 translate-*.jar
 Forgematica-*.jar
 MaFgLib-*.jar
+oculus-*.jar
+embeddium-*.jar
