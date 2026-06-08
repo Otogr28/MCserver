@@ -1,5 +1,7 @@
 {
-  "last_directories": {},
+  "last_directories": {
+    "schematic_load": "/home/oto/.local/share/ModrinthApp/profiles/Forge 1.20.1/schematics"
+  },
   "create_placement_on_load": true,
-  "config_gui_tab": "GENERIC"
+  "config_gui_tab": "HOTKEYS"
 }

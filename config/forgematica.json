@@ -87,7 +87,7 @@
       "keys": ""
     },
     "executeOperation": {
-      "keys": ""
+      "keys": "KP_ENTER"
     },
     "invertGhostBlockRenderState": {
       "keys": ""
