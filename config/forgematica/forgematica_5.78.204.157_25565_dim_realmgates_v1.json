@@ -8,19 +8,19 @@
         "schematic": "/home/oto/.local/share/ModrinthApp/profiles/Forge 1.20.1/schematics/largespawn.schem",
         "name": "largespawn (Converted Structure)",
         "origin": [
-          -27,
-          198,
-          -19
+          -336,
+          30,
+          -172
         ],
         "rotation": "NONE",
         "mirror": "NONE",
-        "ignore_entities": false,
+        "ignore_entities": true,
         "enabled": true,
         "enable_render": true,
         "render_enclosing_box": false,
         "locked": false,
         "locked_coords": 0,
-        "bb_color": 16757504,
+        "bb_color": 8404597,
         "verifier_type": "all",
         "placements": [
           {
@@ -47,7 +47,7 @@
     "origin_selected": true
   },
   "schematic_projects_manager": {},
-  "operation_mode": "REPLACE_BLOCK",
+  "operation_mode": "PASTE_SCHEMATIC",
   "render_range": {
     "mode": "ALL",
     "axis": "y",
