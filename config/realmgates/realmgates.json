@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "defaultPolicy": "deny",
+  "defaultPolicy": "allow",
   "enforceNonPlayers": false,
   "bootstrapVanilla": false,
   "denyMessage": "You cannot travel from %from% to %to%.",
