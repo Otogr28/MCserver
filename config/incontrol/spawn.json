@@ -1,0 +1,31 @@
+[
+  {
+    "dimension": "realmgates:v1",
+    "mob": [
+      "born_in_chaos_v1:decaying_zombie",
+      "born_in_chaos_v1:decaying_zombie_not_despawn",
+      "born_in_chaos_v1:barrel_zombie",
+      "born_in_chaos_v1:zombie_bruiser",
+      "born_in_chaos_v1:zombie_clown",
+      "born_in_chaos_v1:zombie_clown_not_despawn",
+      "born_in_chaos_v1:zombie_fisherman",
+      "born_in_chaos_v1:zombie_lumberjack"
+    ],
+    "result": "default"
+  },
+  {
+    "dimension": "realmgates:v1",
+    "mod": ["minecraft", "creeperoverhaul"],
+    "result": "default"
+  },
+  {
+    "dimension": "realmgates:v1",
+    "mod": ["iceandfire"],
+    "when": "onjoin",
+    "result": "deny"
+  },
+  {
+    "dimension": "realmgates:v1",
+    "result": "deny"
+  }
+]

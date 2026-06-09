@@ -12,9 +12,12 @@
 // rebuild. This is the KubeJS half of the per-dimension setup; structures/biomes are handled by the
 // Realm Gates mod (dimension JSON `worldgen` block + vanilla biome source).
 
+// DISABLED: vanilla-mob filtering for v1 is now handled by the In Control! mod
+// (config/incontrol/spawn.json), which is the single source of truth for per-dimension spawns and
+// supports per-mob exceptions (e.g. Born in Chaos zombies allowed in v1). Keeping this map empty makes
+// the handler a no-op for every dimension; re-add a dimension here only if you ever drop In Control.
 const VANILLA_DIMENSIONS = {
-    'realmgates:v1': ['minecraft', 'creeperoverhaul'],
-    // 'realmgates:v2': ['minecraft', 'creeperoverhaul'],
+    // 'realmgates:v1': ['minecraft', 'creeperoverhaul'],
 }
 
 // Spawn sources treated as "the world placing a mob"; everything else is player/mechanic driven.
