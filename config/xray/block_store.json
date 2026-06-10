@@ -1,23 +1,16 @@
 [
   {
-    "name": "Nether Quartz Ore",
-    "blockName": "minecraft:nether_quartz_ore",
-    "order": 23,
-    "color": 5143183,
+    "name": "Deepslate Redstone Ore",
+    "blockName": "minecraft:deepslate_redstone_ore",
+    "order": 21,
+    "color": 14122232,
     "drawing": false
   },
   {
-    "name": "Deepslate Gold Ore",
-    "blockName": "minecraft:deepslate_gold_ore",
-    "order": 14,
-    "color": 1391926,
-    "drawing": false
-  },
-  {
-    "name": "Deepslate Iron Ore",
-    "blockName": "minecraft:deepslate_iron_ore",
-    "order": 16,
-    "color": 5592271,
+    "name": "Lapis Lazuli Ore",
+    "blockName": "minecraft:lapis_ore",
+    "order": 18,
+    "color": 5999502,
     "drawing": false
   },
   {
@@ -28,10 +21,10 @@
     "drawing": false
   },
   {
-    "name": "Deepslate Redstone Ore",
-    "blockName": "minecraft:deepslate_redstone_ore",
-    "order": 21,
-    "color": 14122232,
+    "name": "Ancient Debris",
+    "blockName": "minecraft:ancient_debris",
+    "order": 24,
+    "color": 14517546,
     "drawing": false
   },
   {
@@ -49,87 +42,17 @@
     "drawing": false
   },
   {
-    "name": "Guanostone Redstone Ore",
-    "blockName": "alexscaves:guanostone_redstone_ore",
-    "order": 22,
-    "color": 13342703,
-    "drawing": false
-  },
-  {
-    "name": "Radrock Uranium Ore",
-    "blockName": "alexscaves:radrock_uranium_ore",
-    "order": 25,
-    "color": 1639592,
-    "drawing": false
-  },
-  {
-    "name": "Deepslate Copper Ore",
-    "blockName": "minecraft:deepslate_copper_ore",
-    "order": 7,
-    "color": 483832,
-    "drawing": false
-  },
-  {
-    "name": "Deepslate Silver Ore",
-    "blockName": "iceandfire:deepslate_silver_ore",
-    "order": 1,
-    "color": 7957284,
+    "name": "Silver Ore",
+    "blockName": "iceandfire:silver_ore",
+    "order": 0,
+    "color": 4400278,
     "drawing": true
-  },
-  {
-    "name": "Lapis Lazuli Ore",
-    "blockName": "minecraft:lapis_ore",
-    "order": 18,
-    "color": 5999502,
-    "drawing": false
-  },
-  {
-    "name": "Sapphire Ore",
-    "blockName": "iceandfire:sapphire_ore",
-    "order": 2,
-    "color": 13567175,
-    "drawing": true
-  },
-  {
-    "name": "Redstone Ore",
-    "blockName": "minecraft:redstone_ore",
-    "order": 20,
-    "color": 6323210,
-    "drawing": false
-  },
-  {
-    "name": "Iron Ore",
-    "blockName": "minecraft:iron_ore",
-    "order": 15,
-    "color": 3767666,
-    "drawing": false
   },
   {
     "name": "Coal Ore",
     "blockName": "minecraft:coal_ore",
     "order": 3,
     "color": 4516538,
-    "drawing": false
-  },
-  {
-    "name": "Galena Iron Ore",
-    "blockName": "alexscaves:galena_iron_ore",
-    "order": 17,
-    "color": 14681197,
-    "drawing": false
-  },
-  {
-    "name": "Coprolith Coal Ore",
-    "blockName": "alexscaves:coprolith_coal_ore",
-    "order": 5,
-    "color": 9646445,
-    "drawing": false
-  },
-  {
-    "name": "Deepslate Lapis Lazuli Ore",
-    "blockName": "minecraft:deepslate_lapis_ore",
-    "order": 19,
-    "color": 11002911,
     "drawing": false
   },
   {
@@ -140,10 +63,17 @@
     "drawing": false
   },
   {
-    "name": "Nether Gold Ore",
-    "blockName": "minecraft:nether_gold_ore",
-    "order": 13,
-    "color": 5226846,
+    "name": "Deepslate Emerald Ore",
+    "blockName": "minecraft:deepslate_emerald_ore",
+    "order": 11,
+    "color": 13551017,
+    "drawing": false
+  },
+  {
+    "name": "Coprolith Coal Ore",
+    "blockName": "alexscaves:coprolith_coal_ore",
+    "order": 5,
+    "color": 9646445,
     "drawing": false
   },
   {
@@ -154,11 +84,60 @@
     "drawing": false
   },
   {
-    "name": "Silver Ore",
-    "blockName": "iceandfire:silver_ore",
-    "order": 0,
-    "color": 4400278,
+    "name": "Nether Gold Ore",
+    "blockName": "minecraft:nether_gold_ore",
+    "order": 13,
+    "color": 5226846,
+    "drawing": false
+  },
+  {
+    "name": "Deepslate Silver Ore",
+    "blockName": "iceandfire:deepslate_silver_ore",
+    "order": 1,
+    "color": 7957284,
     "drawing": true
+  },
+  {
+    "name": "Galena Iron Ore",
+    "blockName": "alexscaves:galena_iron_ore",
+    "order": 17,
+    "color": 14681197,
+    "drawing": false
+  },
+  {
+    "name": "Guanostone Redstone Ore",
+    "blockName": "alexscaves:guanostone_redstone_ore",
+    "order": 22,
+    "color": 13342703,
+    "drawing": false
+  },
+  {
+    "name": "Deepslate Gold Ore",
+    "blockName": "minecraft:deepslate_gold_ore",
+    "order": 14,
+    "color": 1391926,
+    "drawing": false
+  },
+  {
+    "name": "Deepslate Iron Ore",
+    "blockName": "minecraft:deepslate_iron_ore",
+    "order": 16,
+    "color": 5592271,
+    "drawing": false
+  },
+  {
+    "name": "Redstone Ore",
+    "blockName": "minecraft:redstone_ore",
+    "order": 20,
+    "color": 6323210,
+    "drawing": false
+  },
+  {
+    "name": "Radrock Uranium Ore",
+    "blockName": "alexscaves:radrock_uranium_ore",
+    "order": 25,
+    "color": 1639592,
+    "drawing": false
   },
   {
     "name": "Diamond Ore",
@@ -168,17 +147,38 @@
     "drawing": false
   },
   {
-    "name": "Ancient Debris",
-    "blockName": "minecraft:ancient_debris",
-    "order": 24,
-    "color": 14517546,
+    "name": "Iron Ore",
+    "blockName": "minecraft:iron_ore",
+    "order": 15,
+    "color": 3767666,
     "drawing": false
   },
   {
-    "name": "Deepslate Emerald Ore",
-    "blockName": "minecraft:deepslate_emerald_ore",
-    "order": 11,
-    "color": 13551017,
+    "name": "Deepslate Copper Ore",
+    "blockName": "minecraft:deepslate_copper_ore",
+    "order": 7,
+    "color": 483832,
     "drawing": false
+  },
+  {
+    "name": "Deepslate Lapis Lazuli Ore",
+    "blockName": "minecraft:deepslate_lapis_ore",
+    "order": 19,
+    "color": 11002911,
+    "drawing": false
+  },
+  {
+    "name": "Nether Quartz Ore",
+    "blockName": "minecraft:nether_quartz_ore",
+    "order": 23,
+    "color": 5143183,
+    "drawing": false
+  },
+  {
+    "name": "Sapphire Ore",
+    "blockName": "iceandfire:sapphire_ore",
+    "order": 2,
+    "color": 13567175,
+    "drawing": true
   }
 ]
