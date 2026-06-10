@@ -1,5 +1,14 @@
 [
   {
+    "biome": "realmgates:wasteland",
+    "mob": ["realmgates:shade"],
+    "result": "default"
+  },
+  {
+    "biome": "realmgates:wasteland",
+    "result": "deny"
+  },
+  {
     "dimension": "realmgates:v1",
     "mob": [
       "born_in_chaos_v1:decaying_zombie",
