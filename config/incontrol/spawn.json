@@ -15,7 +15,7 @@
   },
   {
     "dimension": "realmgates:v1",
-    "mod": ["minecraft", "creeperoverhaul"],
+    "mod": ["minecraft", "creeperoverhaul", "realmgates"],
     "result": "default"
   },
   {
