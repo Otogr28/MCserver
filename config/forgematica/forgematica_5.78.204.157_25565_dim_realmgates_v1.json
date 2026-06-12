@@ -8,14 +8,14 @@
         "schematic": "/home/oto/.local/share/ModrinthApp/profiles/Forge 1.20.1/schematics/parapendejos.litematic",
         "name": "Unnamed",
         "origin": [
-          -358,
-          66,
-          309
+          -327,
+          64,
+          287
         ],
         "rotation": "NONE",
         "mirror": "NONE",
         "ignore_entities": false,
-        "enabled": true,
+        "enabled": false,
         "enable_render": true,
         "render_enclosing_box": false,
         "locked": false,
@@ -47,7 +47,7 @@
     "origin_selected": true
   },
   "schematic_projects_manager": {},
-  "operation_mode": "SCHEMATIC_PLACEMENT",
+  "operation_mode": "PASTE_SCHEMATIC",
   "render_range": {
     "mode": "ALL",
     "axis": "y",
@@ -65,14 +65,14 @@
     "boxes": [
       {
         "pos1": [
-          0,
-          0,
-          0
+          -43,
+          78,
+          150
         ],
         "pos2": [
-          -354,
-          65,
-          283
+          -43,
+          78,
+          150
         ],
         "name": "Unnamed"
       }
