@@ -54,6 +54,9 @@
   "ars_nouveau": {
     "mob_jar": true
   },
+  "camerapture": {
+    "picture_frame": true
+  },
   "tombstone": {
     "decorative_graves": true,
     "player_graves": true
