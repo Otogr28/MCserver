@@ -12,3 +12,9 @@ Forgematica-*.jar
 MaFgLib-*.jar
 oculus-*.jar
 embeddium-*.jar
+
+# Axiom (editor de mundos, jar Fabric) corriendo sobre Forge vía Sinytra
+# Connector + Forgified Fabric API. Solo cliente: en el server crashearían.
+Axiom-*.jar
+Connector-*.jar
+fabric-api-*.jar

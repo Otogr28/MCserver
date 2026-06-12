@@ -23,6 +23,10 @@
   "neverRemoveBadIcon": false,
   "exportBuiltin": false,
   "hideWarning": false,
-  "fastmenu": {},
+  "fastmenu": {
+    "0": {
+      "4": "ebfb1e69-330a-4970-8bca-f5625c90681a"
+    }
+  },
   "keys": {}
 }
