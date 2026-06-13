@@ -47,7 +47,7 @@
     "origin_selected": true
   },
   "schematic_projects_manager": {},
-  "operation_mode": "PASTE_SCHEMATIC",
+  "operation_mode": "DELETE",
   "render_range": {
     "mode": "ALL",
     "axis": "y",
