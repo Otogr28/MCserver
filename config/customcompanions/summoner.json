@@ -35,7 +35,7 @@
   },
 
   // Energy a summon costs to (re)deploy = Size * energyPerSize.
-  "energyPerSize": 8,
+  "energyPerSize": 12,
 
   // Post-death re-summon delay in ticks = Size * respawnTicksPerSize (20 ticks = 1 second).
   "respawnTicksPerSize": 60,
