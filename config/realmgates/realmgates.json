@@ -5,5 +5,10 @@
   "bootstrapVanilla": false,
   "denyMessage": "You cannot travel from %from% to %to%.",
   "loginRemediation": "teleport_to_spawn",
-  "spawnDimension": "realmgates:v1"
+  "spawnDimension": "realmgates:v1",
+  "void": {
+    "columnHeight": 90.0,
+    "columnDensity": 1.0,
+    "columnThickness": 1.0
+  }
 }

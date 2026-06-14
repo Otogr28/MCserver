@@ -47,7 +47,7 @@
     "origin_selected": true
   },
   "schematic_projects_manager": {},
-  "operation_mode": "REPLACE_BLOCK",
+  "operation_mode": "REBUILD",
   "render_range": {
     "mode": "ALL",
     "axis": "y",
