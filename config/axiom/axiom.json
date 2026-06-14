@@ -136,7 +136,7 @@
     "preventInteractions": false
   },
   "movement": {
-    "flightMomentum": 100,
+    "flightMomentum": 0,
     "flightDirection": "CAMERA",
     "syncIngameMovementWithEditorUI": false,
     "separateFlightSpeeds": true
