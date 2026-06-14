@@ -34,6 +34,15 @@
     "items": false              // drop loot items when a summon dies?
   },
 
+  "summonAi": {
+    // How the summoned army picks targets. Each summoner can also flip its mode live from the Equip tab;
+    // this is just the DEFAULT a new summoner starts with.
+    "defaultMode": "neutral",   // aggressive (hunt all hostiles) | neutral (defend you + assist) | defensive (only guard you)
+    "aggroRange": 16.0,         // how far an AGGRESSIVE summon looks for a hostile to hunt
+    "tankPullRange": 16.0,      // hostiles attacking you within this range can be pulled onto a summon (army tanks for you)
+    "tankSummonRange": 14.0     // ...as long as a summon is at least this close to the hostile
+  },
+
   // Energy a summon costs to (re)deploy = Size * energyPerSize.
   "energyPerSize": 12,
 
