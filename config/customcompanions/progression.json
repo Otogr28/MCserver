@@ -1,0 +1,21 @@
+{
+  // Shared attribute progression for ALL companion classes. Each allocated point of an attribute grants this
+  // much of its combat stat (and equipped pictos add on top through the same pipeline). Edit + /reload to apply.
+
+  "perPoint": {
+    "vitality": 4.0,        // Vitality  → +max health per point        (all classes)
+    "might": 0.6,           // Might      → +attack damage per point     (warrior)
+    "agility": 0.004,       // Agility    → +movement speed per point    (all classes)
+    "defense": 1.0,         // Defense    → +armor points per point      (all classes)
+    "luck": 1.0,            // Luck       → +% crit chance per point      (warrior)
+    "intelligence": 25.0,   // Intelligence → +mana per point            (mage)
+    "grace": 1.0,           // Grace      → +aura power per point         (spirit)
+    "command": 1.0          // Command    → +army power per point         (summoner)
+  },
+
+  // Mechanic constants the attributes feed:
+  "critBonus": 0.5,         // a critical hit deals this much EXTRA damage (0.5 = +50% on the hit)
+  "commandPerSlot": 4.0,    // Army (Command) points needed for +1 summon slot
+  "gracePerAmp": 12.0,      // Aura (Grace) points needed for +1 buff amplifier in the Spirit's aura
+  "gracePerAmpCap": 2       // ...capped at this many extra amplifier levels
+}
