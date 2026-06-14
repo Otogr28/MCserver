@@ -10,5 +10,13 @@
     "columnHeight": 90.0,
     "columnDensity": 1.0,
     "columnThickness": 1.0
+  },
+  "sandstorm": {
+    "checkInterval": 600,
+    "randomChance": 8,
+    "minDuration": 1200,
+    "maxDuration": 3600,
+    "damage": 1.0,
+    "damageInterval": 40
   }
 }
