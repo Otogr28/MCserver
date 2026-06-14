@@ -8,9 +8,9 @@
         "schematic": "/home/oto/.local/share/ModrinthApp/profiles/Forge 1.20.1/schematics/parapendejos.litematic",
         "name": "Unnamed",
         "origin": [
-          -327,
-          64,
-          287
+          3068,
+          101,
+          -1556
         ],
         "rotation": "NONE",
         "mirror": "NONE",
@@ -47,7 +47,7 @@
     "origin_selected": true
   },
   "schematic_projects_manager": {},
-  "operation_mode": "REBUILD",
+  "operation_mode": "SCHEMATIC_PLACEMENT",
   "render_range": {
     "mode": "ALL",
     "axis": "y",
@@ -70,9 +70,9 @@
           150
         ],
         "pos2": [
-          -43,
-          78,
-          150
+          3065,
+          100,
+          -1552
         ],
         "name": "Unnamed"
       }

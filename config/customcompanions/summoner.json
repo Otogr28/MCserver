@@ -1,3 +1,39 @@
 {
-  "_note": "placeholder \u2014 this class is not balance-driven yet"
+  // Summoner tuning. Every number the kill-to-unlock summons use lives here.
+  // Edit and run /reload in-game (or restart the server) to apply. If this file is
+  // ever deleted the mod regenerates it with the code defaults (without these notes).
+
+  "power": {
+    // A mob's "power score" = hpWeight*maxHealth + armorWeight*armor + attackDamageWeight*attackDamage.
+    // A higher score makes a summon bigger (more slots) and take more kills to unlock.
+    "hpWeight": 1.0,            // weight of the mob's max health (HP dominates — every mob has it)
+    "armorWeight": 2.0,         // weight of its armor points
+    "attackDamageWeight": 6.0   // weight of its melee attack damage
+  },
+
+  "size": {
+    // Size = slot cost of one summon = clamp(round(power / powerPerSize), min, max).
+    // LOWER powerPerSize => creatures reach a higher Size sooner => they take up MORE army space.
+    "powerPerSize": 50.0,       // power needed per Size point (was 60; lowered so summons cost a bit more space)
+    "min": 1,                   // smallest a summon can be (cheapest mob still costs 1 slot)
+    "max": 6                    // largest a summon can be (strongest non-boss mob caps here)
+  },
+
+  "unlock": {
+    // Kills to unlock a mob = clamp(round(baseKills + (power>softCapPower ? log2(power/softCapPower) : 0)), minKills, maxKills).
+    "baseKills": 4.0,           // base kills before the power bonus
+    "softCapPower": 20.0,       // power above which extra kills start being required
+    "minKills": 5,              // never fewer kills than this (so nothing is trivial)
+    "maxKills": 8               // never more kills than this (so nothing is a grind)
+  },
+
+  // Energy a summon costs to (re)deploy = Size * energyPerSize.
+  "energyPerSize": 8,
+
+  // Post-death re-summon delay in ticks = Size * respawnTicksPerSize (20 ticks = 1 second).
+  "respawnTicksPerSize": 60,
+
+  // Mobs with max-health >= this are treated as bosses and can never be unlocked as summons
+  // (this auto-catches modded bosses; vanilla bosses are always excluded by class).
+  "bossHpCeiling": 150.0
 }
