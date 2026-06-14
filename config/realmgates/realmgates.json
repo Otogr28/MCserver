@@ -17,6 +17,9 @@
     "minDuration": 1200,
     "maxDuration": 3600,
     "damage": 1.0,
-    "damageInterval": 40
+    "damageInterval": 40,
+    "gustChance": 14,
+    "gustLift": 0.55,
+    "gustStrength": 0.45
   }
 }
