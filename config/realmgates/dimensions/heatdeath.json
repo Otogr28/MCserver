@@ -1,5 +1,5 @@
 {
-  "dimension": "sb:heatdeath",
+  "dimension": "realmgates:heatdeath",
   "tier": 1,
   "entryMessage": "The heat hits like an open furnace. Nothing has lived here in a long time.",
   "exitMessage": "The air turns cool again.",
