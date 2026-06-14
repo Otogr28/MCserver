@@ -15,6 +15,7 @@
   "summoner": {
     // The summoner Equip tab shows each summon's Size as a row of pips (one pip per army slot it costs).
     "sizePip": "◆",          // the glyph for one Size slot (default ◆); e.g. set "*" or "#" if ◆ won't render
-    "sizePipColor": "#54A9F0"     // color of the Size pips (default blue)
+    "sizePipColor": "#54A9F0",    // color of the Size pips (default blue)
+    "rowHeight": 18               // vertical spacing of each summon row; raise for a roomier list, lower to fit more
   }
 }
