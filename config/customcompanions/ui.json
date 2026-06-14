@@ -1,0 +1,20 @@
+{
+  // Presentation knobs for the companion panel (Codex). Edit and reopen the panel to apply
+  // (or /reload). Colors are "#AARRGGBB" (alpha-red-green-blue), or "#RRGGBB" for an opaque color.
+
+  "statRadar": {
+    // The hexagonal stat radar at the top of the Stats tab (one axis per attribute).
+    "referenceMin": 8.0,          // the web scales to max(referenceMin, your highest attribute): a low-level
+                                  //   companion shows a small web instead of one pinned to the outer edge
+    "fillColor": "#66C8A23A",     // translucent gold fill of the web
+    "gridColor": "#66554F6E",     // the background grid rings + spokes
+    "outlineColor": "#FFE6C766",  // the web outline + vertex dots
+    "labelColor": "#FFD8D5E0"     // the attribute names around the chart
+  },
+
+  "summoner": {
+    // The summoner Equip tab shows each summon's Size as a row of pips (one pip per army slot it costs).
+    "sizePip": "◆",          // the glyph for one Size slot (default ◆); e.g. set "*" or "#" if ◆ won't render
+    "sizePipColor": "#54A9F0"     // color of the Size pips (default blue)
+  }
+}
