@@ -27,6 +27,13 @@
     "maxKills": 8               // never more kills than this (so nothing is a grind)
   },
 
+  "drops": {
+    // What a summoned minion drops when it dies. Both off by default: a conjured minion isn't a real
+    // kill, so dropping XP/loot would let you farm it by re-summoning. Set true to re-enable.
+    "experience": false,        // drop XP orbs when a summon dies?
+    "items": false              // drop loot items when a summon dies?
+  },
+
   // Energy a summon costs to (re)deploy = Size * energyPerSize.
   "energyPerSize": 8,
 
