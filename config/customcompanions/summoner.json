@@ -14,7 +14,7 @@
   "size": {
     // Size = slot cost of one summon = clamp(round(power / powerPerSize), min, max).
     // LOWER powerPerSize => creatures reach a higher Size sooner => they take up MORE army space.
-    "powerPerSize": 50.0,       // power needed per Size point (was 60; lowered so summons cost a bit more space)
+    "powerPerSize": 42.0,       // power needed per Size point (lower = each mob is a bigger Size = more slots)
     "min": 1,                   // smallest a summon can be (cheapest mob still costs 1 slot)
     "max": 6                    // largest a summon can be (strongest non-boss mob caps here)
   },
