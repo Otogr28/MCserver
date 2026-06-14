@@ -81,7 +81,7 @@
 [magic_item]
 	#Chance for players to obtain an enchanted Grave's Key on death (-1 disables the Perk Jailer) [-1..100|default:0]
 	#Range: -1 ~ 100
-	chance_enchanted_grave_key = 0
+	chance_enchanted_grave_key = 100
 	#Prevents to craft Enchanted Grave Key [false/true|default:false]
 	disable_enchanted_grave_key_recipe = false
 	#Scroll duration [1200..120000|default:12000]
