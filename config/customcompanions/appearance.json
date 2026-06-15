@@ -1,0 +1,16 @@
+{
+  // Appearance editor + the two companion-panel header buttons.
+  // minSize/maxSize/sizeStep: the model-scale range and step the "Appearance" editor enforces.
+  "minSize": 0.3,
+  "maxSize": 2.5,
+  "sizeStep": 0.1,
+  // The three toggles below are enforced server-side (the buttons are always drawn so the LDLib panel
+  // matches on both sides; a disallowed action just no-ops with a chat notice).
+  // allowModelChange: allow re-styling an existing companion via the "Appearance" button.
+  "allowModelChange": true,
+  // allowClassChange: let the editor switch the companion's CLASS when editing an existing companion.
+  // Off by default — changing class mid-progression re-arms and rescales; the editor only restyles.
+  "allowClassChange": false,
+  // allowDisable: allow the "Disable / Enable" button (despawn the companion, keep ALL its data).
+  "allowDisable": true
+}
