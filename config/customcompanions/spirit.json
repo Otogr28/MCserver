@@ -12,7 +12,9 @@
     "regenAmplifier": 0      // 0 = Regen I
   },
   // envelop: the burst on the Spirit keybind (default X) — the wisp merges into you for a limited time,
-  // giving strong buffs PLUS a share of the Spirit's own combat stats.
+  // giving strong buffs PLUS a share of the Spirit's own combat stats. In your own first-person view the aura
+  // particles are hidden and you instead get a colour root-frame around the screen edge (others still see the
+  // particle aura on you).
   "envelop": {
     "durationTicks": 160,    // 8s enveloped
     "cooldownTicks": 600,    // 30s cooldown AFTER it ends (tracked per-player + persisted, so disabling/
