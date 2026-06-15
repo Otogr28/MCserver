@@ -15,7 +15,8 @@
   // giving strong buffs PLUS a share of the Spirit's own combat stats.
   "envelop": {
     "durationTicks": 160,    // 8s enveloped
-    "cooldownTicks": 600,    // 30s cooldown AFTER it ends
+    "cooldownTicks": 600,    // 30s cooldown AFTER it ends (tracked per-player + persisted, so disabling/
+                             // re-enabling the spirit or relogging can't reset it)
     "refreshTicks": 40,      // how often the potion effects are re-applied while active
     // Potion amplifiers (Grace + the Spirit's ability nodes add on top, capped by progression.json auraAmpCap).
     "speedAmplifier": 1,
@@ -33,7 +34,8 @@
   // stored in modelPreset as color:RRGGBB). The same colour tints both the in-world particle wisp and the
   // glowing orb shown in the create/panel preview. defaultColor is only the tint a freshly created Spirit gets.
   "wisp": {
-    "defaultColor": "7FC8FF"  // spectral blue (RRGGBB hex)
+    "defaultColor": "7FC8FF",   // spectral blue (RRGGBB hex)
+    "followDistance": 2.0       // how far (blocks) the wisp hovers from you — far enough not to crowd/push you
   },
   // modes: Equip-tab attunement (one active at a time; an always-on boon while the wisp floats near you, plus
   // a subtle shift of the wisp's tone toward the mode's colour — kept small so your chosen colour dominates).
