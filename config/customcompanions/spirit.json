@@ -28,5 +28,11 @@
     "attackTransfer": 1.0,   // +100% of the Spirit's attack damage
     "armorTransfer": 1.0,    // +100% of the Spirit's armor
     "speedTransfer": 0.5     // +50% of the Spirit's movement-speed bonus
+  },
+  // wisp: the Spirit has no model — its colour is per-companion (picked in the create/Appearance UI and
+  // stored in modelPreset as color:RRGGBB). The same colour tints both the in-world particle wisp and the
+  // glowing orb shown in the create/panel preview. defaultColor is only the tint a freshly created Spirit gets.
+  "wisp": {
+    "defaultColor": "7FC8FF"  // spectral blue (RRGGBB hex)
   }
 }
