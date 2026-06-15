@@ -5,9 +5,5 @@
   "exitMessage": "The air turns cool again.",
   "canEnterFrom": ["realmgates:v1"],
   "canExitTo": ["realmgates:v1"],
-  "worldgen": {
-    "allowedStructureNamespaces": ["minecraft", "dungeons_arise", "terralith"],
-    "blockedFeatureNamespaces": ["iceandfire", "born_in_chaos_v1"]
-  },
   "portal": { "frameBlock": "minecraft:sandstone", "igniter": "minecraft:fire_charge", "color": "#FF8A00" }
 }

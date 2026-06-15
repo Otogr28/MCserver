@@ -1,10 +1,5 @@
 [
   {
-    "mob": ["iceandfire:fire_dragon", "iceandfire:ice_dragon", "iceandfire:black_frost_dragon"],
-    "when": "onjoin",
-    "result": "deny"
-  },
-  {
     "biome": "realmgates:wasteland",
     "mob": ["realmgates:shade"],
     "result": "default"
