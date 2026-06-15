@@ -3,15 +3,16 @@
   // to tune: one allocated point of an attribute grants this much of its effect (equipped pictos add on top
   // through the same pipeline). Edit + /reload (or restart) to apply.
 
+  // Lowered for a slower, more gradual progression (each point steps the stat up less, so growth is steadier).
   "perPoint": {
-    "vitality": 4.0,        // +max health per point          (all classes)
-    "might": 0.6,           // +attack damage per point        (warrior)
-    "agility": 0.004,       // +movement speed per point       (all classes)
-    "defense": 1.0,         // +armor points per point         (all classes)
-    "luck": 1.0,            // +% crit CHANCE per point         (warrior)
-    "intelligence": 25.0,   // +max mana per point             (mage)
-    "grace": 1.0,           // +aura power per point           (spirit)  — feeds auraAmpPerPoint below
-    "command": 1.0          // +army power per point           (summoner) — feeds armySlotsPerPoint below
+    "vitality": 2.0,        // +max health per point          (all classes)
+    "might": 0.35,          // +attack damage per point        (warrior)
+    "agility": 0.0025,      // +movement speed per point       (all classes)
+    "defense": 0.6,         // +armor points per point         (all classes)
+    "luck": 0.6,            // +% crit CHANCE per point         (warrior)
+    "intelligence": 16.0,   // +max mana per point             (mage)
+    "grace": 0.7,           // +aura power per point           (spirit)  — feeds auraAmpPerPoint below
+    "command": 0.7          // +army power per point           (summoner) — feeds armySlotsPerPoint below
   },
 
   // How the special mechanics scale (all per-point so you can dial them directly):

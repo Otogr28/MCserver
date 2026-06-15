@@ -1,15 +1,14 @@
 {
-  // Spirit support class — a floating soul-wisp at your side (SpiritBalance.java). It keeps a light
-  // passive aura on you, and on the "Spirit: Envelop" keybind (default X) it merges into you for a
-  // limited time: strong buffs + a share of its own combat stats. All numbers below are tunable live.
-  // passive: the light aura it keeps on you just by floating nearby (a gentle Speed/Regen hum;
-  // Grace does NOT scale the passive — it scales the Envelop burst below).
+  // Spirit support class — a floating soul-wisp at your side (SpiritBalance.java). It has an always-on PASSIVE
+  // (Equip > Passives) and an ACTIVE (Equip > Actives) applied when you Envelop (press X). All tunable live.
+  // passive: the always-on perk's numbers (Hunger Saver / Slow Regen). Much subtler than the old Speed/Regen
+  // aura (removed). You select which passive in the Equip tab.
   "passive": {
-    "intervalTicks": 40,     // refresh cadence
-    "durationTicks": 100,    // effect duration each refresh (> interval, so it never flickers)
-    "radius": 16.0,          // you must be within this for the passive aura to land
-    "speedAmplifier": 0,     // 0 = Speed I
-    "regenAmplifier": 0      // 0 = Regen I
+    "intervalTicks": 40,            // generic tick gate
+    "radius": 16.0,                 // you must be within this for passives to apply (the wisp follows you)
+    "hungerSlowFraction": 0.5,      // Hunger Saver: refund this fraction of exhaustion (0.5 = hunger 50% slower)
+    "regenIntervalTicks": 60,      // Slow Regen: heal every N ticks (120 = 6s) — constant but super slow
+    "regenAmount": 2.0              // Slow Regen: HP healed each interval
   },
   // envelop: the burst on the Spirit keybind (default X) — the wisp merges into you for a limited time,
   // giving strong buffs PLUS a share of the Spirit's own combat stats. In your own first-person view the aura
@@ -39,15 +38,16 @@
     "defaultColor": "7FC8FF",   // spectral blue (RRGGBB hex)
     "followDistance": 2.0       // how far (blocks) the wisp hovers from you — far enough not to crowd/push you
   },
-  // modes: Equip-tab attunement (one active at a time; an always-on boon while the wisp floats near you, plus
-  // a subtle shift of the wisp's tone toward the mode's colour — kept small so your chosen colour dominates).
+  // modes: the ACTIVE modes (Equip > Actives). One selected; its effect is applied ONLY during the Envelop
+  // (press X), on top of the base burst. The wisp's tone shifts slightly toward the active's colour (kept
+  // small so your chosen colour dominates).
   "modes": {
     "moonGrace": {
-      "jumpAmplifier": 2        // Jump Boost III — jump higher (violet tint)
+      "jumpAmplifier": 2        // Jump Boost III during the envelop — jump higher (violet tint)
     },
     "berserker": {
-      "strengthAmplifier": 1,   // Strength II — more damage dealt (red tint)
-      "damageTakenMultiplier": 1.3  // ...but you take x1.3 incoming damage (the cost)
+      "strengthAmplifier": 1,   // extra Strength during the envelop — more damage dealt (red tint)
+      "damageTakenMultiplier": 1.3  // ...but you take x1.3 incoming damage WHILE enveloped (the cost)
     }
   }
 }
