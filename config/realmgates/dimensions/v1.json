@@ -5,6 +5,7 @@
   "canExitTo": ["minecraft:the_nether", "minecraft:the_end"],
   "worldgen": {
     "allowedStructureNamespaces": ["minecraft"],
-    "blockedFeatureNamespaces": ["iceandfire", "terralith"]
+    "blockedFeatureNamespaces": ["iceandfire", "terralith"],
+    "blockedFeatures": ["realmgates:oasis"]
   }
 }
