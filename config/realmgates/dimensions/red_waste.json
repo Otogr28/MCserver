@@ -7,5 +7,6 @@
   "canEnterFrom": ["realmgates:v1"],
   "canExitTo": ["realmgates:v1"],
   "environment": { "effects": [{ "effect": "minecraft:darkness", "amplifier": 0, "ambient": true }] },
+  "worldgen": { "blockedStructureNamespaces": ["dungeons_arise"] },
   "portal": { "frameBlock": "minecraft:red_sandstone", "igniter": "minecraft:fire_charge", "color": "#FF3030" }
 }
