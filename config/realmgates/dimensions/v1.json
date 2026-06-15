@@ -2,7 +2,7 @@
   "dimension": "realmgates:v1",
   "tier": 0,
   "canEnterFrom": ["minecraft:the_nether", "minecraft:the_end"],
-  "canExitTo": ["minecraft:the_nether", "minecraft:the_end", "realmgates:red_waste"],
+  "canExitTo": ["minecraft:the_nether", "minecraft:the_end"],
   "worldgen": {
     "allowedStructureNamespaces": ["minecraft"],
     "blockedFeatureNamespaces": ["iceandfire", "terralith"]
