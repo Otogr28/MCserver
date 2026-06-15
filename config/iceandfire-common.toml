@@ -327,11 +327,11 @@
 		#True if dragons can break blocks if they get stuck. Turn this off if your dragons randomly explode.
 		"Dragons Dig When Stuck" = true
 		#True if dragons can drop their skull on death.
-		"Dragons Drop Skull" = true
+		"Dragons Drop Skull" = false
 		#True if dragons can drop their heart on death.
-		"Dragons Drop Heart" = true
+		"Dragons Drop Heart" = false
 		#True if dragons can drop their blood on death.
-		"Dragons Drop Blood" = true
+		"Dragons Drop Blood" = false
 		#True if dragons fire/ice charges create secondary explosions that launch blocks everywhere. Turn this to true if you like unfair explosions. Or lag.
 		"Explosive Dragon Breath" = false
 		#How many blocks away can dragons spot potential prey. Note that increasing this could cause lag.
