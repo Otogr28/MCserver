@@ -1,0 +1,32 @@
+{
+  // Spirit support class — a floating soul-wisp at your side (SpiritBalance.java). It keeps a light
+  // passive aura on you, and on the "Spirit: Envelop" keybind (default X) it merges into you for a
+  // limited time: strong buffs + a share of its own combat stats. All numbers below are tunable live.
+  // passive: the light aura it keeps on you just by floating nearby (a gentle Speed/Regen hum;
+  // Grace does NOT scale the passive — it scales the Envelop burst below).
+  "passive": {
+    "intervalTicks": 40,     // refresh cadence
+    "durationTicks": 100,    // effect duration each refresh (> interval, so it never flickers)
+    "radius": 16.0,          // you must be within this for the passive aura to land
+    "speedAmplifier": 0,     // 0 = Speed I
+    "regenAmplifier": 0      // 0 = Regen I
+  },
+  // envelop: the burst on the Spirit keybind (default X) — the wisp merges into you for a limited time,
+  // giving strong buffs PLUS a share of the Spirit's own combat stats.
+  "envelop": {
+    "durationTicks": 160,    // 8s enveloped
+    "cooldownTicks": 600,    // 30s cooldown AFTER it ends
+    "refreshTicks": 40,      // how often the potion effects are re-applied while active
+    // Potion amplifiers (Grace + the Spirit's ability nodes add on top, capped by progression.json auraAmpCap).
+    "speedAmplifier": 1,
+    "regenAmplifier": 1,
+    "strengthAmplifier": 1,
+    "resistanceAmplifier": 1,
+    "fireResistance": true,
+    // Stat inheritance: fraction of the Spirit's attribute value added to YOU for the duration.
+    "healthTransfer": 0.5,   // +50% of the Spirit's max health as bonus hearts
+    "attackTransfer": 1.0,   // +100% of the Spirit's attack damage
+    "armorTransfer": 1.0,    // +100% of the Spirit's armor
+    "speedTransfer": 0.5     // +50% of the Spirit's movement-speed bonus
+  }
+}
