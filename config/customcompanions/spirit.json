@@ -34,5 +34,16 @@
   // glowing orb shown in the create/panel preview. defaultColor is only the tint a freshly created Spirit gets.
   "wisp": {
     "defaultColor": "7FC8FF"  // spectral blue (RRGGBB hex)
+  },
+  // modes: Equip-tab attunement (one active at a time; an always-on boon while the wisp floats near you, plus
+  // a subtle shift of the wisp's tone toward the mode's colour — kept small so your chosen colour dominates).
+  "modes": {
+    "moonGrace": {
+      "jumpAmplifier": 2        // Jump Boost III — jump higher (violet tint)
+    },
+    "berserker": {
+      "strengthAmplifier": 1,   // Strength II — more damage dealt (red tint)
+      "damageTakenMultiplier": 1.3  // ...but you take x1.3 incoming damage (the cost)
+    }
   }
 }
