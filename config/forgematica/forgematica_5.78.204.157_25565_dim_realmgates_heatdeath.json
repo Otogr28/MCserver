@@ -4,7 +4,7 @@
   },
   "placements": {},
   "schematic_projects_manager": {},
-  "operation_mode": "PASTE_SCHEMATIC",
+  "operation_mode": "AREA_SELECTION",
   "render_range": {
     "mode": "ALL",
     "axis": "y",
@@ -22,9 +22,9 @@
     "boxes": [
       {
         "pos1": [
-          6,
-          84,
-          -32
+          246,
+          83,
+          -691
         ],
         "pos2": [
           6,

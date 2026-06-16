@@ -6,7 +6,8 @@
   "passive": {
     "intervalTicks": 40,            // generic tick gate
     "radius": 16.0,                 // you must be within this for passives to apply (the wisp follows you)
-    "hungerSlowFraction": 0.5,      // Hunger Saver: refund this fraction of exhaustion (0.5 = hunger 50% slower)
+    "hungerSlowFraction": 0.5,      // Hunger Saver: refund this fraction of exhaustion (0.5 = hunger 50% slower).
+                                    // The Equip > Passives label shows this as a %, derived live from this value.
     "regenIntervalTicks": 60,      // Slow Regen: heal every N ticks (120 = 6s) — constant but super slow
     "regenAmount": 2.0              // Slow Regen: HP healed each interval
   },
