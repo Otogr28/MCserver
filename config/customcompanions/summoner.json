@@ -49,6 +49,9 @@
   // Post-death re-summon delay in ticks = Size * respawnTicksPerSize (20 ticks = 1 second).
   "respawnTicksPerSize": 60,
 
+  // The "Lasting Bond" draft node multiplies that re-summon delay by this (0.5 = minions return twice as fast).
+  "lastingBondRespawnMultiplier": 0.5,
+
   // Mobs with max-health >= this are treated as bosses and can never be unlocked as summons
   // (this auto-catches modded bosses; vanilla bosses are always excluded by class).
   "bossHpCeiling": 150.0

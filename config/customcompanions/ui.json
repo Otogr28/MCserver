@@ -2,7 +2,7 @@
   // Presentation knobs for the companion panel (Codex). Edit and reopen the panel to apply
   // (or /reload). Colors are "#AARRGGBB" (alpha-red-green-blue), or "#RRGGBB" for an opaque color.
 
-  "tooltipHoverMs": 2500,         // ms the mouse must rest on an ability row (e.g. Spirit Equip passives/actives)
+  "tooltipHoverMs": 1900,         // ms the mouse must rest on an ability row (e.g. Spirit Equip passives/actives)
                                   //   before its description tooltip appears; 0 = show immediately
 
   "statRadar": {
