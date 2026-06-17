@@ -18,6 +18,7 @@
   // How the special mechanics scale (all per-point so you can dial them directly):
   "critBonus": 0.5,         // crit DAMAGE: a critical hit deals this much extra (0.5 = +50% on the hit)
   "armySlotsPerPoint": 0.2, // Summoner: +summon slots per Army point (0.2 = 5 points → +1 slot; total is floored)
-  "auraPointsPerAmp": 12.0, // Spirit: Aura points needed for +1 buff amplifier level (lower = stronger aura)
-  "auraAmpCap": 2           // ...capped at this many extra amplifier levels on the aura buffs
+  // Spirit aura: spread the curve so Grace keeps mattering past mid-game (was capped at amp 2 by ~level 15).
+  "auraPointsPerAmp": 18.0, // Aura points needed for +1 buff amplifier level (raised → smoother scaling to 50)
+  "auraAmpCap": 3           // ...capped at this many extra amplifier levels on the aura buffs (was 2)
 }
