@@ -4,7 +4,7 @@
   },
   "placements": {},
   "schematic_projects_manager": {},
-  "operation_mode": "GRID_PASTE",
+  "operation_mode": "MOVE",
   "render_range": {
     "mode": "ALL",
     "axis": "y",
@@ -22,14 +22,14 @@
     "boxes": [
       {
         "pos1": [
-          246,
-          83,
-          -691
+          5,
+          85,
+          -42
         ],
         "pos2": [
-          6,
-          84,
-          -32
+          5,
+          85,
+          -42
         ],
         "name": "Unnamed"
       }
