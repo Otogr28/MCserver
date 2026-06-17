@@ -21,6 +21,9 @@
     "gustChance": 1,
     "gustLift": 1.0,
     "gustStrength": 0.5,
-    "gustCooldown": 90
+    "gustCooldown": 90,
+    "gustThreshold": 0.62,
+    "gustWavelength": 26.0,
+    "gustSpeed": 0.7
   }
 }
