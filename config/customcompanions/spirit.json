@@ -49,6 +49,17 @@
     "berserker": {
       "strengthAmplifier": 1,   // extra Strength during the envelop — more damage dealt (red tint)
       "damageTakenMultiplier": 1.3  // ...but you take x1.3 incoming damage WHILE enveloped (the cost)
+    },
+    "bulwark": {
+      "resistanceAmplifier": 3, // Resistance IV during the envelop — soak hits (steel-blue tint)
+      "slownessAmplifier": 1    // ...but Slowness II while enveloped (the cost)
+    },
+    "phantomStep": {
+      "bonusSpeed": 2           // extra Speed on top of the base envelop Speed + a brief Invisibility (pale tint)
+    },
+    "wrath": {
+      "strengthBonus": 2,       // extra Strength on top of the base burst (molten tint)
+      "hasteAmplifier": 1       // Haste II during the envelop
     }
   }
 }

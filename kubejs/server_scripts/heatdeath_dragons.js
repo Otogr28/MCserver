@@ -1,16 +1,22 @@
 // Heatdeath dragon rules — ONLY this dimension. Other dimensions are left completely untouched.
 //
-//   * Any NON-lightning dragon (fire / ice / black-frost) that spawns in heatdeath:
-//       - 30% chance it is replaced by a lightning dragon (same spot/age),
+//   * Any dragon that spawns in heatdeath that is NOT a lightning dragon (fire / ice / black-frost):
+//       - 30% chance it is replaced by a lightning dragon at the same spot & age,
 //       - 70% chance nothing spawns (it is removed).
-//   * Lightning dragons in heatdeath get buffed: 3000 max health + DOUBLE attack damage.
+//   * Lightning dragons in heatdeath get DOUBLE attack damage.
 //
 // "No drops" is handled in config/iceandfire-common.toml ("Dragons Drop Skull/Heart/Blood = false").
-// Dragons only ever spawn in heatdeath (v1 denies Ice and Fire; the other dims have no dragon biomes),
-// so that global toggle is effectively heatdeath-only.
+// Ice and Fire generates its dragons as worldgen roosts (placed features, not structures); heatdeath
+// does NOT filter Ice and Fire features (no `worldgen` block in its rule), so a fire-dragon roost CAN
+// generate here — and we reuse that spawn as the trigger for the rule above.
 //
-// NOTE: Ice and Fire dragons have custom health/damage/drop code; this is best-effort and was written to
-// be verified in-game (summon a fire/lightning dragon in heatdeath and check).
+// ── Two gotchas that broke the previous version, both fixed below ──
+//   1. KubeJS `event.cancel()` THROWS (EventExit) to unwind the handler, so anything written AFTER it
+//      never runs. The old code cancelled first and summoned the replacement after → the replacement
+//      never happened (effectively 0% lightning). The summon now runs BEFORE cancel(); cancel() is last.
+//   2. Ice and Fire re-bakes a dragon's attributes by growth stage (updateAttributes -> setBaseValue),
+//      which wipes a plain setBaseValue() buff. We double the damage with a stable-UUID
+//      MULTIPLY_TOTAL AttributeModifier instead, so it survives every re-bake and reload.
 
 const HEATDEATH = 'realmgates:heatdeath'
 const LIGHTNING = 'iceandfire:lightning_dragon'
@@ -18,6 +24,15 @@ const REPLACEABLE = ['iceandfire:fire_dragon', 'iceandfire:ice_dragon', 'iceandf
 const REPLACE_CHANCE = 0.30
 
 const $EntityType = Java.loadClass('net.minecraft.world.entity.EntityType')
+const $AttributeModifier = Java.loadClass('net.minecraft.world.entity.ai.attributes.AttributeModifier')
+const $Operation = Java.loadClass('net.minecraft.world.entity.ai.attributes.AttributeModifier$Operation')
+const $UUID = Java.loadClass('java.util.UUID')
+const $ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
+const $BuiltInRegistries = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
+
+// Stable UUID so the "double damage" modifier is added exactly once and survives reloads /
+// Ice and Fire's per-stage attribute re-bake.
+const DMG_BUFF_UUID = $UUID.fromString('a1b2c3d4-e5f6-47a8-9c0d-1e2f3a4b5c6d')
 
 // Rhino exposes some zero-arg Java getters as values, others as methods; resolve either way.
 function call0(obj, name) {
@@ -37,19 +52,29 @@ function typeId(entity) {
     return String(call0($EntityType.getKey(t), 'toString'))
 }
 
+// Resolve a vanilla Attribute object from its id (avoids relying on a getAttribute(String) wrapper).
+function attribute(entity, id) {
+    const a = $BuiltInRegistries.ATTRIBUTE.get(new $ResourceLocation(id))
+    return a ? entity.getAttribute(a) : null
+}
+
+// Double attack damage via a MULTIPLY_TOTAL modifier (amount 1.0 => final = base * 2), idempotent
+// by UUID so re-entry / reload never compounds or duplicates it.
 function buffLightning(dragon) {
-    const maxHealth = dragon.getAttribute('minecraft:generic.max_health')
-    if (maxHealth) {
-        maxHealth.setBaseValue(3000)
-        dragon.setHealth(3000)
+    const attack = attribute(dragon, 'minecraft:generic.attack_damage')
+    if (attack && attack.getModifier(DMG_BUFF_UUID) == null) {
+        attack.addPermanentModifier(
+            new $AttributeModifier(DMG_BUFF_UUID, 'heatdeath_double_damage', 1.0, $Operation.MULTIPLY_TOTAL))
     }
-    // Double attack damage ONCE (flag in persistent data so a chunk reload doesn't compound it).
-    const pd = dragon.persistentData
-    if (!pd.getBoolean('heatdeathBuffed')) {
-        const attack = dragon.getAttribute('minecraft:generic.attack_damage')
-        if (attack) attack.setBaseValue(attack.getBaseValue() * 2)
-        pd.putBoolean('heatdeathBuffed', true)
-    }
+}
+
+// AgeTicks (IaF's real NBT key) off the source dragon, so a stage-5 fire dragon -> stage-5 lightning.
+function ageOf(entity) {
+    try {
+        const nbt = entity.nbt
+        if (nbt && nbt.contains('AgeTicks')) return nbt.getInt('AgeTicks')
+    } catch (err) { /* fall through */ }
+    return 90000 // adult fallback
 }
 
 EntityEvents.spawned(event => {
@@ -67,12 +92,12 @@ EntityEvents.spawned(event => {
     }
     if (REPLACEABLE.indexOf(type) === -1) return
 
-    // A fire/ice/black-frost dragon spawned in heatdeath → remove it, maybe replace with a lightning one.
-    event.cancel()
+    // Fire/ice/black-frost dragon in heatdeath. Roll the replacement and summon it FIRST — event.cancel()
+    // below throws to unwind this handler, so nothing after it would run.
     if (Math.random() < REPLACE_CHANCE) {
-        const age = (e.nbt && e.nbt.AgeTicks !== undefined) ? e.nbt.AgeTicks : 90000
         const server = call0(level, 'server')
-        server.runCommandSilent(`summon ${LIGHTNING} ${e.x} ${e.y} ${e.z} {AgeTicks:${age}}`)
-        // the summoned lightning dragon re-enters this handler and gets buffed by the lightning branch
+        // The summoned lightning dragon re-enters this handler and is buffed by the LIGHTNING branch.
+        server.runCommandSilent(`summon ${LIGHTNING} ${e.x} ${e.y} ${e.z} {AgeTicks:${ageOf(e)}}`)
     }
+    event.cancel() // MUST be last: throws EventExit and unwinds the handler.
 })
