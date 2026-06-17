@@ -5,5 +5,12 @@
   "exitMessage": "The air turns cool again.",
   "canEnterFrom": ["realmgates:v1"],
   "canExitTo": ["realmgates:v1"],
-  "portal": { "frameBlock": "minecraft:sandstone", "igniter": "minecraft:fire_charge", "color": "#FF8A00" }
+  "portal": { "frameBlock": "minecraft:sandstone", "igniter": "minecraft:fire_charge", "color": "#FF8A00" },
+  "worldgen": {
+    "chanceBlockedFeatures": [
+      "minecraft:spring_water",
+      "realmgates:oasis"
+    ],
+    "featureBlockChance": 0.92
+  }
 }
