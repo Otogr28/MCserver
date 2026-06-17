@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:jigsaw",
+  "start_pool": "desert_tomb:deserttomb",
+  "size": 1,
+  "max_distance_from_center": 64,
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "start_height": {
+    "absolute": 0
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "biomes": [
+    "biomeswevegone:atacama_outback",
+    "biomeswevegone:mojave_desert",
+    "biomeswevegone:windswept_desert",
+    "biomeswevegone:dead_sea",
+    "biomeswevegone:red_rock_peaks",
+    "biomeswevegone:red_rock_valley",
+    "biomeswevegone:firecracker_chaparral",
+    "terralith:volcanic_crater",
+    "terralith:volcanic_peaks",
+    "terralith:basalt_cliffs",
+    "terralith:ancient_sands",
+    "terralith:desert_canyon",
+    "terralith:desert_oasis",
+    "terralith:red_oasis",
+    "minecraft:desert"
+  ],
+  "use_expansion_hack": false
+}
