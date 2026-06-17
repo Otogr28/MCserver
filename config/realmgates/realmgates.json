@@ -6,6 +6,7 @@
   "denyMessage": "You cannot travel from %from% to %to%.",
   "loginRemediation": "teleport_to_spawn",
   "spawnDimension": "realmgates:v1",
+  "regenLootRadiusChunks": 4,
   "void": {
     "columnHeight": 90.0,
     "columnDensity": 1.0,
@@ -25,5 +26,11 @@
     "gustThreshold": 0.62,
     "gustWavelength": 26.0,
     "gustSpeed": 0.7
+  },
+  "deepHeatdeath": {
+    "riseSeconds": 240,
+    "dangerThreshold": 0.5,
+    "maxScorch": 1.5,
+    "relicTiers": 3
   }
 }

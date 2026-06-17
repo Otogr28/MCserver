@@ -1,5 +1,54 @@
 [
   {
+    "name": "Galena Iron Ore",
+    "blockName": "alexscaves:galena_iron_ore",
+    "order": 17,
+    "color": 14681197,
+    "drawing": false
+  },
+  {
+    "name": "Deepslate Copper Ore",
+    "blockName": "minecraft:deepslate_copper_ore",
+    "order": 7,
+    "color": 483832,
+    "drawing": false
+  },
+  {
+    "name": "Deepslate Iron Ore",
+    "blockName": "minecraft:deepslate_iron_ore",
+    "order": 16,
+    "color": 5592271,
+    "drawing": false
+  },
+  {
+    "name": "Gold Ore",
+    "blockName": "minecraft:gold_ore",
+    "order": 12,
+    "color": 9217993,
+    "drawing": false
+  },
+  {
+    "name": "Deepslate Gold Ore",
+    "blockName": "minecraft:deepslate_gold_ore",
+    "order": 14,
+    "color": 1391926,
+    "drawing": false
+  },
+  {
+    "name": "Radrock Uranium Ore",
+    "blockName": "alexscaves:radrock_uranium_ore",
+    "order": 25,
+    "color": 1639592,
+    "drawing": false
+  },
+  {
+    "name": "Nether Quartz Ore",
+    "blockName": "minecraft:nether_quartz_ore",
+    "order": 23,
+    "color": 5143183,
+    "drawing": false
+  },
+  {
     "name": "Deepslate Redstone Ore",
     "blockName": "minecraft:deepslate_redstone_ore",
     "order": 21,
@@ -7,24 +56,24 @@
     "drawing": false
   },
   {
-    "name": "Lapis Lazuli Ore",
-    "blockName": "minecraft:lapis_ore",
-    "order": 18,
-    "color": 5999502,
+    "name": "Redstone Ore",
+    "blockName": "minecraft:redstone_ore",
+    "order": 20,
+    "color": 6323210,
     "drawing": false
   },
   {
-    "name": "Emerald Ore",
-    "blockName": "minecraft:emerald_ore",
-    "order": 10,
-    "color": 15252909,
+    "name": "Copper Ore",
+    "blockName": "minecraft:copper_ore",
+    "order": 6,
+    "color": 1968783,
     "drawing": false
   },
   {
-    "name": "Ancient Debris",
-    "blockName": "minecraft:ancient_debris",
-    "order": 24,
-    "color": 14517546,
+    "name": "Coprolith Coal Ore",
+    "blockName": "alexscaves:coprolith_coal_ore",
+    "order": 5,
+    "color": 9646445,
     "drawing": false
   },
   {
@@ -42,11 +91,11 @@
     "drawing": false
   },
   {
-    "name": "Silver Ore",
-    "blockName": "iceandfire:silver_ore",
-    "order": 0,
-    "color": 4400278,
-    "drawing": true
+    "name": "Ancient Debris",
+    "blockName": "minecraft:ancient_debris",
+    "order": 24,
+    "color": 14517546,
+    "drawing": false
   },
   {
     "name": "Coal Ore",
@@ -56,10 +105,17 @@
     "drawing": false
   },
   {
-    "name": "Copper Ore",
-    "blockName": "minecraft:copper_ore",
-    "order": 6,
-    "color": 1968783,
+    "name": "Chest",
+    "blockName": "minecraft:chest",
+    "order": 27,
+    "color": 42495,
+    "drawing": true
+  },
+  {
+    "name": "Diamond Ore",
+    "blockName": "minecraft:diamond_ore",
+    "order": 8,
+    "color": 12605548,
     "drawing": false
   },
   {
@@ -70,80 +126,10 @@
     "drawing": false
   },
   {
-    "name": "Coprolith Coal Ore",
-    "blockName": "alexscaves:coprolith_coal_ore",
-    "order": 5,
-    "color": 9646445,
-    "drawing": false
-  },
-  {
-    "name": "Gold Ore",
-    "blockName": "minecraft:gold_ore",
-    "order": 12,
-    "color": 9217993,
-    "drawing": false
-  },
-  {
     "name": "Nether Gold Ore",
     "blockName": "minecraft:nether_gold_ore",
     "order": 13,
     "color": 5226846,
-    "drawing": false
-  },
-  {
-    "name": "Deepslate Silver Ore",
-    "blockName": "iceandfire:deepslate_silver_ore",
-    "order": 1,
-    "color": 7957284,
-    "drawing": true
-  },
-  {
-    "name": "Galena Iron Ore",
-    "blockName": "alexscaves:galena_iron_ore",
-    "order": 17,
-    "color": 14681197,
-    "drawing": false
-  },
-  {
-    "name": "Guanostone Redstone Ore",
-    "blockName": "alexscaves:guanostone_redstone_ore",
-    "order": 22,
-    "color": 13342703,
-    "drawing": false
-  },
-  {
-    "name": "Deepslate Gold Ore",
-    "blockName": "minecraft:deepslate_gold_ore",
-    "order": 14,
-    "color": 1391926,
-    "drawing": false
-  },
-  {
-    "name": "Deepslate Iron Ore",
-    "blockName": "minecraft:deepslate_iron_ore",
-    "order": 16,
-    "color": 5592271,
-    "drawing": false
-  },
-  {
-    "name": "Redstone Ore",
-    "blockName": "minecraft:redstone_ore",
-    "order": 20,
-    "color": 6323210,
-    "drawing": false
-  },
-  {
-    "name": "Radrock Uranium Ore",
-    "blockName": "alexscaves:radrock_uranium_ore",
-    "order": 25,
-    "color": 1639592,
-    "drawing": false
-  },
-  {
-    "name": "Diamond Ore",
-    "blockName": "minecraft:diamond_ore",
-    "order": 8,
-    "color": 12605548,
     "drawing": false
   },
   {
@@ -154,10 +140,17 @@
     "drawing": false
   },
   {
-    "name": "Deepslate Copper Ore",
-    "blockName": "minecraft:deepslate_copper_ore",
-    "order": 7,
-    "color": 483832,
+    "name": "Guanostone Redstone Ore",
+    "blockName": "alexscaves:guanostone_redstone_ore",
+    "order": 22,
+    "color": 13342703,
+    "drawing": false
+  },
+  {
+    "name": "Emerald Ore",
+    "blockName": "minecraft:emerald_ore",
+    "order": 10,
+    "color": 15252909,
     "drawing": false
   },
   {
@@ -168,11 +161,11 @@
     "drawing": false
   },
   {
-    "name": "Nether Quartz Ore",
-    "blockName": "minecraft:nether_quartz_ore",
-    "order": 23,
-    "color": 5143183,
-    "drawing": false
+    "name": "Silver Ore",
+    "blockName": "iceandfire:silver_ore",
+    "order": 0,
+    "color": 4400278,
+    "drawing": true
   },
   {
     "name": "Sapphire Ore",
@@ -180,5 +173,19 @@
     "order": 2,
     "color": 13567175,
     "drawing": true
+  },
+  {
+    "name": "Deepslate Silver Ore",
+    "blockName": "iceandfire:deepslate_silver_ore",
+    "order": 1,
+    "color": 7957284,
+    "drawing": true
+  },
+  {
+    "name": "Lapis Lazuli Ore",
+    "blockName": "minecraft:lapis_ore",
+    "order": 18,
+    "color": 5999502,
+    "drawing": false
   }
 ]
