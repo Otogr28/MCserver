@@ -1,3 +1,55 @@
 {
-  "_note": "placeholder \u2014 this class is not balance-driven yet"
+  "engagement": {
+    "holdRange": 1.6,
+    "chaseSpeed": 1.15
+  },
+  "stances": {
+    "aggressiveSpeed": 1.35,
+    "aggressiveHoldFraction": 0.6,
+    "defensiveHoldFraction": 1.4,
+    "defensivePeelHealthFraction": 0.35,
+    "defensivePeelDistance": 3.0,
+    "defensivePeelSpeed": 1.2
+  },
+  "cleave": {
+    "radius": 2.5,
+    "damageFraction": 0.5
+  },
+  "lifesteal": {
+    "healFraction": 0.25
+  },
+  "execute": {
+    "healthFraction": 0.3,
+    "bonusFraction": 0.6
+  },
+  "sunder": {
+    "chance": 0.25,
+    "durationTicks": 80,
+    "amplifier": 0
+  },
+  "skills": {
+    "dodgeCooldownTicks": 70,
+    "stepCooldownTicks": 40,
+    "dodgeIFrameTicks": 10,
+    "guardCooldownTicks": 50,
+    "guardDamageReduction": 0.7,
+    "weaponArtCooldownTicks": 120,
+    "weaponArtRange": 3.5,
+    "whirlwindRadius": 3.0,
+    "stalwartDamageReduction": 0.15,
+    "stalwartKnockbackResist": 0.6,
+    "berserkerMaxBonus": 0.6,
+    "swordmasterDamageBonus": 0.25,
+    "vengeanceDamageBonus": 0.5,
+    "adrenalineHeal": 6.0,
+    "parryDamageReduction": 0.85,
+    "parryCooldownTicks": 80
+  },
+  "taunt": {
+    "range": 16.0,
+    "intervalTicks": 20
+  },
+  "fallback": {
+    "attackTicks": 16
+  }
 }
