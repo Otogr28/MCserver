@@ -2,6 +2,9 @@
   // Presentation knobs for the companion panel (Codex). Edit and reopen the panel to apply
   // (or /reload). Colors are "#AARRGGBB" (alpha-red-green-blue), or "#RRGGBB" for an opaque color.
 
+  "tooltipHoverMs": 2500,         // ms the mouse must rest on an ability row (e.g. Spirit Equip passives/actives)
+                                  //   before its description tooltip appears; 0 = show immediately
+
   "statRadar": {
     // The hexagonal stat radar at the top of the Stats tab (one axis per attribute).
     "referenceMin": 8.0,          // the web scales to max(referenceMin, your highest attribute): a low-level

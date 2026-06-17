@@ -47,7 +47,7 @@
     "origin_selected": true
   },
   "schematic_projects_manager": {},
-  "operation_mode": "AREA_SELECTION",
+  "operation_mode": "PASTE_SCHEMATIC",
   "render_range": {
     "mode": "ALL",
     "axis": "y",
@@ -65,14 +65,14 @@
     "boxes": [
       {
         "pos1": [
-          -43,
+          144,
           78,
-          150
+          11
         ],
         "pos2": [
-          3065,
-          100,
-          -1552
+          144,
+          78,
+          11
         ],
         "name": "Unnamed"
       }

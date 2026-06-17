@@ -6,6 +6,8 @@
   "unlockEveryLevels": 5,   // grant one unlock token every N levels (0 = never)
   "choicesPerDraft": 3,     // how many nodes each draft offers — you pick one
   "rerollEnabled": false,   // reserved: allow re-rolling the current offer (not wired yet)
+  "showRequiredLevelOnCards": false,  // draw "Unlocks at level N" on each draft card — redundant (the offer is
+                                      // already band-gated), so off by default; set true to bring the line back
   // Cumulative level bands: each band that has opened (level >= opensAtLevel) raises the pool ceiling. The
   // offer may include any node whose requiredLevel <= the current ceiling — so the pool widens as you level
   // ("1-10", then "1-20", then "1-30").
