@@ -1,0 +1,7 @@
+{
+  // Picto / Lumina tuning (PictoConfig.java). Edit + reopen the panel / restart to apply.
+  "killsToLearnLumina": 12,   // kills (with a picto equipped) to learn its lumina
+  "lumenPerLevel": 1,         // lumen (lumina-point budget) gained per companion level
+  "pictoDropChance": 0.18,    // chance per chest to add a Picto item (chest-loot injector)
+  "lumenDropChance": 0.05     // chance per chest to add a Lumen item
+}

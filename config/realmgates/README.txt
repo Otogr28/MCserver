@@ -7,6 +7,10 @@ dimensions/*.json      per-dimension rules: travel edges, entry gate, environmen
 Edit these and run /realmgates reload (no restart needed for rule changes).
 Worldgen for custom dimensions is bundled in the mod jar and needs a server restart to change.
 
+/realmgates regen-loot [radiusChunks]  re-rolls the loot of UNOPENED chests in loaded chunks around
+you (default 4-chunk radius) so already-placed chests pick up newly-injected drops (e.g. pictos).
+Already-opened chests can't be re-rolled. Stand near the chests (only loaded chunks are scanned).
+
 Custom portals: add a "portal" block to a dimension's JSON to let players light a gated
 portal INTO it, e.g.:
   "portal": { "frameBlock": "minecraft:red_sandstone", "igniter": "minecraft:fire_charge", "color": "#FF3030" }
