@@ -106,4 +106,30 @@
         }
         event.cancel() // MUST be last: throws EventExit and unwinds the handler.
     })
+
+    // ── Worldgen dragons too ────────────────────────────────────────────────────────────────────
+    // EntityEvents.spawned only catches fresh/summoned entities. Ice and Fire's dragons come from
+    // worldgen ROOSTS (placed during chunk gen, loaded with the chunk), which that event misses — so a
+    // wild fire dragon could still appear in heatdeath. Once a second we sweep heatdeath's loaded
+    // entities and apply the same rule to any dragon that slipped through (remove non-lightning, 30%
+    // replace with a lightning; ensure lightnings are buffed). discard() = remove, no death drops.
+    const HEATDEATH_RL = new ResourceLocationCls(HEATDEATH)
+    let tickCounter = 0
+    ServerEvents.tick(event => {
+        if (++tickCounter % 20 !== 0) return   // ~once a second
+        const server = event.server
+        const level = server.getLevel(HEATDEATH_RL)
+        if (!level) return
+        const entities = level.getEntities()   // snapshot, safe to discard/summon during the loop
+        for (let i = 0; i < entities.size(); i++) {
+            const e = entities.get(i)
+            const type = typeId(e)
+            if (type === LIGHTNING) { buffLightning(e); continue }
+            if (REPLACEABLE.indexOf(type) === -1) continue
+            if (Math.random() < REPLACE_CHANCE) {
+                server.runCommandSilent(`summon ${LIGHTNING} ${e.x} ${e.y} ${e.z} {AgeTicks:${ageOf(e)}}`)
+            }
+            e.discard()
+        }
+    })
 })()

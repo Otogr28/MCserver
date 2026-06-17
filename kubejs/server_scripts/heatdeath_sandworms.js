@@ -22,6 +22,7 @@
     const SCALE = 4.5   // giant; HP/damage scale with this. Brutal preset, tune freely.
 
     const EntityTypeCls = Java.loadClass('net.minecraft.world.entity.EntityType')
+    const ResourceLocationCls = Java.loadClass('net.minecraft.resources.ResourceLocation')
 
     // Rhino exposes some zero-arg Java getters as values, others as methods; resolve either way.
     function call0(obj, name) {
@@ -41,6 +42,16 @@
         return String(call0(EntityTypeCls.getKey(t), 'toString'))
     }
 
+    // Make a worm giant (idempotent: only re-scales if it isn't already). setDeathWormScale rebakes
+    // HP/damage from scale and heals to the new max; aiStep keeps re-asserting this scale every tick, so
+    // the giant size (and its tougher stats) persist for the worm's whole life.
+    function makeGiant(e) {
+        if (typeof e.setDeathWormScale !== 'function') return
+        let cur = 0
+        try { cur = e.getDeathwormScale() } catch (err) { cur = 0 }
+        if (cur < SCALE - 0.01) e.setDeathWormScale(SCALE)
+    }
+
     EntityEvents.spawned(event => {
         const e = event.entity
         if (!e) return
@@ -48,11 +59,23 @@
         try { level = e.level } catch (err) { return }
         if (!level || dimId(level) !== HEATDEATH) return
         if (typeId(e) !== DEATHWORM) return
+        makeGiant(e)
+    })
 
-        // setDeathWormScale rebakes HP/damage from scale and heals to the new max; aiStep keeps re-asserting
-        // this scale every tick, so the giant size (and its tougher stats) persist for the worm's whole life.
-        if (typeof e.setDeathWormScale === 'function') {
-            e.setDeathWormScale(SCALE)
+    // ── Worldgen worms too ──────────────────────────────────────────────────────────────────────
+    // EntityEvents.spawned catches summoned/fresh worms, but Death Worms also come from a worldgen
+    // spawn feature (loaded with the chunk), which that event misses. Once a second, sweep heatdeath's
+    // loaded entities and make any non-giant worm giant.
+    const HEATDEATH_RL = new ResourceLocationCls(HEATDEATH)
+    let wormTick = 0
+    ServerEvents.tick(event => {
+        if (++wormTick % 20 !== 0) return   // ~once a second
+        const level = event.server.getLevel(HEATDEATH_RL)
+        if (!level) return
+        const entities = level.getEntities()
+        for (let i = 0; i < entities.size(); i++) {
+            const e = entities.get(i)
+            if (typeId(e) === DEATHWORM) makeGiant(e)
         }
     })
 })()
