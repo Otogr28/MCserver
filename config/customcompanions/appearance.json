@@ -12,5 +12,6 @@
   // Off by default — changing class mid-progression re-arms and rescales; the editor only restyles.
   "allowClassChange": false,
   // allowDisable: allow the "Disable / Enable" button (despawn the companion, keep ALL its data).
+  //   Re-enabling a companion that was Disabled while DEAD revives it to full (never spawns a stuck corpse).
   "allowDisable": true
 }
