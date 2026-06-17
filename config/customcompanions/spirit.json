@@ -19,13 +19,10 @@
     "durationTicks": 160,    // 8s enveloped
     "cooldownTicks": 600,    // 30s cooldown AFTER it ends (tracked per-player + persisted, so disabling/
                              // re-enabling the spirit or relogging can't reset it)
-    "refreshTicks": 40,      // how often the potion effects are re-applied while active
-    // Potion amplifiers (Grace + the Spirit's ability nodes add on top, capped by progression.json auraAmpCap).
-    "speedAmplifier": 1,
-    "regenAmplifier": 1,
-    "strengthAmplifier": 1,
-    "resistanceAmplifier": 1,
-    "fireResistance": true,
+    "refreshTicks": 40,      // how often the active's effects are re-applied while active
+    // NOTE: there is no longer an always-on base potion burst — the envelop applies ONLY the SELECTED active's
+    // described effects (see "modes" below; Grace adds to the active's primary amplifier). With no active bound,
+    // the keybind does nothing. The only thing the envelop always does is the stat-inheritance "merge":
     // Stat inheritance: fraction of the Spirit's attribute value added to YOU for the duration.
     "healthTransfer": 0.5,   // +50% of the Spirit's max health as bonus hearts
     "attackTransfer": 1.0,   // +100% of the Spirit's attack damage

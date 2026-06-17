@@ -2,6 +2,7 @@
   // Roguelike progression draft (DraftConfig.java). Every few levels a companion earns an "unlock token";
   // spending it opens a "pick 1 of N" chooser drawn from that class's ability nodes, gated by level bands so
   // strong nodes can't appear early. All live-tunable (re-read on /reload).
+  "startingUnlocks": 2,     // tokens a freshly created companion starts with (draft its opening kit at level 1)
   "unlockEveryLevels": 5,   // grant one unlock token every N levels (0 = never)
   "choicesPerDraft": 3,     // how many nodes each draft offers — you pick one
   "rerollEnabled": false,   // reserved: allow re-rolling the current offer (not wired yet)
