@@ -1,8 +1,20 @@
 {
-  // Picto / Lumina tuning (PictoConfig.java). Edit + reopen the panel / restart to apply.
-  // Loot is automatic: any chest, on open, has pictoDropChance to add a Picto (no command needed).
+  // Picto / Lumina tuning (PictoConfig.java). Edit + /reload (or restart) to apply.
+  // Loot is automatic: on open, each chest rolls pictoDropByRarity per tier to add a Picto (no command needed).
   "killsToLearnLumina": 12,   // kills (with a picto equipped) to learn its lumina
   "lumenPerLevel": 1,         // lumen (lumina-point budget) gained per companion level
-  "pictoDropChance": 0.18,    // chance per chest to add a Picto item (chest-loot injector)
-  "lumenDropChance": 0.05     // chance per chest to add a Lumen item
+  // Per-chest drop chance for a picto of EACH rarity (rolled independently — commons common, legendaries rare).
+  // A dropped picto is unidentified + rarity-locked; installing it rolls a random picto of that rarity for your class.
+  "pictoDropByRarity": {
+    "common": 0.40,
+    "uncommon": 0.22,
+    "rare": 0.12,
+    "epic": 0.05,
+    "legendary": 0.02
+  },
+  "lumenDropChance": 0.12,    // chance per chest to add a Lumen item
+  // A loot table is treated as a chest if its id contains any of these. "chests/" is the universal
+  // structure-chest convention (vanilla + ~every structure mod), so this already covers nearly all modded
+  // chests. Add a mod's own pattern here if its chests use a non-standard path.
+  "chestTablePatterns": ["chests/"]
 }
