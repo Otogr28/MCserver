@@ -1,0 +1,25 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "biomeswevegone:atacama_outback",
+    "biomeswevegone:mojave_desert",
+    "biomeswevegone:windswept_desert",
+    "biomeswevegone:dead_sea",
+    "biomeswevegone:red_rock_peaks",
+    "biomeswevegone:red_rock_valley",
+    "biomeswevegone:firecracker_chaparral",
+    "terralith:volcanic_crater",
+    "terralith:volcanic_peaks",
+    "terralith:basalt_cliffs",
+    "terralith:ancient_sands",
+    "terralith:desert_canyon",
+    "terralith:desert_oasis",
+    "terralith:red_oasis"
+  ],
+  "spawners": [
+    { "type": "minecraft:husk", "weight": 20, "minCount": 1, "maxCount": 2 },
+    { "type": "born_in_chaos_v1:decaying_zombie", "weight": 10, "minCount": 1, "maxCount": 2 },
+    { "type": "creeperoverhaul:desert_creeper", "weight": 6, "minCount": 1, "maxCount": 1 },
+    { "type": "creeperoverhaul:badlands_creeper", "weight": 5, "minCount": 1, "maxCount": 1 }
+  ]
+}

@@ -27,10 +27,69 @@
     "gustWavelength": 26.0,
     "gustSpeed": 0.7
   },
-  "deepHeatdeath": {
+  "warmth": {
     "riseSeconds": 240,
-    "dangerThreshold": 0.5,
-    "maxScorch": 1.5,
-    "relicTiers": 3
+    "roofRiseMultiplier": 0.25,
+    "spawnStartThreshold": 0.20,
+    "spawnIntervalMinSeconds": 15,
+    "spawnIntervalMaxSeconds": 30,
+    "spawnRadiusMin": 12,
+    "spawnRadiusMax": 28,
+    "maxNearby": 14,
+    "eliteThreshold": 0.80,
+    "eliteChance": 0.20,
+    "maxLuckLevel": 3,
+    "maxLootingBonus": 3,
+    "maxOreFortune": 3,
+    "tiers": [
+      {
+        "minWarmth": 0.20, "minCount": 1, "maxCount": 2,
+        "mobs": [
+          { "id": "minecraft:husk", "weight": 30, "min": 1, "max": 1 },
+          { "id": "born_in_chaos_v1:decaying_zombie", "weight": 20, "min": 1, "max": 1 },
+          { "id": "desert_tomb:scorpion", "weight": 12, "min": 1, "max": 2 },
+          { "id": "born_in_chaos_v1:baby_spider", "weight": 10, "min": 2, "max": 3 },
+          { "id": "creeperoverhaul:desert_creeper", "weight": 8, "min": 1, "max": 1 }
+        ]
+      },
+      {
+        "minWarmth": 0.40, "minCount": 1, "maxCount": 3,
+        "mobs": [
+          { "id": "minecraft:husk", "weight": 18, "min": 1, "max": 1 },
+          { "id": "minecraft:skeleton", "weight": 16, "min": 1, "max": 1 },
+          { "id": "desert_tomb:mummy", "weight": 12, "min": 1, "max": 1 },
+          { "id": "born_in_chaos_v1:dread_hound", "weight": 12, "min": 2, "max": 3 },
+          { "id": "desert_tomb:scorpion", "weight": 10, "min": 1, "max": 2 },
+          { "id": "creeperoverhaul:badlands_creeper", "weight": 8, "min": 1, "max": 1 }
+        ]
+      },
+      {
+        "minWarmth": 0.60, "minCount": 2, "maxCount": 3,
+        "mobs": [
+          { "id": "minecraft:skeleton", "weight": 12, "min": 1, "max": 1 },
+          { "id": "born_in_chaos_v1:zombie_bruiser", "weight": 10, "min": 1, "max": 1 },
+          { "id": "born_in_chaos_v1:skeleton_thrasher", "weight": 8, "min": 1, "max": 1 },
+          { "id": "desert_tomb:mummy", "weight": 10, "min": 1, "max": 2 },
+          { "id": "born_in_chaos_v1:dread_hound", "weight": 10, "min": 2, "max": 3 },
+          { "id": "minecraft:husk", "weight": 8, "min": 1, "max": 1 }
+        ]
+      },
+      {
+        "minWarmth": 0.80, "minCount": 3, "maxCount": 4,
+        "mobs": [
+          { "id": "born_in_chaos_v1:zombie_bruiser", "weight": 10, "min": 1, "max": 1 },
+          { "id": "born_in_chaos_v1:skeleton_thrasher", "weight": 8, "min": 1, "max": 1 },
+          { "id": "born_in_chaos_v1:dread_hound", "weight": 10, "min": 2, "max": 3 },
+          { "id": "born_in_chaos_v1:seared_spirit", "weight": 6, "min": 1, "max": 1 },
+          { "id": "desert_tomb:mummy", "weight": 8, "min": 1, "max": 2 },
+          { "id": "creeperoverhaul:badlands_creeper", "weight": 6, "min": 1, "max": 1 }
+        ]
+      }
+    ],
+    "elites": [
+      { "id": "iceandfire:troll", "weight": 10, "min": 1, "max": 1 },
+      { "id": "iceandfire:deathworm", "weight": 8, "min": 1, "max": 1 },
+      { "id": "alexscaves:tremorsaurus", "weight": 4, "min": 1, "max": 1 }
+    ]
   }
 }

@@ -4,13 +4,24 @@
   "killsToLearnLumina": 12,   // kills (with a picto equipped) to learn its lumina
   "lumenPerLevel": 1,         // lumen (lumina-point budget) gained per companion level
   // Per-chest drop chance for a picto of EACH rarity (rolled independently — commons common, legendaries rare).
-  // A dropped picto is unidentified + rarity-locked; installing it rolls a random picto of that rarity for your class.
+  // A dropped picto is unidentified + rarity-locked; right-click opens a DRAFT to choose one picto of that rarity
+  // for your companion's class (see draftChoicesByRarity). The offer is frozen onto the item (no re-roll); the
+  // item is consumed only when you pick.
   "pictoDropByRarity": {
     "common": 0.40,
     "uncommon": 0.22,
     "rare": 0.12,
     "epic": 0.05,
     "legendary": 0.02
+  },
+  // How many distinct pictos the right-click draft offers you to choose from, per rarity (always >= 1).
+  // Pool = unowned pictos of that rarity usable by the companion's class; if fewer exist, fewer are shown.
+  "draftChoicesByRarity": {
+    "common": 4,
+    "uncommon": 3,
+    "rare": 2,
+    "epic": 1,
+    "legendary": 2
   },
   "lumenDropChance": 0.12,    // chance per chest to add a Lumen item
   // A loot table is treated as a chest if its id contains any of these. "chests/" is the universal
