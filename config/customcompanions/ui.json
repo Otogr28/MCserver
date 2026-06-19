@@ -20,5 +20,13 @@
     "sizePip": "◆",          // the glyph for one Size slot (default ◆); e.g. set "*" or "#" if ◆ won't render
     "sizePipColor": "#54A9F0",    // color of the Size pips (default blue)
     "rowHeight": 18               // vertical spacing of each summon row; raise for a roomier list, lower to fit more
+  },
+
+  "luminaBar": {
+    // The textless progress bar under each equipped picto's name (Pictos tab): fills with kills toward learning
+    // its Lumina, then turns blue once full/learned. Kills needed per rarity live in picto.json (killsToLearnByRarity).
+    "trackColor": "#FF15152A",    // the empty track behind the fill
+    "progressColor": "#FFFFC233", // gold — the bar as it fills with kills
+    "completeColor": "#FF4FA8FF"  // blue — the full bar once the Lumina is learned
   }
 }
