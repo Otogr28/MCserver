@@ -18,12 +18,16 @@
   // for your companion's class (see draftChoicesByRarity). The offer is frozen onto the item (no re-roll); the
   // item is consumed only when you pick.
   "pictoDropByRarity": {
-    "common": 0.40,
-    "uncommon": 0.22,
-    "rare": 0.12,
-    "epic": 0.05,
-    "legendary": 0.02
+    "common": 0.12,
+    "uncommon": 0.07,
+    "rare": 0.035,
+    "epic": 0.015,
+    "legendary": 0.006
   },
+  // Only inject pictos into real CHEST containers. Many barrels/dispensers in dungeons reuse a "chests/" loot
+  // table, so the table id alone would over-spawn pictos in barrels; this also requires the opened container's
+  // block entity to be a chest (vanilla/trapped/most modded chests). false = any matching loot table (old behavior).
+  "onlyChestBlocks": true,
   // How many distinct pictos the right-click draft offers you to choose from, per rarity (always >= 1).
   // Pool = unowned pictos of that rarity usable by the companion's class; if fewer exist, fewer are shown.
   // Catalog after the 2026-06-18 rework (per class = general + that class) — the real pool caps are:
@@ -38,7 +42,7 @@
     "epic": 1,
     "legendary": 2
   },
-  "lumenDropChance": 0.12,    // chance per chest to add a Lumen item
+  "lumenDropChance": 0.06,    // chance per chest to add a Lumen item
   // A loot table is treated as a chest if its id contains any of these. "chests/" is the universal
   // structure-chest convention (vanilla + ~every structure mod), so this already covers nearly all modded
   // chests. Add a mod's own pattern here if its chests use a non-standard path.

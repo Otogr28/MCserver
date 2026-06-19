@@ -6,7 +6,7 @@
 	skill_book_chest_drop_chance_modifier = 0
 
 [default_gamerule]
-	globalStun = true
+	globalStun = false
 	keepSkills = true
 	hasFallAnimation = true
 	disapleEntityUI = false
