@@ -113,18 +113,18 @@
     "globalHotbars": false
   },
   "capabilities": {
-    "bulldozer": true,
+    "bulldozer": false,
     "replaceMode": false,
     "typeReplace": false,
     "forcePlace": false,
     "noUpdates": false,
-    "tinker": true,
+    "tinker": false,
     "infiniteReach": false,
     "infiniteReachLimit": -1,
-    "fastPlace": true,
+    "fastPlace": false,
     "angelPlacement": false,
     "noClip": true,
-    "phantom": true
+    "phantom": false
   },
   "blockAttributes": {
     "showCollisionMesh": false,
