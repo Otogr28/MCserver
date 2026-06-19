@@ -4,7 +4,7 @@
   "canEnterFrom": ["minecraft:the_nether", "minecraft:the_end"],
   "canExitTo": ["minecraft:the_nether", "minecraft:the_end"],
   "worldgen": {
-    "allowedStructureNamespaces": ["minecraft"],
+    "allowedStructureNamespaces": ["minecraft", "dungeons_arise"],
     "blockedFeatureNamespaces": ["iceandfire"],
     "blockedFeatures": ["realmgates:oasis"]
   }
