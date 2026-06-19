@@ -1,25 +1,25 @@
-// Heatdeath giant sandworms — ONLY this dimension. Other dimensions are left completely untouched.
+// Heatdeath sandworms scale with WARMTH — ONLY this dimension. Other dimensions are left untouched.
 //
-// Ice and Fire's Death Worm (iceandfire:deathworm) is the desert "sandworm". It spawns via a worldgen
-// feature (iceandfire:spawn_death_worm) on sandy ground, so heatdeath's deserts breed them on their own
-// (heatdeath does NOT filter Ice and Fire features). This script makes every one that appears in heatdeath
-// a GIANT: we set its scale, and Ice and Fire scales the worm's max health and attack damage by that scale
-// (base 10 HP / 3 attack -> ~45 HP / ~13.5 attack at scale 4.5), and heals it to the new max. The result is
-// a desert mini-boss instead of a regular worm.
+// Ice and Fire's Death Worm (iceandfire:deathworm) is the desert "sandworm". They reach heatdeath two ways:
+//   1) realmgates' WarmthSpawner conjures them as part of the warmth waves (small at low warmth, giant high),
+//   2) Ice and Fire's own worldgen feature breeds them on sandy ground.
+// Either way, this script sizes each worm ONCE to the heat of the nearest player: a baby at low warmth,
+// a desert mini-boss at 100%, and a monstrous one in overcharge (100%+). Death Worms derive HP/damage from
+// scale (EntityDeathWorm#updateAttributes: maxHealth = base*scale, attack = base*scale; base 10 HP / 3 atk),
+// and their aiStep re-asserts the CURRENT scale (it does NOT recompute from age) — so one setDeathWormScale
+// at spawn sticks for the worm's whole life. We scale ONCE (flag in persistentData) so we never re-heal it.
 //
-// Why setDeathWormScale and not attribute modifiers (unlike the dragons): Death Worms derive HP/damage from
-// their scale (EntityDeathWorm#updateAttributes does maxHealth = base*scale, attack = base*scale). Crucially
-// their per-tick aiStep re-asserts the CURRENT scale (setDeathWormScale(getDeathwormScale())), it does NOT
-// recompute it from age — so a scale we set at spawn sticks, and the scaled HP/damage stick with it. One call
-// gives "giant + more health + more damage" through the mod's own system.
+// Warmth lives in the player's persistent data as a float `realmgatesWarmth` (0..1 normal, up to maxWarmth
+// in overcharge), written by env.Warmth. We read it straight off the nearest player.
 //
 // KubeJS gotcha (same as heatdeath_dragons.js): every server_script shares one scope, so this whole file is
-// wrapped in an IIFE — nothing leaks to the shared scope and no `const` can collide with another script.
+// wrapped in an IIFE — nothing leaks and no `const` can collide with another script.
 
 (function () {
     const HEATDEATH = 'realmgates:heatdeath'
     const DEATHWORM = 'iceandfire:deathworm'
-    const SCALE = 4.5   // giant; HP/damage scale with this. Brutal preset, tune freely.
+    const SCALED_FLAG = 'rgWormScaled'      // set once per worm so we size it a single time
+    const RANGE_SQ = 80 * 80                // only size a worm when a player is within this (blocks²)
 
     const EntityTypeCls = Java.loadClass('net.minecraft.world.entity.EntityType')
     const ResourceLocationCls = Java.loadClass('net.minecraft.resources.ResourceLocation')
@@ -30,26 +30,51 @@
         return typeof m === 'function' ? obj[name]() : m
     }
 
-    // "realmgates:heatdeath" from a Level.
     function dimId(level) {
         return String(call0(call0(level, 'dimension'), 'location'))
     }
 
-    // "iceandfire:deathworm" from an entity, robust to property-vs-EntityType exposure.
     function typeId(entity) {
         const t = entity.type
         if (typeof t === 'string') return t
         return String(call0(EntityTypeCls.getKey(t), 'toString'))
     }
 
-    // Make a worm giant (idempotent: only re-scales if it isn't already). setDeathWormScale rebakes
-    // HP/damage from scale and heals to the new max; aiStep keeps re-asserting this scale every tick, so
-    // the giant size (and its tougher stats) persist for the worm's whole life.
-    function makeGiant(e) {
+    function clamp01(v) { return v < 0 ? 0 : (v > 1 ? 1 : v) }
+
+    // baby at low warmth → giant (4.5) at 100% → monstrous (up to 6.5) in overcharge.
+    function scaleFor(w) {
+        let s = 1.0 + 3.5 * clamp01(w)
+        if (w > 1.0) s += 2.0 * clamp01(w - 1.0)
+        return s
+    }
+
+    // Warmth of the closest player (within RANGE_SQ), or -1 if nobody is near enough yet.
+    function nearestWarmth(level, worm) {
+        const players = level.players()
+        let bestSq = -1
+        let bestWarmth = 0
+        for (let i = 0; i < players.size(); i++) {
+            const p = players.get(i)
+            const d = p.distanceToSqr(worm)
+            if (bestSq < 0 || d < bestSq) {
+                bestSq = d
+                bestWarmth = p.persistentData.getFloat('realmgatesWarmth')
+            }
+        }
+        if (bestSq < 0 || bestSq > RANGE_SQ) return -1
+        return bestWarmth
+    }
+
+    // Size a worm ONCE, to the nearest player's warmth. No player near → leave it for a later sweep.
+    function sizeByWarmth(e, level) {
         if (typeof e.setDeathWormScale !== 'function') return
-        let cur = 0
-        try { cur = e.getDeathwormScale() } catch (err) { cur = 0 }
-        if (cur < SCALE - 0.01) e.setDeathWormScale(SCALE)
+        const pd = e.persistentData
+        if (pd.getBoolean(SCALED_FLAG)) return
+        const w = nearestWarmth(level, e)
+        if (w < 0) return
+        e.setDeathWormScale(scaleFor(w))
+        pd.putBoolean(SCALED_FLAG, true)
     }
 
     EntityEvents.spawned(event => {
@@ -59,13 +84,13 @@
         try { level = e.level } catch (err) { return }
         if (!level || dimId(level) !== HEATDEATH) return
         if (typeId(e) !== DEATHWORM) return
-        makeGiant(e)
+        sizeByWarmth(e, level)   // warmth-spawned worms have the player right here, so they size immediately
     })
 
-    // ── Worldgen worms too ──────────────────────────────────────────────────────────────────────
-    // EntityEvents.spawned catches summoned/fresh worms, but Death Worms also come from a worldgen
-    // spawn feature (loaded with the chunk), which that event misses. Once a second, sweep heatdeath's
-    // loaded entities and make any non-giant worm giant.
+    // ── Worldgen worms (and any that spawned with nobody near) ──────────────────────────────────────
+    // EntityEvents.spawned misses worms loaded with a chunk, and a worm that spawned far from players has no
+    // warmth to read yet. Sweep heatdeath's loaded worms once a second and size any not-yet-sized one as soon
+    // as a player gets close.
     const HEATDEATH_RL = new ResourceLocationCls(HEATDEATH)
     let wormTick = 0
     ServerEvents.tick(event => {
@@ -75,7 +100,7 @@
         const entities = level.getEntities()
         for (let i = 0; i < entities.size(); i++) {
             const e = entities.get(i)
-            if (typeId(e) === DEATHWORM) makeGiant(e)
+            if (typeId(e) === DEATHWORM) sizeByWarmth(e, level)
         }
     })
 })()

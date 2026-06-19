@@ -30,6 +30,8 @@
   "warmth": {
     "riseSeconds": 240,
     "roofRiseMultiplier": 0.25,
+    "maxWarmth": 2.0,
+    "overchargeRiseMultiplier": 0.2,
     "spawnStartThreshold": 0.20,
     "spawnIntervalMinSeconds": 15,
     "spawnIntervalMaxSeconds": 30,
@@ -60,7 +62,8 @@
           { "id": "desert_tomb:mummy", "weight": 12, "min": 1, "max": 1 },
           { "id": "born_in_chaos_v1:dread_hound", "weight": 12, "min": 2, "max": 3 },
           { "id": "desert_tomb:scorpion", "weight": 10, "min": 1, "max": 2 },
-          { "id": "creeperoverhaul:badlands_creeper", "weight": 8, "min": 1, "max": 1 }
+          { "id": "creeperoverhaul:badlands_creeper", "weight": 8, "min": 1, "max": 1 },
+          { "id": "iceandfire:deathworm", "weight": 5, "min": 1, "max": 1 }
         ]
       },
       {
@@ -71,7 +74,8 @@
           { "id": "born_in_chaos_v1:skeleton_thrasher", "weight": 8, "min": 1, "max": 1 },
           { "id": "desert_tomb:mummy", "weight": 10, "min": 1, "max": 2 },
           { "id": "born_in_chaos_v1:dread_hound", "weight": 10, "min": 2, "max": 3 },
-          { "id": "minecraft:husk", "weight": 8, "min": 1, "max": 1 }
+          { "id": "minecraft:husk", "weight": 8, "min": 1, "max": 1 },
+          { "id": "iceandfire:deathworm", "weight": 6, "min": 1, "max": 1 }
         ]
       },
       {
@@ -81,6 +85,7 @@
           { "id": "born_in_chaos_v1:skeleton_thrasher", "weight": 8, "min": 1, "max": 1 },
           { "id": "born_in_chaos_v1:dread_hound", "weight": 10, "min": 2, "max": 3 },
           { "id": "born_in_chaos_v1:seared_spirit", "weight": 6, "min": 1, "max": 1 },
+          { "id": "iceandfire:deathworm", "weight": 8, "min": 1, "max": 1 },
           { "id": "desert_tomb:mummy", "weight": 8, "min": 1, "max": 2 },
           { "id": "creeperoverhaul:badlands_creeper", "weight": 6, "min": 1, "max": 1 }
         ]
@@ -88,7 +93,7 @@
     ],
     "elites": [
       { "id": "iceandfire:troll", "weight": 10, "min": 1, "max": 1 },
-      { "id": "iceandfire:deathworm", "weight": 8, "min": 1, "max": 1 },
+      { "id": "iceandfire:deathworm", "weight": 10, "min": 1, "max": 1 },
       { "id": "alexscaves:tremorsaurus", "weight": 4, "min": 1, "max": 1 }
     ]
   }

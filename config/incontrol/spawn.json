@@ -18,13 +18,26 @@
       "born_in_chaos_v1:zombie_clown",
       "born_in_chaos_v1:zombie_clown_not_despawn",
       "born_in_chaos_v1:zombie_fisherman",
-      "born_in_chaos_v1:zombie_lumberjack"
+      "born_in_chaos_v1:zombie_lumberjack",
+      "born_in_chaos_v1:dread_hound",
+      "born_in_chaos_v1:baby_spider",
+      "born_in_chaos_v1:skeleton_thrasher",
+      "born_in_chaos_v1:decrepit_skeleton"
     ],
     "result": "default"
   },
   {
     "dimension": "realmgates:v1",
     "mod": ["minecraft", "creeperoverhaul", "realmgates"],
+    "result": "default"
+  },
+  {
+    "dimension": "realmgates:v1",
+    "mob": [
+      "iceandfire:pixie",
+      "iceandfire:hippogryph",
+      "iceandfire:hippocampus"
+    ],
     "result": "default"
   },
   {

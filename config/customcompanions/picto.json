@@ -1,7 +1,17 @@
 {
   // Picto / Lumina tuning (PictoConfig.java). Edit + /reload (or restart) to apply.
   // Loot is automatic: on open, each chest rolls pictoDropByRarity per tier to add a Picto (no command needed).
-  "killsToLearnLumina": 12,   // kills (with a picto equipped) to learn its lumina
+  "killsToLearnLumina": 12,   // fallback only — used if killsToLearnByRarity is removed/null
+  // Kills (with the picto EQUIPPED) to LEARN its lumina, scaled by rarity: commons are quick to master, legendaries
+  // a long grind. The Pictos tab shows a textless progress bar under each equipped picto's name (rarity-tinted,
+  // turns gold when learned). Tune freely + /reload.
+  "killsToLearnByRarity": {
+    "common": 5,
+    "uncommon": 10,
+    "rare": 15,
+    "epic": 20,
+    "legendary": 25
+  },
   "lumenPerLevel": 1,         // lumen (lumina-point budget) gained per companion level
   // Per-chest drop chance for a picto of EACH rarity (rolled independently — commons common, legendaries rare).
   // A dropped picto is unidentified + rarity-locked; right-click opens a DRAFT to choose one picto of that rarity
@@ -16,6 +26,11 @@
   },
   // How many distinct pictos the right-click draft offers you to choose from, per rarity (always >= 1).
   // Pool = unowned pictos of that rarity usable by the companion's class; if fewer exist, fewer are shown.
+  // Catalog after the 2026-06-18 rework (per class = general + that class) — the real pool caps are:
+  //   common 7 (6 general + 1 class) · uncommon 8 (6 + 2) · rare 7 (5 + 2) · epic 3 (2 + 1) · legendary 0 (none yet).
+  // So the defaults below never over-ask, EXCEPT legendary: a legendary picto item finds an empty pool and is NOT
+  // consumed until legendary pictos exist. (Before the rework, common was the SCARCEST tier — that's why a common
+  // draft dried up after a couple of picks; the rework flattened the curve so common now has the most depth.)
   "draftChoicesByRarity": {
     "common": 4,
     "uncommon": 3,
