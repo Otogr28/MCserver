@@ -35,11 +35,6 @@ Bosses'Rise mod (block_factorys_bosses). /realmgates reload applies it live (no 
   dragonSpawnerProximityBlocks    how close a player must be for that spawner to fire (default 8)
   dragonSpawnerExistingBossRadius box checked for an already-spawned dragon before spawning (default 16)
   dragonFullHealOnPhase2          true = Ashlord heals to full when he transforms to phase 2 (2nd bar)
-  forceStructureSpawnSetup        true = bosses spawned from a SPAWN EGG run the mod's intended natural
-                                  setup (e.g. the Yeti's frozen->awaken intro) instead of the degraded
-                                  egg path. NOTE: /summon never triggers this (use the egg); and bosses
-                                  that need their structure (Sandworm = sand to emerge, Kraken = its ship)
-                                  still need that environment regardless.
 
 Custom portals: add a "portal" block to a dimension's JSON to let players light a gated
 portal INTO it, e.g.:

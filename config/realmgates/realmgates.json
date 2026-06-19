@@ -101,8 +101,7 @@
     "enableHandPlacedDragonSpawner": true,
     "dragonSpawnerProximityBlocks": 8,
     "dragonSpawnerExistingBossRadius": 16,
-    "dragonFullHealOnPhase2": true,
-    "forceStructureSpawnSetup": true
+    "dragonFullHealOnPhase2": true
   },
   "fogBarriers": {
     "defaultFogBand": 48,
