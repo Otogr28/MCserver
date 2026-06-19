@@ -11,6 +11,36 @@ Worldgen for custom dimensions is bundled in the mod jar and needs a server rest
 you (default 4-chunk radius) so already-placed chests pick up newly-injected drops (e.g. pictos).
 Already-opened chests can't be re-rolled. Stand near the chests (only loaded chunks are scanned).
 
+Fog barriers (soft world-borders, Korok-Forest style): a vertical cylinder around an origin in
+one dimension. As a player nears the edge the screen fogs over (denser the closer); reaching the
+HORIZONTAL radius teleports them back to just inside the edge (Y is ignored, so it can't be
+climbed/dug past). Manage them in-game (ops):
+  /realmgates limitfog add <name> <origin> <radius> [fogBand]   (fogBand = blocks of mist before the wall)
+  /realmgates limitfog list
+  /realmgates limitfog remove <name>
+The barriers themselves are saved in the world (per dimension). The "fogBarriers" block of
+realmgates.json tunes the system globally (no recompile; /realmgates reload applies it live):
+  defaultFogBand        mist band used when "add" omits it (blocks)
+  pushInBlocks          how far inside the wall a bounced player lands
+  messageCooldownTicks  ticks between repeats of the "turned back" line
+  turnBackMessage       the action-bar line shown on bounce (§ colour codes ok)
+  mistRed/Green/Blue    mist colour (0..1);  maxColorBlend  how strongly the fog tints (0..1)
+  denseFarBlocks        view distance (blocks) at the wall;  fadeSpeed  how fast the mist fades in/out
+The mist visuals are mirrored to clients, so editing them + /realmgates reload updates everyone live.
+
+Bosses'Rise patch: the "bossesRise" block of realmgates.json tunes RealmGates' cross-mod fixes for the
+Bosses'Rise mod (block_factorys_bosses). /realmgates reload applies it live (no recompile):
+  enableHandPlacedDragonSpawner   true = the dragon boss-spawner fires by player proximity alone, so a
+                                  /place'd (hand-placed) dragon tower works too, not only world-gen ones
+  dragonSpawnerProximityBlocks    how close a player must be for that spawner to fire (default 8)
+  dragonSpawnerExistingBossRadius box checked for an already-spawned dragon before spawning (default 16)
+  dragonFullHealOnPhase2          true = Ashlord heals to full when he transforms to phase 2 (2nd bar)
+  forceStructureSpawnSetup        true = bosses spawned from a SPAWN EGG run the mod's intended natural
+                                  setup (e.g. the Yeti's frozen->awaken intro) instead of the degraded
+                                  egg path. NOTE: /summon never triggers this (use the egg); and bosses
+                                  that need their structure (Sandworm = sand to emerge, Kraken = its ship)
+                                  still need that environment regardless.
+
 Custom portals: add a "portal" block to a dimension's JSON to let players light a gated
 portal INTO it, e.g.:
   "portal": { "frameBlock": "minecraft:red_sandstone", "igniter": "minecraft:fire_charge", "color": "#FF3030" }

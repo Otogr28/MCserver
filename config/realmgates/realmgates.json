@@ -5,7 +5,7 @@
   "bootstrapVanilla": false,
   "denyMessage": "You cannot travel from %from% to %to%.",
   "loginRemediation": "teleport_to_spawn",
-  "spawnDimension": "realmgates:v1",
+  "spawnDimension": "minecraft:overworld",
   "regenLootRadiusChunks": 4,
   "void": {
     "columnHeight": 90.0,
@@ -100,6 +100,20 @@
   "bossesRise": {
     "enableHandPlacedDragonSpawner": true,
     "dragonSpawnerProximityBlocks": 8,
-    "dragonSpawnerExistingBossRadius": 16
+    "dragonSpawnerExistingBossRadius": 16,
+    "dragonFullHealOnPhase2": true,
+    "forceStructureSpawnSetup": true
+  },
+  "fogBarriers": {
+    "defaultFogBand": 48,
+    "pushInBlocks": 1.5,
+    "messageCooldownTicks": 40,
+    "turnBackMessage": "§7The mist thickens and turns you back.",
+    "mistRed": 0.80,
+    "mistGreen": 0.84,
+    "mistBlue": 0.90,
+    "maxColorBlend": 0.95,
+    "denseFarBlocks": 6.0,
+    "fadeSpeed": 0.08
   }
 }

@@ -13,5 +13,10 @@
   "allowClassChange": false,
   // allowDisable: allow the "Disable / Enable" button (despawn the companion, keep ALL its data).
   //   Re-enabling a companion that was Disabled while DEAD revives it to full (never spawns a stuck corpse).
-  "allowDisable": true
+  "allowDisable": true,
+  // codexOpenFallbackTicks: Codex open safety net. The Codex opens via a client ack (the client applies the
+  //   ownership data, then asks the server to open) so the create-vs-panel UI never desyncs under lag. If that
+  //   ack is ever LOST (dropped packet), the server opens the Codex anyway after this many ticks so it can't
+  //   silently fail to open. 20 ticks = 1s. Set to 0 to disable the fallback (pure ack-only).
+  "codexOpenFallbackTicks": 40
 }

@@ -9,6 +9,16 @@
     "result": "deny"
   },
   {
+    "dimension": "minecraft:overworld",
+    "mob": [
+      "iceandfire:fire_dragon",
+      "iceandfire:ice_dragon",
+      "iceandfire:lightning_dragon"
+    ],
+    "when": "onjoin",
+    "result": "deny"
+  },
+  {
     "dimension": "realmgates:v1",
     "mob": [
       "born_in_chaos_v1:decaying_zombie",
