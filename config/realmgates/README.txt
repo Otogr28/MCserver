@@ -13,20 +13,26 @@ Already-opened chests can't be re-rolled. Stand near the chests (only loaded chu
 
 Fog barriers (soft world-borders, Korok-Forest style): a vertical cylinder around an origin in
 one dimension. As a player nears the edge the screen fogs over (denser the closer); reaching the
-HORIZONTAL radius teleports them back to just inside the edge (Y is ignored, so it can't be
+HORIZONTAL radius stops them dead just inside the edge (Y is ignored, so it can't be
 climbed/dug past). Manage them in-game (ops):
   /realmgates limitfog add <name> <origin> <radius> [fogBand]   (fogBand = blocks of mist before the wall)
   /realmgates limitfog list
   /realmgates limitfog remove <name>
-The barriers themselves are saved in the world (per dimension). The "fogBarriers" block of
-realmgates.json tunes the system globally (no recompile; /realmgates reload applies it live):
+The wall is enforced on the CLIENT (it clamps your own position, so there's no teleport rubber-band);
+the server only steps in as a far backstop. The mist shows even under Iris/Oculus shaders (it's drawn
+as a HUD overlay, not just vanilla fog). The barriers themselves are saved in the world (per dimension).
+The "fogBarriers" block of realmgates.json tunes the system globally (no recompile; /realmgates reload
+applies it live):
   defaultFogBand        mist band used when "add" omits it (blocks)
-  pushInBlocks          how far inside the wall a bounced player lands
+  wallSkin              how far inside the radius the client holds you (blocks; the soft-wall skin)
+  backstopMargin        blocks past the radius before the SERVER backstop teleports (client handles below this)
+  pushInBlocks          how far inside the wall the backstop drops a player (rare; client wall comes first)
   messageCooldownTicks  ticks between repeats of the "turned back" line
-  turnBackMessage       the action-bar line shown on bounce (§ colour codes ok)
+  turnBackMessage       the action-bar line shown when turned back (§ colour codes ok)
   mistRed/Green/Blue    mist colour (0..1);  maxColorBlend  how strongly the fog tints (0..1)
   denseFarBlocks        view distance (blocks) at the wall;  fadeSpeed  how fast the mist fades in/out
-The mist visuals are mirrored to clients, so editing them + /realmgates reload updates everyone live.
+The wall geometry, mist visuals and the turn-back line are all mirrored to clients, so editing them
++ /realmgates reload updates everyone live.
 
 Bosses'Rise patch: the "bossesRise" block of realmgates.json tunes RealmGates' cross-mod fixes for the
 Bosses'Rise mod (block_factorys_bosses). /realmgates reload applies it live (no recompile):
@@ -42,7 +48,8 @@ the higher you climb (the corruption zone feels physically wrong with altitude).
 "wastelandTilt" block of realmgates.json tunes it; the values are mirrored to clients, so editing them +
 /realmgates reload updates everyone live (no recompile):
   startY          Y below which there is no lean (default 122)
-  fullY           Y at which the lean maxes out (default 320 = overworld build ceiling)
+  fullY           Y at which the lean maxes out; ABOVE it the lean drops back to 0 (default 260).
+                  So the tilt lives in the [startY, fullY] band and goes away once you climb past fullY.
   maxTiltDegrees  worst-case roll to one side at/above fullY (default 22)
   wobbleDegrees   amplitude of the slow sway over the lean; 0 = clean steady tilt (default 3)
   wobbleSpeed     speed (radians/tick) of that sway (default 0.04)

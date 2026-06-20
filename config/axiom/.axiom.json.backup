@@ -217,7 +217,7 @@
     "useVanillaMovementForEditor": true,
     "tallGrassIsActuallyNotTall": false,
     "disableChunkRenderOverrider": false,
-    "hadEditorUIOpen": true,
+    "hadEditorUIOpen": false,
     "blueprintBrowserDirSize": 175
   }
 }
