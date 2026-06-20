@@ -114,5 +114,13 @@
     "maxColorBlend": 0.95,
     "denseFarBlocks": 6.0,
     "fadeSpeed": 0.08
+  },
+  "wastelandTilt": {
+    "startY": 122.0,
+    "fullY": 320.0,
+    "maxTiltDegrees": 22.0,
+    "wobbleDegrees": 3.0,
+    "wobbleSpeed": 0.04,
+    "easeSpeed": 0.05
   }
 }

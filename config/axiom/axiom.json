@@ -107,7 +107,7 @@
     "statusBackground": true
   },
   "contextMenu": {
-    "keybindMode": "HOLD",
+    "keybindMode": "TOGGLE",
     "autoSwapToCreative": true,
     "autoSwapToOtherHotbarWithItem": false,
     "globalHotbars": false
@@ -123,8 +123,8 @@
     "infiniteReachLimit": -1,
     "fastPlace": false,
     "angelPlacement": false,
-    "noClip": false,
-    "phantom": false
+    "noClip": true,
+    "phantom": true
   },
   "blockAttributes": {
     "showCollisionMesh": false,

@@ -107,14 +107,14 @@
     "statusBackground": true
   },
   "contextMenu": {
-    "keybindMode": "HOLD",
+    "keybindMode": "TOGGLE",
     "autoSwapToCreative": true,
     "autoSwapToOtherHotbarWithItem": false,
     "globalHotbars": false
   },
   "capabilities": {
     "bulldozer": false,
-    "replaceMode": true,
+    "replaceMode": false,
     "typeReplace": false,
     "forcePlace": false,
     "noUpdates": false,
@@ -123,8 +123,8 @@
     "infiniteReachLimit": -1,
     "fastPlace": false,
     "angelPlacement": false,
-    "noClip": false,
-    "phantom": false
+    "noClip": true,
+    "phantom": true
   },
   "blockAttributes": {
     "showCollisionMesh": false,
@@ -217,7 +217,7 @@
     "useVanillaMovementForEditor": true,
     "tallGrassIsActuallyNotTall": false,
     "disableChunkRenderOverrider": false,
-    "hadEditorUIOpen": false,
+    "hadEditorUIOpen": true,
     "blueprintBrowserDirSize": 175
   }
 }
