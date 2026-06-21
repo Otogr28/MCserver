@@ -1,0 +1,28 @@
+#长按跳过键的判定时间（毫秒）
+#范围: 500 ~ 10000，默认 3000
+#Range: 500 ~ 10000
+skipHoldThresholdMs = 3000
+#过场动画播放时显示跳过提示（长按进度环 + 按键提示）
+showSkipHud = true
+#跳过投票所需比例（百分比），全部玩家投票后跳过才生效
+#例: 100 = 所有玩家必须投跳过, 50 = 半数即可
+#Range: 10 ~ 100
+skipVoteRatio = 100
+#启用调试日志输出
+debugLogging = false
+#location 触发器的轮询间隔（tick，20 tick = 1 秒）
+#Range: 1 ~ 600
+triggerPollInterval_location = 20
+#biome 触发器的轮询间隔（tick）
+#Range: 1 ~ 600
+triggerPollInterval_biome = 40
+#inventory 触发器的轮询间隔（tick）
+#Range: 1 ~ 600
+triggerPollInterval_inventory = 20
+#structure 触发器的轮询间隔（tick）
+#Range: 1 ~ 600
+triggerPollInterval_structure = 20
+#gamestage 触发器的轮询间隔（tick）
+#Range: 1 ~ 600
+triggerPollInterval_gamestage = 20
+

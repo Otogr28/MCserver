@@ -123,6 +123,8 @@
     "searchMarginChunks": 2,
     "maxSearchRadiusChunks": 12,
     "defaultRadius": 96,
-    "defaultFogBand": 48
+    "defaultFogBand": 48,
+    "pushOutBlocks": 4.0,
+    "backstopMargin": 24.0
   }
 }
