@@ -13,7 +13,7 @@
     "columnThickness": 1.0
   },
   "altar": {
-    "beamRadius": 2.0,
+    "beamRadius": 4.0,
     "colorRed": 1.0,
     "colorGreen": 0.80,
     "colorBlue": 0.30,
@@ -21,7 +21,12 @@
     "orbitParticlesPerTick": 3,
     "growSeconds": 0.6,
     "flowSpeed": 0.22,
-    "sounds": true
+    "sounds": true,
+    "viewClearRadius": 10.0,
+    "inputItems": [
+      "block_factorys_bosses:ice_gauntlet",
+      "block_factorys_bosses:ice_gauntlet"
+    ]
   },
   "sandstorm": {
     "checkInterval": 600,
