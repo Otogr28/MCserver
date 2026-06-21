@@ -18,5 +18,14 @@
       "iceandfire:ice_dragon_roost",
       "iceandfire:ice_dragon_cave"
     ]
+  },
+  "structureWards": {
+    "lockedStructures": [
+      "block_factorys_bosses:dragon_tower",
+      "block_factorys_bosses:kraken_ship",
+      "block_factorys_bosses:sandworm_nest",
+      "block_factorys_bosses:underworld_arena",
+      "block_factorys_bosses:yeti_hideout"
+    ]
   }
 }

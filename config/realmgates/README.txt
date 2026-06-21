@@ -42,23 +42,6 @@ Bosses'Rise mod (block_factorys_bosses). /realmgates reload applies it live (no 
   dragonSpawnerExistingBossRadius box checked for an already-spawned dragon before spawning (default 16)
   dragonFullHealOnPhase2          true = Ashlord heals to full when he transforms to phase 2 (2nd bar)
 
-Wasteland camera tilt: inside the realmgates:wasteland biome the view rolls slowly to one side, harder
-the higher you climb (the corruption zone feels physically wrong with altitude). It's a real camera roll
-(the horizon slants), not a screen overlay, and it's render-only (aiming/movement unaffected). The
-"wastelandTilt" block of realmgates.json tunes it; the values are mirrored to clients, so editing them +
-/realmgates reload updates everyone live (no recompile):
-  startY          Y below which there is no lean (default 122)
-  fullY           Y at which the lean maxes out; ABOVE it the lean drops back to 0 (default 260).
-                  So the tilt lives in the [startY, fullY] band and goes away once you climb past fullY.
-  maxTiltDegrees  worst-case roll to one side at/above fullY (default 22)
-  wobbleDegrees   amplitude of the slow sway over the lean; 0 = clean steady tilt (default 3)
-  wobbleSpeed     speed (radians/tick) of that sway (default 0.04)
-  easeSpeed       how fast the lean fades in/out per tick (0..1; smaller = softer, default 0.05)
-  forceRollDegrees DIAGNOSTIC/OVERRIDE: non-zero = roll this many degrees CONSTANTLY, ignoring biome and
-                  altitude. Use it to force/verify the tilt (e.g. to check it renders under Oculus shaders)
-                  without recompiling. 0 = off (normal altitude-driven behaviour). Default currently 25 for a
-                  render test — set to 0 once confirmed.
-
 Custom portals: add a "portal" block to a dimension's JSON to let players light a gated
 portal INTO it, e.g.:
   "portal": { "frameBlock": "minecraft:red_sandstone", "igniter": "minecraft:fire_charge", "color": "#FF3030" }

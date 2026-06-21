@@ -114,7 +114,7 @@
   },
   "capabilities": {
     "bulldozer": false,
-    "replaceMode": false,
+    "replaceMode": true,
     "typeReplace": false,
     "forcePlace": false,
     "noUpdates": false,
@@ -217,7 +217,7 @@
     "useVanillaMovementForEditor": true,
     "tallGrassIsActuallyNotTall": false,
     "disableChunkRenderOverrider": false,
-    "hadEditorUIOpen": false,
+    "hadEditorUIOpen": true,
     "blueprintBrowserDirSize": 175
   }
 }
