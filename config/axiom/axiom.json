@@ -123,8 +123,8 @@
     "infiniteReachLimit": -1,
     "fastPlace": false,
     "angelPlacement": false,
-    "noClip": true,
-    "phantom": true
+    "noClip": false,
+    "phantom": false
   },
   "blockAttributes": {
     "showCollisionMesh": false,

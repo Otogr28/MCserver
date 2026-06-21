@@ -13,12 +13,15 @@
     "columnThickness": 1.0
   },
   "altar": {
-    "beamRadius": 5.0,
+    "beamRadius": 2.0,
     "colorRed": 1.0,
     "colorGreen": 0.80,
     "colorBlue": 0.30,
     "maxBeam": 160,
-    "orbitParticlesPerTick": 3
+    "orbitParticlesPerTick": 3,
+    "growSeconds": 0.6,
+    "flowSpeed": 0.22,
+    "sounds": true
   },
   "sandstorm": {
     "checkInterval": 600,
