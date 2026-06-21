@@ -115,7 +115,8 @@
     "mistBlue": 0.90,
     "maxColorBlend": 0.95,
     "denseFarBlocks": 6.0,
-    "fadeSpeed": 0.08
+    "fadeSpeed": 0.08,
+    "mistSoundVolume": 0.6
   },
   "structureWards": {
     "enabled": true,
