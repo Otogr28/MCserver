@@ -54,6 +54,10 @@ the higher you climb (the corruption zone feels physically wrong with altitude).
   wobbleDegrees   amplitude of the slow sway over the lean; 0 = clean steady tilt (default 3)
   wobbleSpeed     speed (radians/tick) of that sway (default 0.04)
   easeSpeed       how fast the lean fades in/out per tick (0..1; smaller = softer, default 0.05)
+  forceRollDegrees DIAGNOSTIC/OVERRIDE: non-zero = roll this many degrees CONSTANTLY, ignoring biome and
+                  altitude. Use it to force/verify the tilt (e.g. to check it renders under Oculus shaders)
+                  without recompiling. 0 = off (normal altitude-driven behaviour). Default currently 25 for a
+                  render test — set to 0 once confirmed.
 
 Custom portals: add a "portal" block to a dimension's JSON to let players light a gated
 portal INTO it, e.g.:

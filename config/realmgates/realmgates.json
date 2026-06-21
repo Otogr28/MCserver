@@ -109,7 +109,7 @@
     "backstopMargin": 24.0,
     "wallSkin": 0.30,
     "messageCooldownTicks": 40,
-    "turnBackMessage": "§7The mist thickens and turns you back.",
+    "turnBackMessage": "§cThe mist thickens and turns you back.",
     "mistRed": 0.80,
     "mistGreen": 0.84,
     "mistBlue": 0.90,
@@ -118,11 +118,12 @@
     "fadeSpeed": 0.08
   },
   "wastelandTilt": {
-    "startY": -64.0,
-    "fullY": 320.0,
-    "maxTiltDegrees": 80.0,
-    "wobbleDegrees": 8.0,
+    "startY": 122.0,
+    "fullY": 260.0,
+    "maxTiltDegrees": 22.0,
+    "wobbleDegrees": 3.0,
     "wobbleSpeed": 0.04,
-    "easeSpeed": 0.1
+    "easeSpeed": 0.05,
+    "forceRollDegrees": 25.0
   }
 }
