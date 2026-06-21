@@ -12,6 +12,14 @@
     "columnDensity": 1.0,
     "columnThickness": 1.0
   },
+  "altar": {
+    "beamRadius": 5.0,
+    "colorRed": 1.0,
+    "colorGreen": 0.80,
+    "colorBlue": 0.30,
+    "maxBeam": 160,
+    "orbitParticlesPerTick": 3
+  },
   "sandstorm": {
     "checkInterval": 600,
     "randomChance": 8,
@@ -116,7 +124,8 @@
     "maxColorBlend": 0.95,
     "denseFarBlocks": 6.0,
     "fadeSpeed": 0.08,
-    "mistSoundVolume": 0.6
+    "mistSoundVolume": 0.6,
+    "mistSoundAt": 0.5
   },
   "structureWards": {
     "enabled": true,

@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "id": "Test",
+    "name": "Test",
+    "author": "Test",
+    "version": 3,
+    "description": "Teest",
+    "block_keyboard": false,
+    "block_mouse": true,
+    "block_mob_ai": false,
+    "hide_hud": true,
+    "hide_arm": true,
+    "suppress_bob": true,
+    "render_player_model": true,
+    "pause_when_game_paused": true,
+    "skippable": true,
+    "hold_at_end": false,
+    "interruptible": true,
+    "triggers": []
+  },
+  "timeline": {
+    "total_duration": 10.0,
+    "tracks": [
+      {
+        "type": "CAMERA",
+        "clips": [
+          {
+            "start_time": 0.0,
+            "duration": 5.6833334,
+            "transition": "cut",
+            "transition_duration": 0.5,
+            "keyframes": [
+              {
+                "time": 0.0,
+                "position": {
+                  "x": 289.0,
+                  "y": 120.0,
+                  "z": 1035.0
+                },
+                "yaw": 1.0,
+                "pitch": 0.0,
+                "roll": 0.0,
+                "fov": 70.0,
+                "zoom": 1.0,
+                "dof": 0.0
+              },
+              {
+                "time": 5.6833334,
+                "yaw": 0.0,
+                "pitch": 0.0,
+                "roll": 0.0,
+                "fov": 70.0,
+                "zoom": 1.0,
+                "dof": 0.0,
+                "position": {
+                  "x": 289.0,
+                  "y": 117.0,
+                  "z": 1038.0
+                }
+              }
+            ],
+            "interpolation": "linear",
+            "position_mode": "absolute",
+            "loop": false,
+            "loop_count": -1
+          }
+        ]
+      },
+      {
+        "type": "LETTERBOX",
+        "clips": [
+          {
+            "start_time": 0.0,
+            "duration": 10.0,
+            "keyframes": [
+              {
+                "time": 0.0,
+                "aspect_ratio": 2.35
+              },
+              {
+                "time": 10.0,
+                "aspect_ratio": 2.35
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

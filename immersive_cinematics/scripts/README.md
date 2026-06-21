@@ -5,12 +5,14 @@ one cinematic: camera keyframes (position/yaw/pitch/roll/FOV/zoom), letterbox, a
 
 ## How these are made and deployed
 
-1. **Author graphically in-game**: press **F6** to open IC's timeline editor, build the shot, save it.
-   IC writes the file to your client's `.minecraft/immersive_cinematics/scripts/<name>.json`.
-2. **Copy that `<name>.json` into this folder** (`MCserver/immersive_cinematics/scripts/`).
-3. **Deploy**: `ssh mcserver mc-update` rsyncs this folder to the server's
-   `immersive_cinematics/scripts/` (so `/icinematics play` can read it server-side). Then run
-   `/icinematics reload` in-game (or it loads on the next server start).
+1. **Author graphically in-game**: press **F6** to open IC's timeline editor, set an `id` in *Script Info*
+   (the file is named after the `id`), build the shot, hit **Save**.
+2. The save lands **directly here**: the client's scripts dir is a **symlink** to this repo folder —
+   `~/.local/share/ModrinthApp/profiles/Forge 1.20.1/immersive_cinematics/scripts` → this dir. So no
+   manual copy: Save in-game = file appears here. (Re-create the symlink if you reinstall the profile.)
+3. **Commit + deploy**: `git add immersive_cinematics/scripts/<id>.json && git commit && git push`, then
+   `ssh mcserver mc-update` rsyncs this folder to the server's `immersive_cinematics/scripts/` (so
+   `/icinematics play` can read it server-side). Then `/icinematics reload` in-game (or next server start).
 
 ## Playing them
 
