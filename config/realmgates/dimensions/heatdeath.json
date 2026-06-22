@@ -7,6 +7,7 @@
   "canExitTo": ["realmgates:v1"],
   "portal": { "frameBlock": "minecraft:sandstone", "igniter": "minecraft:fire_charge", "color": "#FF8A00" },
   "worldgen": {
+    "blockedStructureNamespaces": ["cataclysm"],
     "chanceBlockedFeatures": [
       "minecraft:spring_water",
       "realmgates:oasis"
