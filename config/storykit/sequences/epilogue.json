@@ -1,0 +1,14 @@
+{
+  "id": "epilogue",
+  "endFadeOutTicks": 30,
+  "actions": [
+    { "type": "letterbox", "coverage": 0.14, "duration": 30, "wait": 35 },
+    { "type": "music", "sound": "summerbuddies:epilogue_theme", "volume": 0.9, "fadeIn": 60, "wait": 0 },
+    { "type": "card", "title": "Epilogue", "subtitle": "Where Endings Learn to Begin", "typewriter": true, "fadeIn": 35, "stay": 360, "fadeOut": 45, "wait": 70 },
+    { "type": "camera", "scene": "introv2", "camDuration": "16s", "wait": 50 },
+    { "type": "dialogue", "text": "The first realm holds. The morning comes anyway.", "fadeIn": 16, "stay": 100, "fadeOut": 16, "wait": 140 },
+    { "type": "dialogue", "text": "Somewhere past the mist, the next one waits.", "fadeIn": 16, "stay": 100, "fadeOut": 16, "wait": 130 },
+    { "type": "letterbox", "coverage": 0.0, "duration": 45, "wait": 60 },
+    { "type": "music_stop", "fadeOut": 80, "wait": 90 }
+  ]
+}

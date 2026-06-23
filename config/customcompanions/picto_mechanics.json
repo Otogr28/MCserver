@@ -1,0 +1,25 @@
+{
+  "lastGrace": {
+    "cooldownSeconds": 120,
+    "reviveHealth": 1.0,
+    "regenSeconds": 45,
+    "regenAmplifier": 1,
+    "absorptionSeconds": 5,
+    "absorptionAmplifier": 1,
+    "resistanceSeconds": 5,
+    "resistanceAmplifier": 1
+  },
+  "hitlessDuelist": {
+    "ownerMaxHealth": 2.0,
+    "weaponDamageBonus": 0.99,
+    "strengthAmplifier": 1,
+    "strengthRefreshTicks": 40
+  },
+  "minionBuffs": {
+    "championsHealthPct": 30.0,
+    "championsDamagePct": 25.0,
+    "lowHealthThreshold": 0.5,
+    "buffDurationTicks": 60
+  },
+  "enrageRadius": 8.0
+}

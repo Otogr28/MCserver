@@ -4,6 +4,11 @@
   "minSize": 0.3,
   "maxSize": 2.5,
   "sizeStep": 0.1,
+  // defaultModel: the curated model a freshly-created companion (and any unknown/legacy preset, e.g. an old
+  //   "robot") falls back to. Use an id from companion/models_index.json (e.g. "ars_starbuncle", "paimon",
+  //   "cri_red_panda"). This replaced the old blue/red placeholder cubes. If the id isn't found, any loaded
+  //   curated model is used before the built-in placeholder, so a typo never brings the dev cube back.
+  "defaultModel": "ars_starbuncle",
   // The three toggles below are enforced server-side (the buttons are always drawn so the LDLib panel
   // matches on both sides; a disallowed action just no-ops with a chat notice).
   // allowModelChange: allow re-styling an existing companion via the "Appearance" button.

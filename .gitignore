@@ -2,6 +2,12 @@
 mcserver_key
 mcserver_key.pub
 CLAUDE.md
+
+# ===== Audio con copyright para cinemáticas (NO subir al repo público) =====
+# La canción del epílogo (descargada de YouTube). El sounds.json + el script + el README SÍ se versionan;
+# solo el .ogg queda local. Para que los jugadores lo escuchen, distribuilo aparte (o quitá esta línea si
+# asumís la redistribución pública).
+kubejs/assets/summerbuddies/sounds/*.ogg
 # secretos sueltos (ej. API key de DeepL para el sidecar de voicetrans)
 .secrete
 .secret

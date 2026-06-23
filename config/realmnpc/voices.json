@@ -1,0 +1,19 @@
+{
+  "_comment": "Per-NPC dialogue voice pitch, keyed by NPC display name (case-insensitive). Men deeper (<1.0), women higher (>1.0), all distinct. ~0.7 = very grave, ~1.0 = neutral, ~1.4 = very high. The dialogue markup {pitch=X} multiplies this for dramatic moments.",
+  "voices": {
+    "rudeus": 0.86,
+    "brook": 0.74,
+    "derp": 0.92,
+    "jeff": 0.88,
+    "fabricio": 0.80,
+    "naif": 0.84,
+    "leck": 0.78,
+    "flugel": 0.70,
+
+    "satella": 1.20,
+    "silvia": 1.30,
+    "grandma": 1.10,
+    "ame": 1.36,
+    "verity": 1.26
+  }
+}

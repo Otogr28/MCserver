@@ -50,14 +50,15 @@ objectives is skipped.
 
 - **Real ids only.** `minecraft:oak_log`, `iceandfire:fire_dragon`, `realmgates:heatdeath`, tags `#minecraft:...`.
   A bad id just makes that objective/reward skip (warned in the log). `reach_location` needs a real dimension.
-- **The Traveler** (main giver): uuid `d48a3f45-0efd-46c6-9803-5e1256d95d33`, name "the-traveler" (matched
-  case/space/punctuation-insensitively, so "The Traveler" also matches).
+- **Flugel the Traveler** (main giver): uuid `d48a3f45-0efd-46c6-9803-5e1256d95d33`, DSL `"npcName": "the-traveler"`
+  (kept as the internal id; matched case/space/punctuation-insensitively, and by uuid). His in-game `CustomName`
+  is now "Flugel" — prefer the **uuid** when targeting him.
 - **Chain primaries** with `prerequisites.priorMissions` + `loreStage`; bump the stage with a
   `lore_stage_advance` reward on the closing mission of a chapter.
 - **Waypoints:** any `reach_location` automatically shows a JourneyMap waypoint + on-screen compass for the
   player while that objective is active.
 - **Story text** (titles/descriptions/lore) is fiction — use the `loremaster` agent for the prose, in
-  English, the Traveler's voice, and do not use the "not X, but Y" construction. Keep early missions doable
-  near the village (Aincrad / overworld, the Traveler is at ~340/112/1075).
+  English, Flugel the Traveler's voice, and do not use the "not X, but Y" construction. Keep early missions
+  doable near the village (Aincrad / overworld, Flugel is at ~340/112/1075).
 - For "talk to / interact with X" beyond plain NPC talk, prefer a `custom_signal` objective and have the
   source emit `/mission signal <name> <player>`.

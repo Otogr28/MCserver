@@ -1,0 +1,8 @@
+{
+  "epilogue_theme": {
+    "category": "music",
+    "sounds": [
+      { "name": "summerbuddies:epilogue_theme", "stream": true }
+    ]
+  }
+}
