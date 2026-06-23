@@ -1,6 +1,6 @@
 {
   "id": "epilogue",
-  "endFadeOutTicks": 30,
+  "endFadeOutTicks": 100,
   "actions": [
     { "type": "letterbox", "coverage": 0.14, "duration": 30, "wait": 30 },
     { "type": "music", "sound": "summerbuddies:epilogue_theme", "volume": 0.9, "fadeIn": 60, "loop": false, "wait": 0 },
@@ -14,7 +14,6 @@
     { "type": "dialogue", "text": "Go meet it.", "fadeIn": 16, "stay": 60, "fadeOut": 24, "wait": 100 },
 
     { "type": "letterbox", "coverage": 0.0, "duration": 40, "wait": 40 },
-    { "type": "music_stop", "fadeOut": 50, "wait": 5 },
     { "type": "command", "command": "mission assign {player} primary_intro_meet_traveler", "asPlayer": true, "wait": 0 }
   ]
 }
