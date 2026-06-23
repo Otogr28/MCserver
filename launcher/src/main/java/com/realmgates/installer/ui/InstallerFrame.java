@@ -123,8 +123,22 @@ public final class InstallerFrame extends JFrame {
     }
 
     private void refreshRamLabel() {
-        HardwareProbe.Info hw = HardwareProbe.probe();
-        ramLabel.setText("RAM " + hw.ramGb() + " GB → -Xmx" + OculusConfig.recommendedXmxGb(hw.ramGb()) + "G");
+        // Probe hardware OFF the EDT: on Windows oshi's GPU query (WMI Win32_VideoController) can
+        // take many seconds or stall on first call, which would freeze the window before it ever
+        // paints (looks like the app "hung and never opened"). Show the window now, fill in later.
+        ramLabel.setText("Detecting hardware…");
+        new SwingWorker<HardwareProbe.Info, Void>() {
+            @Override protected HardwareProbe.Info doInBackground() { return HardwareProbe.probe(); }
+            @Override protected void done() {
+                try {
+                    HardwareProbe.Info hw = get();
+                    ramLabel.setText("RAM " + hw.ramGb() + " GB → -Xmx"
+                            + OculusConfig.recommendedXmxGb(hw.ramGb()) + "G");
+                } catch (Exception e) {
+                    ramLabel.setText("RAM detection unavailable");
+                }
+            }
+        }.execute();
     }
 
     private void chooseDir() {

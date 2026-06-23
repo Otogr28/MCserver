@@ -47,10 +47,21 @@ jobs:
           mkdir -p build/stage build/out
           cp build/libs/realmgates-installer.jar build/stage/
 
+      - name: Resolve version
+        shell: bash
+        run: |
+          # On a tag build, the version IS the tag (installer-v1.0.2 -> 1.0.2) so artifact names
+          # always match the release. Otherwise fall back to gradle.properties (manual/dev builds).
+          case "$GITHUB_REF" in
+            refs/tags/installer-v*) VER="${GITHUB_REF_NAME#installer-v}" ;;
+            *) VER=$(grep '^appVersion=' gradle.properties | cut -d= -f2) ;;
+          esac
+          echo "VER=$VER" >> "$GITHUB_ENV"
+          echo "Building Realm Gates Installer version: $VER"
+
       - name: Build portable bundle (always)
         shell: bash
         run: |
-          VER=$(grep '^appVersion=' gradle.properties | cut -d= -f2)
           COMMON=(--name "Realm Gates Installer" --app-version "$VER" --vendor "Realm Gates" \
                   --input build/stage --main-jar realmgates-installer.jar \
                   --main-class com.realmgates.installer.Main)
@@ -77,7 +88,6 @@ jobs:
         shell: bash
         continue-on-error: true
         run: |
-          VER=$(grep '^appVersion=' gradle.properties | cut -d= -f2)
           COMMON=(--name "Realm Gates Installer" --app-version "$VER" --vendor "Realm Gates" \
                   --input build/stage --main-jar realmgates-installer.jar \
                   --main-class com.realmgates.installer.Main --dest build/out)

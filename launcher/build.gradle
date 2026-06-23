@@ -43,6 +43,9 @@ tasks.register('generateBuildInfo') {
         repoUrl     : project.findProperty('repoUrl'),
         repoBranch  : project.findProperty('repoBranch'),
     ]
+    // Track the values so a version/coords bump re-runs this (otherwise it stays UP-TO-DATE and
+    // embeds a stale appVersion in build.properties).
+    inputs.property('buildinfo', props.toString())
     doLast {
         def f = outDir.get().file('com/realmgates/installer/build.properties').asFile
         f.parentFile.mkdirs()
