@@ -6,7 +6,7 @@
     { "type": "music", "sound": "summerbuddies:epilogue_theme", "volume": 0.9, "fadeIn": 50, "loop": true, "wait": 0 },
     { "type": "card", "title": "Epilogue", "subtitle": "Where Endings Learn to Begin", "typewriter": true, "fadeIn": 35, "stay": 210, "fadeOut": 40, "wait": 55 },
 
-    { "type": "camera", "scene": "Introv22", "markers": false, "wait": 300 },
+    { "type": "camera", "scene": "Introv22", "markers": false, "wait": 400 },
 
     { "type": "dialogue", "text": "The first realm holds.", "fadeIn": 14, "stay": 52, "fadeOut": 14, "wait": 68 },
     { "type": "dialogue", "text": "The morning comes anyway.", "fadeIn": 14, "stay": 52, "fadeOut": 14, "wait": 68 },
