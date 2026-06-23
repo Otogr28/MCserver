@@ -605,9 +605,10 @@ element {
   auto_sizing_base_screen_width = 3840
   auto_sizing_base_screen_height = 2024
   sticky_anchor = false
-  anchor_point = mid-centered
-  x = 5
-  y = 40
+  anchor_point = element
+  anchor_point_element = rg_website_button
+  x = 55
+  y = 29
   width = 90
   height = 20
   stay_on_screen = true
