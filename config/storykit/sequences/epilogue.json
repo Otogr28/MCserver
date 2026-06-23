@@ -2,18 +2,19 @@
   "id": "epilogue",
   "endFadeOutTicks": 30,
   "actions": [
-    { "type": "letterbox", "coverage": 0.14, "duration": 30, "wait": 35 },
-    { "type": "music", "sound": "summerbuddies:epilogue_theme", "volume": 0.9, "fadeIn": 50, "loop": false, "wait": 0 },
-    { "type": "card", "title": "Epilogue", "subtitle": "Where Endings Learn to Begin", "typewriter": true, "fadeIn": 35, "stay": 210, "fadeOut": 40, "wait": 55 },
+    { "type": "letterbox", "coverage": 0.14, "duration": 30, "wait": 30 },
+    { "type": "music", "sound": "summerbuddies:epilogue_theme", "volume": 0.9, "fadeIn": 60, "loop": false, "wait": 0 },
+    { "type": "card", "title": "Epilogue", "subtitle": "Where Endings Learn to Begin", "typewriter": true, "fadeIn": 30, "stay": 80, "fadeOut": 30, "wait": 50 },
 
-    { "type": "camera", "scene": "Introv22", "markers": false, "wait": 400 },
+    { "type": "camera", "scene": "Introv22", "markers": false, "wait": 0 },
 
-    { "type": "dialogue", "text": "The first realm holds.", "fadeIn": 14, "stay": 52, "fadeOut": 14, "wait": 68 },
-    { "type": "dialogue", "text": "The morning comes anyway.", "fadeIn": 14, "stay": 52, "fadeOut": 14, "wait": 68 },
-    { "type": "dialogue", "text": "Somewhere past the mist, the next one waits.", "fadeIn": 14, "stay": 66, "fadeOut": 14, "wait": 90 },
-    { "type": "dialogue", "text": "Go meet it.", "fadeIn": 18, "stay": 64, "fadeOut": 22, "wait": 116 },
+    { "type": "dialogue", "text": "The first realm holds.", "fadeIn": 14, "stay": 72, "fadeOut": 14, "wait": 100 },
+    { "type": "dialogue", "text": "The morning comes anyway.", "fadeIn": 14, "stay": 72, "fadeOut": 14, "wait": 100 },
+    { "type": "dialogue", "text": "Somewhere past the mist, the next one waits.", "fadeIn": 14, "stay": 76, "fadeOut": 14, "wait": 100 },
+    { "type": "dialogue", "text": "Go meet it.", "fadeIn": 16, "stay": 60, "fadeOut": 24, "wait": 100 },
 
-    { "type": "letterbox", "coverage": 0.0, "duration": 45, "wait": 48 },
-    { "type": "music_stop", "fadeOut": 45, "wait": 55 }
+    { "type": "letterbox", "coverage": 0.0, "duration": 40, "wait": 40 },
+    { "type": "music_stop", "fadeOut": 50, "wait": 5 },
+    { "type": "command", "command": "mission assign {player} primary_intro_meet_traveler", "asPlayer": true, "wait": 0 }
   ]
 }

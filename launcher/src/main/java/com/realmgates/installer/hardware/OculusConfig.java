@@ -10,25 +10,71 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Writes the shader choice into {@code config/oculus.properties}, touching only the
- * {@code enableShaders} and {@code shaderPack} keys (every other key/comment is preserved).
+ * Decides which shader pack to enable and at what quality preset, then writes that decision out:
+ * the {@code enableShaders}/{@code shaderPack} keys in {@code config/oculus.properties} (every other
+ * key/comment preserved) plus, when shaders are on, the preset's option values into the pack's
+ * settings file (via {@link ShaderProfiles}).
+ *
+ * <p>AUTO resolution (when the user leaves a dropdown on AUTO), keyed off the detected hardware tier:
+ * <pre>
+ *   pack:    HIGH -&gt; Solas        | MEDIUM, LOW -&gt; Complementary | OFF -&gt; none
+ *   preset:  HIGH -&gt; HIGH         | MEDIUM -&gt; MEDIUM             | LOW, OFF -&gt; LOW
+ * </pre>
  */
 public final class OculusConfig {
-
-    public static final String SOLAS = "Solas Shader V3.6.zip";
-    public static final String COMPLEMENTARY = "ComplementaryUnbound_r5.8.1.zip";
 
     private OculusConfig() {}
 
     /** @return a short human-readable summary of what was applied. */
-    public static String apply(Path installDir, Tier tier) throws IOException {
-        boolean enable = (tier == Tier.HIGH || tier == Tier.MEDIUM);
-        String pack = switch (tier) {
-            case HIGH -> SOLAS;
-            case MEDIUM -> COMPLEMENTARY;
-            default -> null; // leave shaderPack as-is when shaders are off
-        };
+    public static String apply(Path installDir, ShaderPackChoice packChoice,
+                               ShaderPresetChoice presetChoice, Tier hwTier) throws IOException {
+        ShaderPack pack = resolvePack(packChoice, hwTier);    // null = shaders off
+        boolean enable = pack != null;
 
+        Path shaderpacksDir = installDir.resolve("shaderpacks");
+        String zipName = enable ? pack.zipName(shaderpacksDir) : null;
+
+        writeOculusProperties(installDir, enable, zipName);
+        if (!enable) return "shaders OFF — tier " + hwTier;
+
+        String preset = resolvePreset(presetChoice, hwTier);  // LOW/MEDIUM/HIGH/ULTRA
+        String summary = "shaders ON — " + pack.displayName + " @ " + preset + " (" + zipName + ")";
+        try {
+            if (!ShaderProfiles.applyPreset(shaderpacksDir, zipName, preset))
+                summary += " [preset not found in pack; left at its built-in default]";
+        } catch (IOException e) {
+            summary += " [could not write preset: " + e.getMessage() + "]";
+        }
+        return summary;
+    }
+
+    /** Force a pack, or pick one from the tier when AUTO. {@code null} = no shaders. */
+    private static ShaderPack resolvePack(ShaderPackChoice choice, Tier hwTier) {
+        return switch (choice) {
+            case OFF -> null;
+            case COMPLEMENTARY -> ShaderPack.COMPLEMENTARY;
+            case SOLAS -> ShaderPack.SOLAS;
+            case AUTO -> switch (hwTier) {
+                case HIGH -> ShaderPack.SOLAS;
+                case MEDIUM, LOW -> ShaderPack.COMPLEMENTARY;
+                case OFF -> null;
+            };
+        };
+    }
+
+    /** Force a preset name, or derive it from the tier when AUTO. */
+    private static String resolvePreset(ShaderPresetChoice choice, Tier hwTier) {
+        if (choice != ShaderPresetChoice.AUTO) return choice.name();
+        return switch (hwTier) {
+            case HIGH -> "HIGH";
+            case MEDIUM -> "MEDIUM";
+            case LOW, OFF -> "LOW";
+        };
+    }
+
+    /** Touch only {@code enableShaders} and {@code shaderPack}; preserve every other key and comment. */
+    private static void writeOculusProperties(Path installDir, boolean enable, String zipName)
+            throws IOException {
         Path file = installDir.resolve("config").resolve("oculus.properties");
         List<String> lines = Files.exists(file)
                 ? new ArrayList<>(Files.readAllLines(file, StandardCharsets.UTF_8))
@@ -36,24 +82,19 @@ public final class OculusConfig {
 
         boolean sawEnable = false, sawPack = false;
         for (int i = 0; i < lines.size(); i++) {
-            String l = lines.get(i);
-            String trimmed = l.stripLeading();
+            String trimmed = lines.get(i).stripLeading();
             if (trimmed.startsWith("enableShaders=")) {
                 lines.set(i, "enableShaders=" + enable);
                 sawEnable = true;
-            } else if (trimmed.startsWith("shaderPack=") && pack != null) {
-                lines.set(i, "shaderPack=" + pack);
+            } else if (trimmed.startsWith("shaderPack=") && zipName != null) {
+                lines.set(i, "shaderPack=" + zipName);
                 sawPack = true;
             }
         }
         if (!sawEnable) lines.add("enableShaders=" + enable);
-        if (pack != null && !sawPack) lines.add("shaderPack=" + pack);
+        if (zipName != null && !sawPack) lines.add("shaderPack=" + zipName);
 
         Platform.writeAtomic(file, String.join("\n", lines).concat("\n").getBytes(StandardCharsets.UTF_8));
-
-        return enable
-                ? "shaders ON (" + (pack == null ? "" : pack) + ") — tier " + tier
-                : "shaders OFF — tier " + tier;
     }
 
     /** Recommended -Xmx in GB for the launcher profile, derived from system RAM. */

@@ -1,0 +1,16 @@
+{
+  "id": "secondary_starter_light_the_dark",
+  "category": "secondary",
+  "title": "Light the Dark",
+  "description": "Make torches and place a few around your shelter. Light keeps the worst of the night at bay.",
+  "lore": "The dark is older than the village and far more patient. Hold it back with small flames while you can.",
+  "giver": { "npcUuid": "d48a3f45-0efd-46c6-9803-5e1256d95d33", "npcName": "the-traveler" },
+  "prerequisites": { "loreStage": 0, "priorMissions": ["primary_intro_meet_traveler"] },
+  "objectives": [
+    { "type": "place_block", "block": "minecraft:torch", "count": 4, "description": "Place 4 torches" }
+  ],
+  "rewards": [
+    { "type": "item", "item": "minecraft:cooked_beef", "count": 4 },
+    { "type": "xp", "amount": 20 }
+  ]
+}

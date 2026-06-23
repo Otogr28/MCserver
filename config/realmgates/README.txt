@@ -42,6 +42,15 @@ Bosses'Rise mod (block_factorys_bosses). /realmgates reload applies it live (no 
   dragonSpawnerExistingBossRadius box checked for an already-spawned dragon before spawning (default 16)
   dragonFullHealOnPhase2          true = Ashlord heals to full when he transforms to phase 2 (2nd bar)
 
+Wildcard (realmgates:wildcard): a single-use gamble token. Right-click it for a chance to turn into a
+random item from the WHOLE item registry (vanilla + every loaded mod); on a miss it just crumbles away.
+The "wildcard" block of realmgates.json tunes it; /realmgates reload applies it live (no recompile):
+  winChance          probability (0..1) a use yields a prize, else the token is destroyed (default 0.20)
+  rewardCount        how many copies of the rolled item to give on a win (default 1)
+  cooldownTicks      post-use cooldown so a double-click can't drain a stack (default 8; 0 = none)
+  excludeNamespaces  item namespaces removed from the prize pool (default ["born_in_chaos_v1"]); minecraft:air
+                     is always excluded. Add more ids here to keep other mods' items out of the pool.
+
 Custom portals: add a "portal" block to a dimension's JSON to let players light a gated
 portal INTO it, e.g.:
   "portal": { "frameBlock": "minecraft:red_sandstone", "igniter": "minecraft:fire_charge", "color": "#FF3030" }

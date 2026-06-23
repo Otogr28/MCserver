@@ -28,6 +28,14 @@
       "block_factorys_bosses:ice_gauntlet"
     ]
   },
+  "wildcard": {
+    "winChance": 0.20,
+    "rewardCount": 1,
+    "cooldownTicks": 8,
+    "excludeNamespaces": [
+      "born_in_chaos_v1"
+    ]
+  },
   "sandstorm": {
     "checkInterval": 600,
     "randomChance": 8,

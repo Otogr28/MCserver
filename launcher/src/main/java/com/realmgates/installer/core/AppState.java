@@ -12,7 +12,8 @@ import java.nio.file.Path;
 public final class AppState {
 
     public String installDir = "";
-    public String shaderChoice = "AUTO";   // AUTO/OFF/LOW/MEDIUM/HIGH
+    public String shaderPack = "AUTO";     // AUTO/OFF/COMPLEMENTARY/SOLAS
+    public String shaderPreset = "AUTO";   // AUTO/LOW/MEDIUM/HIGH/ULTRA
     public boolean keepExtraMods = false;
     public boolean xmxLocked = false;
     public int xmxGb = 0;                   // 0 = auto from RAM

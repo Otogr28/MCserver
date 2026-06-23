@@ -6,7 +6,8 @@ import com.realmgates.installer.core.Orchestrator;
 import com.realmgates.installer.core.Platform;
 import com.realmgates.installer.hardware.HardwareProbe;
 import com.realmgates.installer.hardware.OculusConfig;
-import com.realmgates.installer.hardware.Tier;
+import com.realmgates.installer.hardware.ShaderPackChoice;
+import com.realmgates.installer.hardware.ShaderPresetChoice;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -30,7 +31,8 @@ public final class InstallerFrame extends JFrame {
 
     private final AppState state = AppState.load();
     private final JTextField dirField = new JTextField(36);
-    private final JComboBox<Tier.ShaderChoice> shaderBox = new JComboBox<>(Tier.ShaderChoice.values());
+    private final JComboBox<ShaderPackChoice> packBox = new JComboBox<>(ShaderPackChoice.values());
+    private final JComboBox<ShaderPresetChoice> presetBox = new JComboBox<>(ShaderPresetChoice.values());
     private final JCheckBox keepExtraMods = new JCheckBox("Keep my extra mods");
     private final JLabel ramLabel = new JLabel();
     private final JButton installBtn = new JButton("Install");
@@ -45,7 +47,8 @@ public final class InstallerFrame extends JFrame {
         ((JPanel) getContentPane()).setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
         dirField.setText(state.installDir);
-        shaderBox.setSelectedItem(Tier.ShaderChoice.from(state.shaderChoice));
+        packBox.setSelectedItem(ShaderPackChoice.from(state.shaderPack));
+        presetBox.setSelectedItem(ShaderPresetChoice.from(state.shaderPreset));
         keepExtraMods.setSelected(state.keepExtraMods);
 
         add(buildTop(), BorderLayout.NORTH);
@@ -83,12 +86,19 @@ public final class InstallerFrame extends JFrame {
         }
 
         JPanel row2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 4));
-        row2.add(new JLabel("Shaders:"));
-        row2.add(shaderBox);
+        row2.add(new JLabel("Shader pack:"));
+        row2.add(packBox);
+        row2.add(Box.createHorizontalStrut(8));
+        row2.add(new JLabel("Preset:"));
+        row2.add(presetBox);
         row2.add(Box.createHorizontalStrut(12));
         row2.add(keepExtraMods);
         row2.add(Box.createHorizontalStrut(12));
         row2.add(ramLabel);
+        // "Off" disables the quality preset; AUTO/explicit packs use it.
+        packBox.addActionListener(e ->
+                presetBox.setEnabled(packBox.getSelectedItem() != ShaderPackChoice.OFF));
+        presetBox.setEnabled(packBox.getSelectedItem() != ShaderPackChoice.OFF);
 
         p.add(row1);
         p.add(row2);
@@ -127,7 +137,8 @@ public final class InstallerFrame extends JFrame {
 
     private void persistState() {
         state.installDir = dirField.getText().trim();
-        state.shaderChoice = ((Tier.ShaderChoice) shaderBox.getSelectedItem()).name();
+        state.shaderPack = ((ShaderPackChoice) packBox.getSelectedItem()).name();
+        state.shaderPreset = ((ShaderPresetChoice) presetBox.getSelectedItem()).name();
         state.keepExtraMods = keepExtraMods.isSelected();
         state.save();
     }
@@ -157,9 +168,10 @@ public final class InstallerFrame extends JFrame {
     }
 
     private void runInstall() {
-        Tier.ShaderChoice choice = (Tier.ShaderChoice) shaderBox.getSelectedItem();
+        ShaderPackChoice pack = (ShaderPackChoice) packBox.getSelectedItem();
+        ShaderPresetChoice preset = (ShaderPresetChoice) presetBox.getSelectedItem();
         int xmx = state.xmxLocked ? state.xmxGb : 0;
-        runTask(() -> Orchestrator.install(dir(), choice, keepExtraMods.isSelected(), xmx, logPanel));
+        runTask(() -> Orchestrator.install(dir(), pack, preset, keepExtraMods.isSelected(), xmx, logPanel));
     }
 
     private void runSync() {

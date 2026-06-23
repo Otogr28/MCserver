@@ -2,6 +2,8 @@ package com.realmgates.installer.core;
 
 import com.realmgates.installer.hardware.HardwareProbe;
 import com.realmgates.installer.hardware.OculusConfig;
+import com.realmgates.installer.hardware.ShaderPackChoice;
+import com.realmgates.installer.hardware.ShaderPresetChoice;
 import com.realmgates.installer.hardware.Tier;
 import com.realmgates.installer.hardware.TierClassifier;
 import com.realmgates.installer.install.ForgeInstaller;
@@ -19,8 +21,8 @@ public final class Orchestrator {
     private Orchestrator() {}
 
     /** Full first-time install. {@code xmxOverrideGb <= 0} means auto-size from RAM. */
-    public static void install(Path installDir, Tier.ShaderChoice choice, boolean keepExtraMods,
-                               int xmxOverrideGb, ProgressReporter pr) throws Exception {
+    public static void install(Path installDir, ShaderPackChoice packChoice, ShaderPresetChoice presetChoice,
+                               boolean keepExtraMods, int xmxOverrideGb, ProgressReporter pr) throws Exception {
         pr.log("=== Installing Realm Gates into " + installDir + " ===");
 
         // Overlay mode = the target IS a Minecraft launcher root (e.g. TLauncher's single game dir,
@@ -49,9 +51,7 @@ public final class Orchestrator {
 
         HardwareProbe.Info hw = HardwareProbe.probe();
         pr.log("Detected hardware: " + hw);
-        Tier tier = (choice == Tier.ShaderChoice.AUTO)
-                ? TierClassifier.classify(hw)
-                : Tier.valueOf(choice.name());
+        Tier tier = TierClassifier.classify(hw);
 
         if (!ForgeInstaller.installTo(launcherRoot, pr)) {
             pr.log("Forge install did not complete cleanly — open your launcher and select Forge "
@@ -62,7 +62,7 @@ public final class Orchestrator {
         LauncherProfiles.upsert(launcherRoot, installDir, xmx, pr);
         pr.log("Allocated -Xmx" + xmx + "G (of " + hw.ramGb() + " GB system RAM).");
 
-        pr.log("Shader config: " + OculusConfig.apply(installDir, tier));
+        pr.log("Shader config: " + OculusConfig.apply(installDir, packChoice, presetChoice, tier));
         OptionsPatcher.unbindCameraKeys(installDir, pr);
 
         pr.progress(100);
