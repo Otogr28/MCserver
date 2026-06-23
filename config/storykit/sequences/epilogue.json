@@ -3,7 +3,7 @@
   "endFadeOutTicks": 30,
   "actions": [
     { "type": "letterbox", "coverage": 0.14, "duration": 30, "wait": 35 },
-    { "type": "music", "sound": "summerbuddies:epilogue_theme", "volume": 0.9, "fadeIn": 50, "loop": true, "wait": 0 },
+    { "type": "music", "sound": "summerbuddies:epilogue_theme", "volume": 0.9, "fadeIn": 50, "loop": false, "wait": 0 },
     { "type": "card", "title": "Epilogue", "subtitle": "Where Endings Learn to Begin", "typewriter": true, "fadeIn": 35, "stay": 210, "fadeOut": 40, "wait": 55 },
 
     { "type": "camera", "scene": "Introv22", "markers": false, "wait": 400 },
