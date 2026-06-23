@@ -30,10 +30,6 @@ public final class ForgeInstaller {
 
     private ForgeInstaller() {}
 
-    public static boolean install(ProgressReporter pr) throws Exception {
-        return installTo(Platform.dotMinecraft(), pr);
-    }
-
     /** @return true if {@code versions/<FORGE_VERSION_ID>} exists after installing. */
     public static boolean installTo(Path dotMc, ProgressReporter pr) throws Exception {
         Path versionDir = dotMc.resolve("versions").resolve(BuildInfo.FORGE_VERSION_ID);

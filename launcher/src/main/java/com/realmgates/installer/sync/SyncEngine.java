@@ -10,7 +10,6 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectInserter;
 import org.eclipse.jgit.lib.ObjectLoader;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.RefSpec;
@@ -43,40 +42,73 @@ public final class SyncEngine {
     /** Admin owns these — overwrite + prune within them. */
     public static final List<String> FORCE_PATHS = List.of("mods", "kubejs", "config/fancymenu");
 
+    /**
+     * First-time overlay install pulls these modpack trees onto disk (no prune — the player's own
+     * files in the same dirs are kept). Repo-relative paths; missing trees are simply skipped.
+     */
+    public static final List<String> INSTALL_PATHS =
+            List.of("mods", "config", "kubejs", "shaderpacks", "resourcepacks", "defaultconfigs", "datapacks");
+
     private SyncEngine() {}
 
     public static void sync(Path installDir, boolean keepExtraMods, ProgressReporter pr) throws Exception {
         try (Git git = Git.open(installDir.toFile())) {
             Repository repo = git.getRepository();
+            RevTree tree = fetchTree(git, repo, pr);
 
-            pr.log("Fetching latest from " + BuildInfo.REPO_URL);
-            pr.busy();
-            git.fetch()
-                    .setRemote("origin")
-                    .setRefSpecs(new RefSpec("+refs/heads/" + BuildInfo.REPO_BRANCH
-                            + ":refs/remotes/origin/" + BuildInfo.REPO_BRANCH))
-                    .call();
+            int totalWritten = 0, totalPruned = 0;
+            for (String forced : FORCE_PATHS) {
+                boolean prune = !(forced.equals("mods") && keepExtraMods);
+                pr.log("Updating " + forced + (prune ? "" : " (keeping your extra mods)"));
 
-            ObjectId commitId = repo.resolve("refs/remotes/origin/" + BuildInfo.REPO_BRANCH + "^{commit}");
-            if (commitId == null) throw new IllegalStateException("Could not resolve origin/" + BuildInfo.REPO_BRANCH);
-
-            try (RevWalk rw = new RevWalk(repo)) {
-                RevCommit commit = rw.parseCommit(commitId);
-                RevTree tree = commit.getTree();
-
-                int totalWritten = 0, totalPruned = 0;
-                for (String forced : FORCE_PATHS) {
-                    boolean prune = !(forced.equals("mods") && keepExtraMods);
-                    pr.log("Updating " + forced + (prune ? "" : " (keeping your extra mods)"));
-
-                    Map<String, Entry> desired = collect(repo, tree, forced);
-                    totalWritten += materialize(repo, installDir, desired, pr);
-                    if (prune) totalPruned += prune(installDir, forced, desired, pr);
-                }
-                pr.progress(100);
-                pr.log("Sync done — " + totalWritten + " file(s) updated, " + totalPruned + " removed. "
-                        + "Your shader/config and personal settings were left untouched.");
+                Map<String, Entry> desired = collect(repo, tree, forced);
+                totalWritten += materialize(repo, installDir, desired, pr);
+                if (prune) totalPruned += prune(installDir, forced, desired, pr);
             }
+            pr.progress(100);
+            pr.log("Sync done — " + totalWritten + " file(s) updated, " + totalPruned + " removed. "
+                    + "Your shader/config and personal settings were left untouched.");
+        }
+    }
+
+    /**
+     * Overlay first install: materialise the modpack's game trees ({@link #INSTALL_PATHS}) from
+     * {@code origin/master} into an existing game dir, WITHOUT pruning. Used for TLauncher and any
+     * shared {@code .minecraft}: only modpack files are written; the user's worlds, options,
+     * {@code versions/} and {@code libraries/} are left in place. {@code installDir} must already be
+     * a Realm Gates overlay (see {@code RepoCloner.overlayInit}).
+     */
+    public static void materializeInitial(Path installDir, ProgressReporter pr) throws Exception {
+        try (Git git = Git.open(installDir.toFile())) {
+            Repository repo = git.getRepository();
+            RevTree tree = fetchTree(git, repo, pr);
+
+            int written = 0;
+            for (String base : INSTALL_PATHS) {
+                Map<String, Entry> desired = collect(repo, tree, base);
+                if (desired.isEmpty()) continue;
+                pr.log("Installing " + base + " (" + desired.size() + " file(s))");
+                written += materialize(repo, installDir, desired, pr);
+            }
+            pr.progress(100);
+            pr.log("Modpack files installed into " + installDir + " — " + written + " file(s) written.");
+        }
+    }
+
+    /** Fetch {@code origin/master} and return its tree (no working-tree checkout). */
+    private static RevTree fetchTree(Git git, Repository repo, ProgressReporter pr) throws Exception {
+        pr.log("Fetching latest from " + BuildInfo.REPO_URL);
+        pr.busy();
+        git.fetch()
+                .setRemote("origin")
+                .setRefSpecs(new RefSpec("+refs/heads/" + BuildInfo.REPO_BRANCH
+                        + ":refs/remotes/origin/" + BuildInfo.REPO_BRANCH))
+                .call();
+
+        ObjectId commitId = repo.resolve("refs/remotes/origin/" + BuildInfo.REPO_BRANCH + "^{commit}");
+        if (commitId == null) throw new IllegalStateException("Could not resolve origin/" + BuildInfo.REPO_BRANCH);
+        try (RevWalk rw = new RevWalk(repo)) {
+            return rw.parseCommit(commitId).getTree();
         }
     }
 

@@ -3,6 +3,7 @@ package com.realmgates.installer.ui;
 import com.realmgates.installer.core.AppState;
 import com.realmgates.installer.core.BuildInfo;
 import com.realmgates.installer.core.Orchestrator;
+import com.realmgates.installer.core.Platform;
 import com.realmgates.installer.hardware.HardwareProbe;
 import com.realmgates.installer.hardware.OculusConfig;
 import com.realmgates.installer.hardware.Tier;
@@ -67,6 +68,19 @@ public final class InstallerFrame extends JFrame {
         JButton browse = new JButton("Browse…");
         browse.addActionListener(e -> chooseDir());
         row1.add(browse);
+
+        // TLauncher uses one shared game dir (no per-profile gameDir), so the modpack must be
+        // installed straight into it. Offer a one-click target when TLauncher is detected.
+        if (Platform.hasTLauncher()) {
+            Path tlDir = Platform.tlauncherGameDir();
+            JButton useTl = new JButton("Use TLauncher folder");
+            useTl.setToolTipText("Install the modpack into TLauncher's Minecraft folder: " + tlDir);
+            useTl.addActionListener(e -> {
+                dirField.setText(tlDir.toString());
+                keepExtraMods.setSelected(true); // shared dir — don't prune the player's other mods
+            });
+            row1.add(useTl);
+        }
 
         JPanel row2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 4));
         row2.add(new JLabel("Shaders:"));

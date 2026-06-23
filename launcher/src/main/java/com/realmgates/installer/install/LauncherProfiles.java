@@ -26,8 +26,14 @@ public final class LauncherProfiles {
 
     private LauncherProfiles() {}
 
-    public static void upsert(Path installDir, int xmxGb, ProgressReporter pr) throws IOException {
-        Path file = Platform.dotMinecraft().resolve("launcher_profiles.json");
+    /**
+     * @param launcherRoot where {@code launcher_profiles.json} and {@code versions/} live (the
+     *                     official launcher / SKlauncher read {@code .minecraft}; for an overlay
+     *                     install this equals {@code gameDir}).
+     * @param gameDir      the profile's game directory (where mods/config/saves live).
+     */
+    public static void upsert(Path launcherRoot, Path gameDir, int xmxGb, ProgressReporter pr) throws IOException {
+        Path file = launcherRoot.resolve("launcher_profiles.json");
 
         JsonObject root;
         if (Files.exists(file)) {
@@ -53,8 +59,8 @@ public final class LauncherProfiles {
         p.addProperty("type", "custom");
         p.addProperty("created", existing.has("created") ? existing.get("created").getAsString() : now);
         p.addProperty("lastUsed", now);
-        p.addProperty("gameDir", installDir.toAbsolutePath().toString());
-        p.addProperty("lastVersionId", resolveVersionId(pr));
+        p.addProperty("gameDir", gameDir.toAbsolutePath().toString());
+        p.addProperty("lastVersionId", resolveVersionId(launcherRoot, pr));
         p.addProperty("javaArgs", "-Xmx" + xmxGb + "G -Xms2G -XX:+UseG1GC");
         if (existing.has("icon")) p.add("icon", existing.get("icon"));
 
@@ -65,8 +71,8 @@ public final class LauncherProfiles {
     }
 
     /** Prefer the exact id; otherwise pick any installed Forge version for this MC version. */
-    private static String resolveVersionId(ProgressReporter pr) {
-        Path versions = Platform.dotMinecraft().resolve("versions");
+    private static String resolveVersionId(Path launcherRoot, ProgressReporter pr) {
+        Path versions = launcherRoot.resolve("versions");
         if (Files.isDirectory(versions.resolve(BuildInfo.FORGE_VERSION_ID))) {
             return BuildInfo.FORGE_VERSION_ID;
         }

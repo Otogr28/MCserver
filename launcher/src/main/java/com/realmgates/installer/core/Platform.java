@@ -1,9 +1,11 @@
 package com.realmgates.installer.core;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Properties;
 
 /**
  * OS detection and the platform-specific paths the installer needs:
@@ -45,6 +47,46 @@ public final class Platform {
             default:
                 return home().resolve(".minecraft");
         }
+    }
+
+    /**
+     * TLauncher's config directory ({@code .tlauncher}). Windows puts it under {@code %APPDATA%};
+     * macOS and Linux use {@code ~/.tlauncher}.
+     */
+    public static Path tlauncherDir() {
+        if (OS == Os.WINDOWS) {
+            String appData = System.getenv("APPDATA");
+            Path base = (appData != null && !appData.isBlank())
+                    ? Path.of(appData) : home().resolve("AppData").resolve("Roaming");
+            return base.resolve(".tlauncher");
+        }
+        return home().resolve(".tlauncher");
+    }
+
+    /** True when TLauncher appears to be installed for this user. */
+    public static boolean hasTLauncher() {
+        return Files.isDirectory(tlauncherDir());
+    }
+
+    /**
+     * TLauncher's single Minecraft directory ({@code minecraft.gamedir} in
+     * {@code tlauncher-2.0.properties}). TLauncher uses one game dir for everything
+     * (versions, libraries, mods), so this is where the modpack must live for it to load.
+     * Falls back to {@link #dotMinecraft()} when not configured.
+     */
+    public static Path tlauncherGameDir() {
+        Path props = tlauncherDir().resolve("tlauncher-2.0.properties");
+        if (Files.isRegularFile(props)) {
+            Properties p = new Properties();
+            try (InputStream in = Files.newInputStream(props)) {
+                p.load(in); // ISO-8859-1 + unescaping handled by Properties (file stores C\:\\Users\\…)
+            } catch (IOException ignored) {}
+            String v = p.getProperty("minecraft.gamedir");
+            if (v != null && !v.isBlank()) {
+                try { return Path.of(v.strip()); } catch (RuntimeException ignored) {}
+            }
+        }
+        return dotMinecraft();
     }
 
     /** Where we persist the installer's own state (NOT inside the game dir, so a wipe keeps it). */
