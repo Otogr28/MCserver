@@ -13,10 +13,6 @@ MaFgLib-*.jar
 oculus-*.jar
 embeddium-*.jar
 CustomSkinLoader_*.jar
-# WaterMedia: reproductor de video (VLC) que usa FancyMenu para el fondo de video
-# del menú principal. Solo-cliente (no declara side=CLIENT → sería both-side y
-# rompería el server headless al intentar init VLC). Los jugadores SÍ lo necesitan.
-watermedia-*.jar
 
 # Axiom (editor de mundos, jar Fabric) corre sobre Forge vía Sinytra Connector
 # + Forgified Fabric API. Desde 2026-06-12 los tres VAN al server (Connector es

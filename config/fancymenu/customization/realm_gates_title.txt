@@ -28,8 +28,8 @@ menu_background {
 menu_background {
   instance_identifier = rg_background
   background_type = image
-  show_background = false
-  image_path = [source:local]config/fancymenu/assets/realm_gates_main_menu.png
+  show_background = true
+  image_path = [source:local]config/fancymenu/assets/realm_gates_bg.gif
   slide = false
   repeat_texture = false
   parallax = false
@@ -48,7 +48,7 @@ menu_background {
 menu_background {
   instance_identifier = 063a4d56-bdd3-4cca-9359-fc3185feecac-1782182906302
   background_type = video
-  show_background = true
+  show_background = false
   source = [source:local]config/fancymenu/assets/realm_gates_bg.mp4
   loop = true
   volume = 0.0
