@@ -1,0 +1,104 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.gradleup.shadow' version '8.3.6'   // maintained fork of johnrengelman.shadow
+}
+
+group = 'com.realmgates'
+version = project.findProperty('appVersion') ?: '1.0.0'
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Embedded git — players need no native git installed.
+    // 6.10.x is the last JGit line that runs on Java 17 (7.x needs Java 21).
+    implementation 'org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r'
+    // Hardware probing (GPU/VRAM/RAM/CPU). Minecraft bundles oshi too; we ship our own copy.
+    implementation 'com.github.oshi:oshi-core:6.6.5'
+    // JSON for launcher_profiles.json and our app state.
+    implementation 'com.google.code.gson:gson:2.11.0'
+    // SLF4J binding so JGit/oshi don't warn about a missing logger.
+    implementation 'org.slf4j:slf4j-simple:2.0.13'
+}
+
+application {
+    mainClass = project.findProperty('mainClass') ?: 'com.realmgates.installer.Main'
+}
+
+// Pass modpack coordinates into the app as a generated properties resource.
+tasks.register('generateBuildInfo') {
+    def outDir = layout.buildDirectory.dir('generated/resources/buildinfo')
+    outputs.dir(outDir)
+    def props = [
+        appName     : project.findProperty('appName'),
+        appVersion  : version.toString(),
+        mcVersion   : project.findProperty('mcVersion'),
+        forgeVersion: project.findProperty('forgeVersion'),
+        repoUrl     : project.findProperty('repoUrl'),
+        repoBranch  : project.findProperty('repoBranch'),
+    ]
+    doLast {
+        def f = outDir.get().file('com/realmgates/installer/build.properties').asFile
+        f.parentFile.mkdirs()
+        f.text = props.collect { k, v -> "${k}=${v}" }.join('\n') + '\n'
+    }
+}
+sourceSets.main.resources.srcDir(layout.buildDirectory.dir('generated/resources/buildinfo'))
+tasks.named('processResources') { dependsOn 'generateBuildInfo' }
+
+jar {
+    manifest { attributes 'Main-Class': application.mainClass.get() }
+}
+
+shadowJar {
+    archiveBaseName = 'realmgates-installer'
+    archiveClassifier = ''
+    archiveVersion = ''
+    mergeServiceFiles()   // CRITICAL: JGit registers its HTTP transport via META-INF/services
+}
+
+// ---- jpackage: build a native bundle for the HOST OS (CI matrix covers all three) ----
+def osName = System.getProperty('os.name').toLowerCase()
+def isWindows = osName.contains('win')
+def isMac = osName.contains('mac')
+
+tasks.register('jpackage', Exec) {
+    dependsOn 'shadowJar'
+    group = 'distribution'
+    description = 'Build a native installer (jpackage) for the current OS.'
+
+    def fatJar = tasks.named('shadowJar').get().archiveFile.get().asFile
+    def stage = layout.buildDirectory.dir('jpackage-input').get().asFile
+    def dest = layout.buildDirectory.dir('jpackage').get().asFile
+    def type = isWindows ? 'exe' : (isMac ? 'dmg' : 'deb')
+    def icon = isWindows ? 'jpackage/RealmGates.ico' : (isMac ? 'jpackage/RealmGates.icns' : 'jpackage/RealmGates.png')
+
+    doFirst {
+        delete stage; delete dest
+        stage.mkdirs()
+        copy { from fatJar; into stage }   // input dir must contain ONLY the fat jar
+    }
+
+    def args = [
+        'jpackage',
+        '--name', project.findProperty('appName'),
+        '--app-version', version.toString(),
+        '--vendor', project.findProperty('appVendor'),
+        '--input', stage.absolutePath,
+        '--main-jar', fatJar.name,
+        '--main-class', application.mainClass.get(),
+        '--dest', dest.absolutePath,
+        '--type', type,
+    ]
+    if (file(icon).exists()) { args += ['--icon', icon] }
+    if (isWindows) { args += ['--win-shortcut', '--win-menu', '--win-dir-chooser'] }
+    if (!isWindows && !isMac) { args += ['--linux-shortcut'] }
+
+    commandLine args
+}

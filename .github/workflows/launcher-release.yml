@@ -1,0 +1,125 @@
+name: Build installer
+
+# Builds desktop bundles (jpackage, with a bundled JRE — players need no Java) for
+# Windows, macOS and Linux, and attaches them to a GitHub Release.
+#
+# Each leg always produces a PORTABLE bundle (zip/tar.gz/dmg) that needs no extra
+# CI tooling, and additionally TRIES the native installer (.exe/.msi/.deb) as a
+# non-fatal bonus (those need WiX / fakeroot which may be absent on the runner).
+#
+# jpackage only builds for the OS it runs on, hence the matrix.
+# Trigger: push a tag `installer-v*`, or run manually (Actions → Run workflow).
+on:
+  push:
+    tags: ['installer-v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write   # needed by the release job to create the GitHub Release
+
+defaults:
+  run:
+    working-directory: launcher
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'   # JDK 17 ships jpackage
+
+      - name: Build fat jar
+        shell: bash
+        run: ./gradlew --no-daemon shadowJar
+
+      - name: Stage jar for jpackage
+        shell: bash
+        run: |
+          rm -rf build/stage build/app build/out
+          mkdir -p build/stage build/out
+          cp build/libs/realmgates-installer.jar build/stage/
+
+      - name: Build portable bundle (always)
+        shell: bash
+        run: |
+          VER=$(grep '^appVersion=' gradle.properties | cut -d= -f2)
+          COMMON=(--name "Realm Gates Installer" --app-version "$VER" --vendor "Realm Gates" \
+                  --input build/stage --main-jar realmgates-installer.jar \
+                  --main-class com.realmgates.installer.Main)
+          ICON_WIN=jpackage/RealmGates.ico; ICON_MAC=jpackage/RealmGates.icns; ICON_LIN=jpackage/RealmGates.png
+          case "${{ runner.os }}" in
+            Windows)
+              [ -f "$ICON_WIN" ] && IC=(--icon "$ICON_WIN") || IC=()
+              jpackage "${COMMON[@]}" "${IC[@]}" --type app-image --dest build/app
+              powershell -Command "Compress-Archive -Path 'build/app/Realm Gates Installer' -DestinationPath 'build/out/RealmGatesInstaller-windows-$VER.zip' -Force"
+              ;;
+            macOS)
+              [ -f "$ICON_MAC" ] && IC=(--icon "$ICON_MAC") || IC=()
+              jpackage "${COMMON[@]}" "${IC[@]}" --type dmg --dest build/out
+              ;;
+            Linux)
+              [ -f "$ICON_LIN" ] && IC=(--icon "$ICON_LIN") || IC=()
+              jpackage "${COMMON[@]}" "${IC[@]}" --type app-image --dest build/app
+              tar -C build/app -czf "build/out/RealmGatesInstaller-linux-$VER.tar.gz" "Realm Gates Installer"
+              ;;
+          esac
+          ls -la build/out
+
+      - name: Try native installer (non-fatal bonus)
+        shell: bash
+        continue-on-error: true
+        run: |
+          VER=$(grep '^appVersion=' gradle.properties | cut -d= -f2)
+          COMMON=(--name "Realm Gates Installer" --app-version "$VER" --vendor "Realm Gates" \
+                  --input build/stage --main-jar realmgates-installer.jar \
+                  --main-class com.realmgates.installer.Main --dest build/out)
+          case "${{ runner.os }}" in
+            Windows)
+              jpackage "${COMMON[@]}" --type exe --win-shortcut --win-menu --win-dir-chooser || true
+              jpackage "${COMMON[@]}" --type msi --win-shortcut --win-menu --win-dir-chooser || true
+              ;;
+            Linux)
+              sudo apt-get update && sudo apt-get install -y fakeroot binutils || true
+              jpackage "${COMMON[@]}" --type deb --linux-shortcut || true
+              ;;
+          esac
+          ls -la build/out || true
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installer-${{ matrix.os }}
+          path: launcher/build/out/*
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/**/*
+          generate_release_notes: true
+          body: |
+            **Realm Gates Installer** — desktop app with a bundled Java runtime (no Java needed).
+
+            - **Windows:** unzip `RealmGatesInstaller-windows-*.zip` and run `Realm Gates Installer.exe`
+              (or use the `.exe`/`.msi` installer if present). If SmartScreen warns: *More info → Run anyway*.
+            - **macOS:** open the `.dmg`. First launch: right-click the app → *Open* → *Open anyway* (unsigned).
+            - **Linux:** unpack `RealmGatesInstaller-linux-*.tar.gz` and run `Realm Gates Installer/bin/Realm Gates Installer`
+              (or install the `.deb` on Debian/Ubuntu if present).
+
+            Open the app → **Install** (clones the modpack, installs Forge, creates the launcher profile,
+            sets shaders from your hardware). Update later with **Sync**.

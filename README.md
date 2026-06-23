@@ -14,7 +14,27 @@ The world, logs and server files are **not** here (they change constantly).
 2. The mods and configs from this repo, copied into your Forge instance.
 3. The server address — **ask the admin** for it.
 
-### Option A (recommended) — One script (auto-install + auto-update)
+### Option A (recommended) — Realm Gates Installer (Windows / macOS / Linux)
+A small app that does **everything**: installs **Forge 1.20.1** for you, downloads the modpack,
+adds a **"Realm Gates"** profile to your launcher (shows up in the **official Minecraft launcher**
+*and* **SKlauncher**), and picks shaders to match your computer. No Git, no PowerShell, **no Java
+needed** — the app bundles its own.
+
+1. Download the installer for your system from the
+   [**Releases page**](https://github.com/Otogr28/MCserver/releases):
+   - **Windows:** `.exe` (or `.msi`). If SmartScreen warns, click *More info → Run anyway*.
+   - **macOS:** `.dmg`. First open: right-click the app → *Open* → *Open anyway* (it's unsigned).
+   - **Linux:** `.deb` (Debian/Ubuntu) or the portable `*-linux-portable-*.tar.gz` (any distro).
+2. Open it and click **Install** (pick a folder, e.g. `~/RealmGates`).
+3. Launch Minecraft from your launcher → choose the **Realm Gates** profile → play.
+
+When the admin says there's an update, open the app and click **Sync / Update**. It only refreshes
+the shared modpack files and **keeps your personal settings** (shaders, keybinds, language, mic, world).
+
+> Shaders are set automatically from your hardware (strong PC → Solas on; weaker PC → off). Change it
+> any time with the **Shaders** dropdown, or in-game via **Options → Video Settings → Shaders**.
+
+### Option A2 — One PowerShell script (Windows only, legacy)
 A single command installs Git (if needed) and downloads the modpack into a folder. You then point
 your launcher's Forge 1.20.1 instance **at that folder** and launch from there. Open **PowerShell**
 and paste:

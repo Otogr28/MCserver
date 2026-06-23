@@ -1,0 +1,6 @@
+# Build artifacts (source is versioned, builds are not)
+build/
+.gradle/
+out/
+*.iml
+.idea/
