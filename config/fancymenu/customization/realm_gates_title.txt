@@ -1,0 +1,152 @@
+type = fancymenu_layout
+
+layout-meta {
+  identifier = title_screen
+  layout_index = 0
+  is_enabled = true
+  randommode = false
+  randomgroup = 1
+  randomonlyfirsttime = false
+  render_custom_elements_behind_vanilla = false
+  last_edited_time = 1782176214000
+}
+
+menu_background {
+  instance_identifier = rg_background
+  background_type = image
+  image_path = [source:local]config/fancymenu/assets/realm_gates_main_menu.png
+  parallax = false
+  parallax_intensity_x = 0.02
+  parallax_intensity_y = 0.02
+  invert_parallax = false
+  slide = false
+  repeat_texture = false
+  restart_animated_on_menu_load = false
+}
+
+customization {
+  action = backgroundoptions
+  keepaspectratio = true
+}
+
+deep_element {
+  element_type = title_screen_logo
+  is_hidden = true
+}
+
+deep_element {
+  element_type = title_screen_splash
+  is_hidden = true
+}
+
+deep_element {
+  element_type = title_screen_branding
+  is_hidden = true
+}
+
+deep_element {
+  element_type = title_screen_realms_notification
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_singleplayer_button
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_multiplayer_button
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_realms_button
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_quit_button
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_language_button
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = forge_titlescreen_mods_button
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = modmenu_titlescreen_mods_button
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_options_button
+  is_hidden = false
+  anchor_point = bottom-left
+  x = 20
+  y = -52
+  stay_on_screen = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_accessibility_button
+  is_hidden = false
+  anchor_point = bottom-left
+  x = 20
+  y = -26
+  stay_on_screen = true
+}
+
+element {
+  element_type = custom_button
+  instance_identifier = rg_play_button
+  anchor_point = mid-left
+  x = 64
+  y = -18
+  width = 180
+  height = 26
+  stay_on_screen = true
+  label = §e§lPLAY
+  description = Connect to the Realm Gates server
+  transparent_background = true
+  underline_label_on_hover = true
+  restartbackgroundanimations = true
+  navigatable = true
+  button_element_executable_block_identifier = block_play
+  [executable_block:block_play][type:generic] = [executables:action_play;]
+  [executable_action_instance:action_play][action_type:joinserver] = 5.78.204.157
+}
+
+element {
+  element_type = custom_button
+  instance_identifier = rg_website_button
+  anchor_point = mid-left
+  x = 64
+  y = 16
+  width = 180
+  height = 20
+  stay_on_screen = true
+  label = §7Visit the Wiki
+  description = Open the Realm Gates wiki in your browser
+  transparent_background = true
+  underline_label_on_hover = true
+  restartbackgroundanimations = true
+  navigatable = true
+  button_element_executable_block_identifier = block_website
+  [executable_block:block_website][type:generic] = [executables:action_website;]
+  [executable_action_instance:action_website][action_type:openlink] = https://otogr28.github.io/realm-gates/
+}

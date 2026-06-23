@@ -1,0 +1,15 @@
+{
+  "id": "example_camera_scene",
+  "endFadeOutTicks": 20,
+  "actions": [
+    { "type": "fade", "opacity": 1.0, "duration": 1 },
+    { "type": "letterbox", "coverage": 0.12, "duration": 20 },
+
+    { "type": "camera", "scene": "REPLACE_WITH_YOUR_SCENE_NAME", "wait": 0 },
+
+    { "type": "fade", "opacity": 0.0, "duration": 40, "wait": 30 },
+    { "type": "card", "title": "Chapter", "subtitle": "Subtitle here", "typewriter": true },
+    { "type": "dialogue", "text": "Line of dialogue over the shot..." },
+    { "type": "wait", "duration": 40 }
+  ]
+}
