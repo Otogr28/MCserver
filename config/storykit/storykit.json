@@ -1,0 +1,10 @@
+{
+  "_comment": "Global StoryKit settings. Edit and run /story reload (no restart).",
+  "firstJoin": {
+    "_comment": "Auto-play a sequence to a player N seconds after they connect (once the world has loaded). onlyFirstTime=brand-new accounts only, once ever; persisted in world data (existing players are seeded as already-seen).",
+    "enabled": true,
+    "sequence": "epilogue",
+    "delaySeconds": 15,
+    "onlyFirstTime": true
+  }
+}
