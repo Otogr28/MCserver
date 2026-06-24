@@ -1,0 +1,23 @@
+{
+  // Healing a companion by feeding it a GOLDEN APPLE (FeedingConfig.java). Owner + non-sneak right-click with a
+  // golden apple in hand makes the companion "eat" it, mirroring a vanilla golden apple on the companion plus an
+  // instant heart top-up. Loaded on both client and server; re-read on /reload. Tunable without recompiling.
+
+  // Master switch. false = a golden apple does nothing special (the right-click falls through to vanilla).
+  "goldenAppleHealEnabled": true,
+
+  // Hearts restored instantly when fed (1 heart = 2 HP). Our extra on top of the vanilla effects so the heal
+  // reads immediately. Set 0 to drop the instant top-up and rely only on Regeneration.
+  "goldenAppleInstantHealHearts": 1.0,
+
+  // Regeneration: amplifier (0 = Regen I, 1 = Regen II, the vanilla golden-apple value) + duration in seconds.
+  "goldenAppleRegenAmplifier": 1,
+  "goldenAppleRegenSeconds": 5,
+
+  // Absorption: amplifier (0 = Absorption I, the vanilla golden-apple value) + duration in seconds.
+  "goldenAppleAbsorptionAmplifier": 0,
+  "goldenAppleAbsorptionSeconds": 120,
+
+  // Whether feeding consumes one golden apple (creative players are never charged regardless).
+  "goldenAppleConsume": true
+}

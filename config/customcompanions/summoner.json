@@ -55,5 +55,13 @@
 
   // Mobs with max-health >= this are treated as bosses and can never be unlocked as summons
   // (this auto-catches modded bosses; vanilla bosses are always excluded by class).
-  "bossHpCeiling": 150.0
+  "bossHpCeiling": 150.0,
+
+  "nameTag": {
+    // Floating name above each summon so your army is easy to tell apart from wild mobs.
+    // Always visible (renders through blocks).
+    "enabled": true,            // show a name above each summon?
+    "useOwnerName": true,       // true = the owning player's name; false = the mob's own type name
+    "color": "yellow"           // name color: any vanilla color name (yellow, gold, aqua, green, red, ...)
+  }
 }
