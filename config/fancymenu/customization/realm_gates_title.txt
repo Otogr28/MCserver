@@ -345,7 +345,7 @@ layout_action_executable_blocks {
 
 element {
   button_element_executable_block_identifier = block_play
-  [executable_action_instance:action_play][action_type:joinserver] = 5.78.204.157
+  [executable_action_instance:action_play][action_type:joinserver] = 5.161.52.222
   [executable_block:block_play][type:generic] = [executables:action_play;]
   backgroundnormal = [source:local]config/fancymenu/assets/btn_purple.png
   backgroundhovered = [source:local]config/fancymenu/assets/btn_purple_hover.png
