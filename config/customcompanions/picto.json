@@ -18,11 +18,11 @@
   // for your companion's class (see draftChoicesByRarity). The offer is frozen onto the item (no re-roll); the
   // item is consumed only when you pick.
   "pictoDropByRarity": {
-    "common": 0.12,
-    "uncommon": 0.07,
-    "rare": 0.035,
-    "epic": 0.015,
-    "legendary": 0.006
+    "common": 0.06,
+    "uncommon": 0.03,
+    "rare": 0.012,
+    "epic": 0.005,
+    "legendary": 0.0025
   },
   // Only inject pictos into real CHEST containers. Many barrels/dispensers in dungeons reuse a "chests/" loot
   // table, so the table id alone would over-spawn pictos in barrels; this also requires the opened container's

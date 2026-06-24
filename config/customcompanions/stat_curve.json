@@ -1,0 +1,39 @@
+{
+  // Companion progression curve (StatCurve.java). Companion XP pool ONLY — never the player's vanilla XP.
+  // Loaded on BOTH client and server (lazy on first use; server also re-reads it on /reload). It MUST be the
+  // SAME file on the server and on every player's client: the client derives the companion's level (and thus its
+  // attribute-point budget = level x 3) from the synced XP using THIS curve, so if a client's copy differs from
+  // the server's it will show a different level — e.g. offer 24 attribute points while the server grants 21.
+  // The modpack ships it to players via git and `mc-update` syncs it to the server, keeping them identical.
+  // All fields optional; anything omitted falls back to code defaults (StatCurve.defaults()).
+
+  // Raised cap for a multi-dimension game (~20 levels per dimension; dimensions escalate). Steeper per-level
+  // steps so a high-level companion is meaningfully stronger in a harder later dimension; XP exponent eased so
+  // ~level 50 is reachable across ~2.5 dims without an absurd lategame grind.
+  "max_level": 50,
+
+  // XP needed to go from level L to L+1 = round(xp_base * L^xp_exponent).
+  "xp_base": 24.0,
+  "xp_exponent": 1.50,
+
+  // Base stats at level 1 + linear per-level gains (applied server-side in applyLevelStats).
+  "base_health": 20.0,
+  "per_level_health": 1.3,
+  "base_attack": 2.0,
+  "per_level_attack": 0.4,
+  "base_speed": 0.30,
+  "per_level_speed": 0.0011,
+  "base_energy": 50.0,
+  "per_level_energy": 2.2,
+
+  "base_respawn_seconds": 60,
+  "per_level_respawn": -1.2,
+  "min_respawn_seconds": 8,
+
+  "base_fetch_range": 16.0,
+  "per_level_fetch": 1.0,
+
+  "teleport_unlock_level": 15,
+
+  "ability_slot_levels": [1, 5, 12]
+}
