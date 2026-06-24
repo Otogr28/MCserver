@@ -1,6 +1,6 @@
 {
   "trees": {
-    "minimumLeavesAroundRequired": 3,
+    "minimumLeavesAroundRequired": 5,
     "leavesBreaking": true
   }
 }
