@@ -9,6 +9,7 @@
     { "type": "dialogue", "text": "Two Sacred Beasts. One failing seal.", "fadeIn": 14, "stay": 58, "fadeOut": 14, "wait": 60 },
     { "type": "dialogue", "text": "But first, sate your thirst for knowledge.", "fadeIn": 14, "stay": 58, "fadeOut": 14, "wait": 50 },
     { "type": "dialogue", "text": "Read the book in the library, beneath the Tree of Knowledge.", "fadeIn": 14, "stay": 74, "fadeOut": 16, "wait": 50 },
+    { "type": "wait", "duration": 20 },
     { "type": "letterbox", "coverage": 0.0, "duration": 30, "wait": 0 }
   ]
 }

@@ -11,6 +11,7 @@
     { "type": "dialogue", "text": "Skor, the Yeti. Nerakyss, the Kraken.", "fadeIn": 14, "stay": 72, "fadeOut": 14, "wait": 70 },
     { "type": "dialogue", "text": "Great and old, and they must fall.", "fadeIn": 14, "stay": 66, "fadeOut": 14, "wait": 70 },
     { "type": "dialogue", "text": "Defeat them both. Take what the altar demands.", "fadeIn": 14, "stay": 78, "fadeOut": 16, "wait": 70 },
+    { "type": "wait", "duration": 190 },
     { "type": "letterbox", "coverage": 0.0, "duration": 30, "wait": 0 }
   ]
 }
