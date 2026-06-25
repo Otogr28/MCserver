@@ -13,6 +13,10 @@
     "legendary": 25
   },
   "lumenPerLevel": 1,         // lumen (lumina-point budget) gained per companion level
+  // Spirit pictos progress toward their luminas from the OWNER PLAYER's kills (the spirit IS the player).
+  // false (default) = the player's kills always count. true = only kills landed while the Spirit Active (Envelop)
+  // is running count. (Summoner pictos always progress from their summons' kills; warrior/mage from their own.)
+  "spiritProgressRequiresActive": false,
   // Per-chest drop chance for a picto of EACH rarity (rolled independently — commons common, legendaries rare).
   // A dropped picto is unidentified + rarity-locked; right-click opens a DRAFT to choose one picto of that rarity
   // for your companion's class (see draftChoicesByRarity). The offer is frozen onto the item (no re-roll); the
