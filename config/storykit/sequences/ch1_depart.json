@@ -1,11 +1,13 @@
 {
   "id": "ch1_depart",
-  "endFadeOutTicks": 40,
+  "endFadeOutTicks": 30,
   "actions": [
-    { "type": "letterbox", "coverage": 0.14, "duration": 30, "wait": 20 },
-    { "type": "card", "title": "Chapter 1", "subtitle": "The Blight", "typewriter": true, "fadeIn": 30, "stay": 70, "fadeOut": 30, "wait": 40 },
-    { "type": "dialogue", "text": "Two Sacred Beasts. One failing seal.", "fadeIn": 14, "stay": 70, "fadeOut": 14, "wait": 90 },
-    { "type": "dialogue", "text": "Begin at the library, beneath the Tree of Knowledge.", "fadeIn": 14, "stay": 78, "fadeOut": 14, "wait": 90 },
-    { "type": "letterbox", "coverage": 0.0, "duration": 40, "wait": 0 }
+    { "type": "letterbox", "coverage": 0.14, "duration": 20, "wait": 0 },
+    { "type": "camera", "scene": "Chapter11", "markers": false, "wait": 0 },
+    { "type": "card", "title": "Chapter 1", "subtitle": "The Blight", "typewriter": true, "fadeIn": 30, "stay": 60, "fadeOut": 30, "wait": 130 },
+    { "type": "dialogue", "text": "Two Sacred Beasts. One failing seal.", "fadeIn": 14, "stay": 58, "fadeOut": 14, "wait": 60 },
+    { "type": "dialogue", "text": "But first, sate your thirst for knowledge.", "fadeIn": 14, "stay": 58, "fadeOut": 14, "wait": 50 },
+    { "type": "dialogue", "text": "Read the book in the library, beneath the Tree of Knowledge.", "fadeIn": 14, "stay": 74, "fadeOut": 16, "wait": 50 },
+    { "type": "letterbox", "coverage": 0.0, "duration": 30, "wait": 0 }
   ]
 }

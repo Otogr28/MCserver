@@ -51,6 +51,11 @@
     "painting": true,
     "chiseled_bookshelf": true
   },
+  "lightmanscurrency": {
+    "model_variant": true,
+    "model_variant.locked": false,
+    "paygate": true
+  },
   "ars_nouveau": {
     "mob_jar": true
   },

@@ -1,5 +1,5 @@
 {
-  "_comment": "Per-NPC dialogue voice pitch, keyed by NPC display name (case-insensitive). Men deeper (<1.0), women higher (>1.0), all distinct. ~0.7 = very grave, ~1.0 = neutral, ~1.4 = very high. The dialogue markup {pitch=X} multiplies this for dramatic moments.",
+  "_comment": "Per-NPC dialogue voice, keyed by NPC display name (case-insensitive, EXACT match on the FULL name). 'voices' = pitch (men deeper <1.0, women higher >1.0, all distinct; ~0.5 = floor/very grave, ~1.0 = neutral, ~1.4 = very high; the markup {pitch=X} multiplies this). 'sounds' = optional per-NPC blip sound id (any sound event id; else the client's global blip preset). WARNING: the key is the FULL CustomName lowercased, e.g. 'flugel the traveler' (not 'flugel').",
   "voices": {
     "kirigaya": 0.72,
     "brook": 0.74,
@@ -8,12 +8,15 @@
     "fabricio": 0.80,
     "naif": 0.84,
     "leck": 0.78,
-    "flugel": 0.70,
+    "flugel the traveler": 0.50,
 
     "satella": 1.20,
     "silvia": 1.30,
     "grandma": 1.10,
     "ame": 1.36,
     "verity": 1.26
+  },
+  "sounds": {
+    "flugel the traveler": "minecraft:block.note_block.bass"
   }
 }
