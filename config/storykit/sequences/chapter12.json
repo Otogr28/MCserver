@@ -1,0 +1,9 @@
+{
+  "id": "chapter12",
+  "endFadeOutTicks": 30,
+  "actions": [
+    { "type": "letterbox", "coverage": 0.12, "duration": 20, "wait": 10 },
+    { "type": "camera", "scene": "chapter12", "wait": 520 },
+    { "type": "letterbox", "coverage": 0.0, "duration": 30, "wait": 0 }
+  ]
+}

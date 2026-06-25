@@ -1,0 +1,23 @@
+{
+  "id": "primary_read_lectern",
+  "category": "primary",
+  "title": "The Book in the Library",
+  "description": "Flugel pointed you to the library beneath the Tree of Knowledge. Find the lectern and read what the old heroes left behind.",
+  "lore": "The town named that tree for the books beneath it, and the books remember what the world forgot. Read, and you will understand what Flugel could not say in one breath.",
+  "giver": { "npcUuid": "d48a3f45-0efd-46c6-9803-5e1256d95d33", "npcName": "the-traveler" },
+  "prerequisites": { "loreStage": 0, "priorMissions": ["primary_flugel_needs_you"] },
+  "objectives": [
+    { "type": "reach_location", "dimension": "minecraft:overworld", "x": 344, "y": 134, "z": 1064,
+      "radius": 3, "waypoint": "Library Lectern", "waypointColor": "#A020F0",
+      "description": "Read the book at the library lectern" }
+  ],
+  "rewards": [
+    { "type": "item", "item": "minecraft:golden_apple", "count": 5 },
+    { "type": "xp", "amount": 100 },
+    { "type": "item", "item": "lightmanscurrency:coin_copper", "count": 2 }
+  ],
+  "onComplete": [
+    { "type": "command", "command": "mission assign {player} primary_defeat_yeti" },
+    { "type": "command", "command": "mission assign {player} primary_defeat_kraken" }
+  ]
+}

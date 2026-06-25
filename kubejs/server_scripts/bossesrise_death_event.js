@@ -47,6 +47,18 @@
         if (server) {
             // Demo reaction (edit/extend freely): a small gold action-bar line for everyone.
             server.runCommandSilent(`title @a actionbar {"text":"${name} has fallen","color":"gold"}`)
+
+            // CustomMissions — GLOBAL completion of the "Sacred Beast" primaries: the kill counts for the whole
+            // group. `mission signal <name> 1 @a` advances that custom_signal objective for EVERY online player
+            // who has it active, not only the one who landed the blow (so one kill completes it for everyone).
+            const MISSION_SIGNAL = {
+                'block_factorys_bosses:yeti': 'defeat_yeti',
+                'block_factorys_bosses:kraken': 'defeat_kraken',
+            }
+            const signal = MISSION_SIGNAL[typeId(e)]
+            if (signal) {
+                server.runCommandSilent(`mission signal ${signal} 1 @a`)
+            }
             // Add your own here, e.g.:
             //   server.runCommandSilent('story play sb:dragon_outro')      // StoryKit
             //   if (killer) server.runCommandSilent(`give ${killer.username} minecraft:diamond 3`)

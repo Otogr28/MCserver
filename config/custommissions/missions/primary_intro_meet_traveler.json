@@ -15,6 +15,7 @@
     { "type": "xp", "amount": 30 }
   ],
   "onComplete": [
-    { "type": "command", "command": "mission flag add met_traveler" }
+    { "type": "command", "command": "mission flag add met_traveler" },
+    { "type": "command", "command": "mission assign {player} primary_flugel_needs_you" }
   ]
 }

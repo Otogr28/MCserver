@@ -1,0 +1,18 @@
+{
+  "id": "primary_defeat_yeti",
+  "category": "primary",
+  "title": "Sacred Beast: Skor, the Yeti",
+  "description": "One of the two Sacred Beasts that hold the seal. Hunt Skor down together and bring it low.",
+  "lore": "A guardian whose strength has failed becomes the very door it was meant to bar. Better it falls to friends, with purpose.",
+  "giver": { "npcUuid": "d48a3f45-0efd-46c6-9803-5e1256d95d33", "npcName": "the-traveler" },
+  "prerequisites": { "loreStage": 0, "priorMissions": ["primary_read_lectern"] },
+  "objectives": [
+    { "type": "custom_signal", "signal": "defeat_yeti",
+      "description": "Defeat Skor, the Yeti (counts for the whole group)" }
+  ],
+  "rewards": [
+    { "type": "item", "item": "minecraft:golden_apple", "count": 3 },
+    { "type": "xp", "amount": 200 },
+    { "type": "item", "item": "lightmanscurrency:coin_copper", "count": 8 }
+  ]
+}

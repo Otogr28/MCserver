@@ -1,0 +1,8 @@
+{
+  "id": "cuttest",
+  "endFadeOutTicks": 20,
+  "actions": [
+    { "type": "camcut", "x": 312.85, "y": 190.33, "z": 1183.83, "yaw": -22.0, "pitch": 10.0, "forceLoad": true, "forceRadius": 8, "fadeOut": 15, "hold": 80, "fadeIn": 15 },
+    { "type": "wait", "duration": 120 }
+  ]
+}

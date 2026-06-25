@@ -1,0 +1,18 @@
+{
+  "id": "primary_defeat_kraken",
+  "category": "primary",
+  "title": "Sacred Beast: Nerakyss, the Kraken",
+  "description": "One of the two Sacred Beasts that hold the seal. Drag Nerakyss from the deep and end it together.",
+  "lore": "Holy things, great and old, and they have done no wrong. Yet the seal in them has thinned, and the hunger waits behind it. Take what must be taken.",
+  "giver": { "npcUuid": "d48a3f45-0efd-46c6-9803-5e1256d95d33", "npcName": "the-traveler" },
+  "prerequisites": { "loreStage": 0, "priorMissions": ["primary_read_lectern"] },
+  "objectives": [
+    { "type": "custom_signal", "signal": "defeat_kraken",
+      "description": "Defeat Nerakyss, the Kraken (counts for the whole group)" }
+  ],
+  "rewards": [
+    { "type": "item", "item": "minecraft:golden_apple", "count": 3 },
+    { "type": "xp", "amount": 200 },
+    { "type": "item", "item": "lightmanscurrency:coin_copper", "count": 8 }
+  ]
+}

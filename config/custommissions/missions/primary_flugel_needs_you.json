@@ -7,14 +7,18 @@
   "giver": { "npcUuid": "d48a3f45-0efd-46c6-9803-5e1256d95d33", "npcName": "the-traveler" },
   "prerequisites": { "loreStage": 0 },
   "objectives": [
-    { "type": "reach_location", "dimension": "minecraft:overworld", "x": 340, "y": 112, "z": 1075,
+    { "type": "reach_location", "dimension": "minecraft:overworld", "x": 287, "y": 115, "z": 1070,
       "radius": 8, "waypoint": "Flugel", "waypointColor": "#FFD200",
       "description": "Get to Flugel, fast" },
     { "type": "talk_to_npc", "npcUuid": "d48a3f45-0efd-46c6-9803-5e1256d95d33", "npcName": "the-traveler",
       "description": "Speak with Flugel" }
   ],
   "rewards": [
-    { "type": "item", "item": "minecraft:bread", "count": 4 },
-    { "type": "xp", "amount": 40 }
+    { "type": "item", "item": "minecraft:golden_apple", "count": 10 },
+    { "type": "xp", "amount": 100 },
+    { "type": "item", "item": "lightmanscurrency:coin_copper", "count": 2 }
+  ],
+  "onComplete": [
+    { "type": "command", "command": "mission assign {player} primary_read_lectern" }
   ]
 }
