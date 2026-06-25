@@ -51,7 +51,7 @@ menu_background {
   show_background = false
   source = [source:local]config/fancymenu/assets/realm_gates_bg.mp4
   loop = true
-  volume = 0.0
+  volume = 1.0
   sound_source = master
   parallax = false
   parallax_intensity_x = 0.02

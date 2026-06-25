@@ -15,6 +15,8 @@ kubejs/assets/summerbuddies/sounds/*.ogg
 *.secret
 # tooling/hooks de la laptop del admin (no es modpack)
 .claude/
+# xray: solo para el admin, NO se distribuye a los jugadores (queda local)
+mods/advanced-xray-*.jar
 # ruta local de la instancia de cada jugador (la crea sync.ps1, es personal)
 .sync-target.txt
 # notas personales en markdown (Obsidian, etc.) — NO son modpack. README.md sí se versiona.

@@ -1,0 +1,20 @@
+{
+  "id": "primary_flugel_needs_you",
+  "category": "primary",
+  "title": "Flugel Needs You. Now.",
+  "description": "Flugel is on his feet and calling for you, and it will not keep. Follow the marker to where he stands and hear him out.",
+  "lore": "The kettle has gone cold and the old man is pacing. Whatever he saw out there, he means to tell you while it still burns in him. Go to him before the moment passes.",
+  "giver": { "npcUuid": "d48a3f45-0efd-46c6-9803-5e1256d95d33", "npcName": "the-traveler" },
+  "prerequisites": { "loreStage": 0 },
+  "objectives": [
+    { "type": "reach_location", "dimension": "minecraft:overworld", "x": 340, "y": 112, "z": 1075,
+      "radius": 8, "waypoint": "Flugel", "waypointColor": "#FFD200",
+      "description": "Get to Flugel, fast" },
+    { "type": "talk_to_npc", "npcUuid": "d48a3f45-0efd-46c6-9803-5e1256d95d33", "npcName": "the-traveler",
+      "description": "Speak with Flugel" }
+  ],
+  "rewards": [
+    { "type": "item", "item": "minecraft:bread", "count": 4 },
+    { "type": "xp", "amount": 40 }
+  ]
+}
