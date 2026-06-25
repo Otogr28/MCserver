@@ -34,7 +34,11 @@
   // glowing orb shown in the create/panel preview. defaultColor is only the tint a freshly created Spirit gets.
   "wisp": {
     "defaultColor": "7FC8FF",   // spectral blue (RRGGBB hex)
-    "followDistance": 2.0       // how far (blocks) the wisp hovers from you — far enough not to crowd/push you
+    "followDistance": 2.0,      // side-float only (aboveHead=false): how far (blocks) the wisp hovers from you
+    "aboveHead": true,          // hover directly ABOVE your head (sits on top of you, never lands in the crosshair —
+                                // it used to float at face height and block your hits/mining/block placement).
+                                // false = old side-float at head height (uses followDistance).
+    "aboveHeadOffset": 0.7      // blocks of clearance kept above your head when aboveHead is on
   },
   // modes: the ACTIVE modes (Equip > Actives). One selected; its effect is applied ONLY during the Envelop
   // (press X), on top of the base burst. The wisp's tone shifts slightly toward the active's colour (kept
