@@ -8,6 +8,12 @@
   "spiritEnvelopOverlay": true,   // show the root-tendril frame around the screen while your Spirit envelops you
                                   //   (the X ability). Set false to keep the screen clear when you trigger it.
 
+  "luminaLabelSource": "picto",   // which name a learned lumina shows (Luminas list + "Lumina learned" chat):
+                                  //   "picto"   = the picto's flavour name, so picto and lumina read the same
+                                  //               (e.g. Swift / Swift) — default
+                                  //   "passive" = the underlying passive primitive's generic name (e.g. Rush,
+                                  //               Momentum). The lumina tooltip always shows the full effect either way.
+
   "statRadar": {
     // The hexagonal stat radar at the top of the Stats tab (one axis per attribute).
     "referenceMin": 8.0,          // the web scales to max(referenceMin, your highest attribute): a low-level

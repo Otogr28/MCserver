@@ -13,6 +13,6 @@
   "rewards": [
     { "type": "item", "item": "minecraft:golden_apple", "count": 3 },
     { "type": "xp", "amount": 200 },
-    { "type": "item", "item": "lightmanscurrency:coin_copper", "count": 8 }
+    { "type": "item", "item": "coinsje:copper_coin", "count": 8 }
   ]
 }

@@ -1,21 +1,21 @@
-// Lightman's Currency — lock coins to admin / quest issuance.
+// Coins JE (coinsje) — lock coins to admin / quest issuance.
 //
-// Design (admin request): coins are UNIQUE and must NOT be craftable from other items. The only coin
-// "crafting" allowed is coin <-> coin: the built-in TIER CONVERSION (right-click to step copper -> iron ->
-// gold -> emerald -> diamond -> netherite) and the pile/block compacting recipes. Money enters the economy
-// ONLY through: admin commands (/lcadmin, /lc money give), mission rewards (reward: item with a coin id),
-// and player- or trader-run shops.
+// Design (admin request): coins are a CONTROLLED currency. They must NOT be mintable from minerals/ingots,
+// and they must NOT drop from mobs or world loot. Money enters the economy ONLY through: mission rewards
+// (reward: item with a coinsje coin id), admin /give, and player- or trader-run shops.
 //
-// This removes the two item -> coin paths:
-//   1) the Coin Minting Machine block recipe  (so players can't build a mint)
-//   2) every ingot -> coin mint recipe         (type lightmanscurrency:coin_mint)
+// Mob/loot drops: Coins JE ships NO loot tables (verified in the jar — no data/coinsje/loot_tables/), so
+// nothing drops coins by default and there is nothing to disable on that side.
 //
-// NOTE: also set these in config/lightmanscurrency/common.toml after first server run (the clean way, and
-// it kills the chest-loot leak this script can't touch):
-//   crafting.coin_mint.canCraftCoinMint = false
-//   crafting.coin_mint.canMint          = false
-//   + disable the "coins in chests" loot (LC loot config) so coins never spawn in world chests.
+// This removes the only mineral -> coin paths: smelting/blasting an ingot into its coin. Coin <-> coin
+// conversions stay intact so the currency is still usable as change:
+//   - upgrade   (copper_pile -> iron_coin, iron_pile -> gold_coin, ... via furnace/blasting)
+//   - downgrade (iron_coin -> 9 copper_coin, ... via crafting table)
+//   - pile stack / deconstruct (9 coins <-> 1 pile)
+//   - banner pattern
 ServerEvents.recipes((event) => {
-  event.remove({ output: 'lightmanscurrency:coinmint' }) // can't build a Coin Minting Machine
-  event.remove({ type: 'lightmanscurrency:coin_mint' })  // can't mint ingots -> coins
+  // ingot -> coin minting (matches BOTH the furnace smelting and the blast-furnace blasting variants)
+  event.remove({ input: 'minecraft:copper_ingot', output: 'coinsje:copper_coin' })
+  event.remove({ input: 'minecraft:iron_ingot',   output: 'coinsje:iron_coin' })
+  event.remove({ input: 'minecraft:gold_ingot',   output: 'coinsje:gold_coin' })
 })

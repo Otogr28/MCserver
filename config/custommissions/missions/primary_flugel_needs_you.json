@@ -16,7 +16,7 @@
   "rewards": [
     { "type": "item", "item": "minecraft:golden_apple", "count": 10 },
     { "type": "xp", "amount": 100 },
-    { "type": "item", "item": "lightmanscurrency:coin_copper", "count": 2 }
+    { "type": "item", "item": "coinsje:copper_coin", "count": 2 }
   ],
   "onComplete": [
     { "type": "command", "command": "mission assign {player} primary_read_lectern" }

@@ -6,13 +6,13 @@
     { "type": "music", "sound": "summerbuddies:chapter12_theme", "volume": 0.9, "fadeIn": 1, "loop": false, "wait": 0 },
     { "type": "camera", "scene": "chapter12", "wait": 0 },
     { "type": "card", "title": "Chapter 1", "subtitle": "The Beasts", "typewriter": true, "fadeIn": 30, "stay": 70, "fadeOut": 30, "wait": 150 },
-    { "type": "dialogue", "text": "The seal does not hold itself.", "fadeIn": 14, "stay": 60, "fadeOut": 14, "wait": 70 },
-    { "type": "dialogue", "text": "Two Sacred Beasts carry it: one in the frozen heights, one in the drowned deep.", "fadeIn": 14, "stay": 92, "fadeOut": 14, "wait": 80 },
-    { "type": "dialogue", "text": "Skor, the Yeti.", "fadeIn": 14, "stay": 52, "fadeOut": 14, "wait": 80 },
-    { "type": "dialogue", "text": "Nerakyss, the Kraken.", "fadeIn": 14, "stay": 50, "fadeOut": 14, "wait": 80 },
+    { "type": "dialogue", "text": "The seal does not hold itself.", "fadeIn": 14, "stay": 60, "fadeOut": 14, "wait": 50 },
+    { "type": "dialogue", "text": "Two Sacred Beasts carry the seal.", "fadeIn": 14, "stay": 50, "fadeOut": 14, "wait": 100 },
+    { "type": "dialogue", "text": "Skor, the Yeti. Warden of the frozen heights.", "fadeIn": 14, "stay": 72, "fadeOut": 14, "wait": 100 },
+    { "type": "dialogue", "text": "Nerakyss, the Kraken. Terror of the drowned deep.", "fadeIn": 14, "stay": 56, "fadeOut": 14, "wait": 80 },
     { "type": "dialogue", "text": "Great and old, and they must fall.", "fadeIn": 14, "stay": 66, "fadeOut": 14, "wait": 70 },
     { "type": "dialogue", "text": "Defeat them both. Take what the altar demands.", "fadeIn": 14, "stay": 78, "fadeOut": 16, "wait": 70 },
-    { "type": "wait", "duration": 100 },
+    { "type": "wait", "duration": 80 },
     { "type": "letterbox", "coverage": 0.0, "duration": 30, "wait": 0 }
   ]
 }
