@@ -79,6 +79,9 @@ backups/
 # OJO: los shaderpacks SÍ se versionan (son .zip que los jugadores copian a shaderpacks/).
 !shaderpacks/
 !shaderpacks/*.zip
+# OJO: los resourcepacks SÍ se versionan (son .zip que los jugadores copian a resourcepacks/).
+!resourcepacks/
+!resourcepacks/*.zip
 
 # ===== Runtime del servidor (NO lo necesitan los jugadores) =====
 libraries/
