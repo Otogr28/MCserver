@@ -14,6 +14,6 @@
     { "type": "dialogue", "text": "Go meet it.", "fadeIn": 16, "stay": 60, "fadeOut": 24, "wait": 100 },
 
     { "type": "letterbox", "coverage": 0.0, "duration": 40, "wait": 40 },
-    { "type": "command", "command": "mission assign {player} primary_intro_meet_traveler", "asPlayer": true, "wait": 0 }
+    { "type": "command", "command": "mission assign {player} primary_flugel_needs_you", "asPlayer": true, "wait": 0 }
   ]
 }

@@ -8,8 +8,10 @@
   "prerequisites": { "loreStage": 0, "priorMissions": ["primary_flugel_needs_you"] },
   "objectives": [
     { "type": "reach_location", "dimension": "minecraft:overworld", "x": 344, "y": 134, "z": 1064,
-      "radius": 3, "waypoint": "Library Lectern", "waypointColor": "#A020F0",
-      "description": "Read the book at the library lectern" }
+      "radius": 4, "waypoint": "Library Lectern", "waypointColor": "#A020F0",
+      "description": "Find the library lectern" },
+    { "type": "custom_signal", "signal": "read_lectern",
+      "description": "Read the book at the lectern" }
   ],
   "rewards": [
     { "type": "item", "item": "minecraft:golden_apple", "count": 5 },

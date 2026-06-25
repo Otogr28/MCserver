@@ -1,22 +1,24 @@
-// Library lectern -> Chapter 1-2 cinematic trigger.
+// Library lectern -> completes the "read the lectern" objective AND fires the Chapter 1-2 cinematic,
+// BOTH when the player CLOSES the lectern (not when they open it).
 //
-// When a player CLOSES the library lectern at 344/134/1064 (closes it, not opens it), 5 seconds later
-// the existing StoryKit story `chapter12` plays for them. Once per player (a `ch1_2_seen` scoreboard
-// tag gates replays across relogs). We do NOT own/modify the `chapter12` story itself — we only fire it.
-//
-// "Close" detection: poll each player's open menu each server tick. While reading a lectern the menu is a
-// LecternMenu; the tick it stops being a LecternMenu (and the player is still next to the lectern) is the
-// close. The 5 s delay is scheduled here, so the `chapter12` story needs no leading wait.
+// Flow per player (armed by right-clicking the lectern at 344/134/1064):
+//   waitOpen  : wait until the lectern menu is actually open (or 3 s grace if the menu can't be read)
+//   waitClose : wait until it's no longer open (= they closed it) -> emit `mission signal read_lectern`
+//               (completes the objective ON CLOSE) and schedule the cinematic 5 s later
+//   waitCine  : after the 5 s, run `story play chapter12` (once per player, gated by a `ch1_2_seen` tag)
+// A 15 s hard cap on waitClose guarantees it always resolves even if the menu state can't be polled.
+// We never own/modify the `chapter12` story — we only fire it.
 //
 // IIFE-wrapped (all KubeJS server_scripts share one global scope — see the kubejs-shared-scope rule).
 
 (function () {
     const LX = 344, LY = 134, LZ = 1064
-    const NEAR_SQ = 36          // 6 blocks
-    const DELAY_TICKS = 100     // 5 seconds
+    const SEEN_TAG = 'ch1_2_seen'
+    const OPEN_GRACE = 60       // 3 s: assume opened if the menu can't be read
+    const CLOSE_CAP = 300       // 15 s: resolve no matter what
+    const CINE_DELAY = 100      // 5 s after close
 
-    const lecternOpen = {}      // uuid -> was a lectern menu open last tick
-    const pending = {}          // uuid -> { at: <serverTick>, name: <username> }
+    const armed = {}            // uuid -> { name, openTick, phase, cineAt }
     let serverTick = 0
 
     function isLecternMenu(p) {
@@ -30,38 +32,52 @@
         }
     }
 
+    // Right-click the library lectern -> ARM (no completion yet; that happens on close).
+    BlockEvents.rightClicked(event => {
+        const b = event.block
+        if (!b || b.x !== LX || b.y !== LY || b.z !== LZ) return
+        if (String(b.id) !== 'minecraft:lectern') return
+        const p = event.player
+        let level
+        try { level = p.level } catch (e) { return }
+        if (!p || !level || level.isClientSide()) return
+        let id
+        try { id = p.uuid.toString() } catch (e) { return }
+        let seen = false
+        try { seen = p.tags.contains(SEEN_TAG) } catch (e) {}
+        if (!seen && armed[id] === undefined) {
+            armed[id] = { name: p.username, openTick: serverTick, phase: 'waitOpen' }
+        }
+    })
+
     ServerEvents.tick(event => {
         serverTick++
         const server = event.server
-
         server.players.forEach(p => {
             let id
             try { id = p.uuid.toString() } catch (e) { return }
+            const a = armed[id]
+            if (!a) return
+            const age = serverTick - a.openTick
 
-            const now = isLecternMenu(p)
-            const was = lecternOpen[id] === true
-            lecternOpen[id] = now
-
-            // Lectern menu just CLOSED.
-            if (was && !now && pending[id] === undefined) {
-                let near = false
-                try { near = p.distanceToSqr(LX + 0.5, LY + 0.5, LZ + 0.5) <= NEAR_SQ } catch (e) {}
-                let seen = false
-                try { seen = p.tags.contains('ch1_2_seen') } catch (e) {}
-                if (near && !seen) {
-                    pending[id] = { at: serverTick + DELAY_TICKS, name: p.username }
+            if (a.phase === 'waitOpen') {
+                if (isLecternMenu(p) || age >= OPEN_GRACE) {
+                    a.phase = 'waitClose'
+                }
+            } else if (a.phase === 'waitClose') {
+                if (!isLecternMenu(p) || age >= CLOSE_CAP) {
+                    // CLOSED -> complete the read objective now, and schedule the cinematic.
+                    server.runCommandSilent(`mission signal read_lectern 1 ${a.name}`)
+                    a.cineAt = serverTick + CINE_DELAY
+                    a.phase = 'waitCine'
+                }
+            } else if (a.phase === 'waitCine') {
+                if (serverTick >= a.cineAt) {
+                    server.runCommandSilent(`tag ${a.name} add ${SEEN_TAG}`)
+                    server.runCommandSilent(`story play chapter12 ${a.name}`)
+                    delete armed[id]
                 }
             }
         })
-
-        // Fire any cinematics whose 5 s delay has elapsed.
-        for (const id in pending) {
-            if (serverTick >= pending[id].at) {
-                const name = pending[id].name
-                server.runCommandSilent(`tag ${name} add ch1_2_seen`)
-                server.runCommandSilent(`story play chapter12 ${name}`)
-                delete pending[id]
-            }
-        }
     })
 })()

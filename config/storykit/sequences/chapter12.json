@@ -1,8 +1,9 @@
 {
   "id": "chapter12",
-  "endFadeOutTicks": 30,
+  "endFadeOutTicks": 80,
   "actions": [
     { "type": "letterbox", "coverage": 0.12, "duration": 20, "wait": 10 },
+    { "type": "music", "sound": "summerbuddies:chapter12_theme", "volume": 0.9, "fadeIn": 1, "loop": false, "wait": 0 },
     { "type": "camera", "scene": "chapter12", "wait": 520 },
     { "type": "letterbox", "coverage": 0.0, "duration": 30, "wait": 0 }
   ]

@@ -1,8 +1,20 @@
 {
   "epilogue_theme": {
-    "category": "music",
+    "category": "master",
     "sounds": [
       { "name": "summerbuddies:epilogue_theme", "stream": true }
+    ]
+  },
+  "chapter11_theme": {
+    "category": "master",
+    "sounds": [
+      { "name": "summerbuddies:chapter11_theme", "stream": true }
+    ]
+  },
+  "chapter12_theme": {
+    "category": "master",
+    "sounds": [
+      { "name": "summerbuddies:chapter12_theme", "stream": true }
     ]
   }
 }
