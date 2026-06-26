@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#minecraft:is_overworld",
+  "spawners": {
+    "type": "born_in_chaos_v1:lifestealer",
+    "weight": 1,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

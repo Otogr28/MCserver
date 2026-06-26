@@ -59,5 +59,13 @@
   {
     "dimension": "realmgates:v1",
     "result": "deny"
+  },
+  {
+    "dimension": "minecraft:overworld",
+    "hostile": true,
+    "when": "finalize",
+    "healthmultiply": 1.5,
+    "damagemultiply": 1.7,
+    "result": "default"
   }
 ]
