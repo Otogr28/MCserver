@@ -61,6 +61,13 @@
     "result": "deny"
   },
   {
+    "mob": ["minecraft:warden"],
+    "when": "onjoin",
+    "healthmultiply": 5.0,
+    "damagemultiply": 5.0,
+    "result": "default"
+  },
+  {
     "dimension": "minecraft:overworld",
     "hostile": true,
     "when": "onjoin",
