@@ -4,7 +4,7 @@
   },
   "placements": {},
   "schematic_projects_manager": {},
-  "operation_mode": "SCHEMATIC_PLACEMENT",
+  "operation_mode": "REBUILD",
   "render_range": {
     "mode": "ALL",
     "axis": "y",
