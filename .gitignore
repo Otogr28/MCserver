@@ -3,11 +3,14 @@ mcserver_key
 mcserver_key.pub
 CLAUDE.md
 
-# ===== Audio con copyright para cinemáticas (NO subir al repo público) =====
-# La canción del epílogo (descargada de YouTube). El sounds.json + el script + el README SÍ se versionan;
-# solo el .ogg queda local. Para que los jugadores lo escuchen, distribuilo aparte (o quitá esta línea si
-# asumís la redistribución pública).
+# ===== Audio de cinemáticas (descargado de YouTube) =====
+# Por defecto los .ogg de esta carpeta quedan LOCALES (precaución copyright). Las EXCEPCIONES `!` de abajo
+# SÍ se versionan: el usuario asumió la redistribución pública para que los jugadores escuchen ese audio
+# (sin esto no llega por git pull / instalador). Para sumar otro, agregá su `!...` aquí.
 kubejs/assets/summerbuddies/sounds/*.ogg
+!kubejs/assets/summerbuddies/sounds/beast_roar.ogg
+!kubejs/assets/summerbuddies/sounds/chapter11_theme.ogg
+!kubejs/assets/summerbuddies/sounds/chapter12_theme.ogg
 # secretos sueltos (ej. API key de DeepL para el sidecar de voicetrans)
 .secrete
 .secret

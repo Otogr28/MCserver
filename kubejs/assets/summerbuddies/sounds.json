@@ -1,4 +1,10 @@
 {
+  "beast_roar": {
+    "category": "hostile",
+    "sounds": [
+      { "name": "summerbuddies:beast_roar", "stream": false }
+    ]
+  },
   "epilogue_theme": {
     "category": "master",
     "sounds": [
