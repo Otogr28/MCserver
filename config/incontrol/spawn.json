@@ -63,7 +63,7 @@
   {
     "mob": ["minecraft:warden"],
     "when": "onjoin",
-    "healthmultiply": 5.0,
+    "healthmultiply": 10.0,
     "damagemultiply": 10.0,
     "result": "default"
   },
