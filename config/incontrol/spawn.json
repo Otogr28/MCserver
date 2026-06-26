@@ -63,9 +63,9 @@
   {
     "dimension": "minecraft:overworld",
     "hostile": true,
-    "when": "finalize",
+    "when": "onjoin",
     "healthmultiply": 1.5,
-    "damagemultiply": 1.7,
+    "damagemultiply": 2.5,
     "result": "default"
   }
 ]
