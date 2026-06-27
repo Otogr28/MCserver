@@ -1,6 +1,7 @@
 {
   "id": "primary_defeat_yeti",
   "category": "primary",
+  "autoAccept": true,
   "title": "Sacred Beast: Skor, the Yeti",
   "description": "One of the two Sacred Beasts that hold the seal. Hunt Skor down together and bring it low.",
   "lore": "A guardian whose strength has failed becomes the very door it was meant to bar. Better it falls to friends, with purpose.",

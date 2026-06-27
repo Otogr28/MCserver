@@ -1,6 +1,7 @@
 {
   "id": "primary_read_lectern",
   "category": "primary",
+  "autoAccept": true,
   "title": "The Book in the Library",
   "description": "Flugel pointed you to the library beneath the Tree of Knowledge. Find the lectern and read what the old heroes left behind.",
   "lore": "The town named that tree for the books beneath it, and the books remember what the world forgot. Read, and you will understand what Flugel could not say in one breath.",

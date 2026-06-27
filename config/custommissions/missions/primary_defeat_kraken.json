@@ -1,6 +1,7 @@
 {
   "id": "primary_defeat_kraken",
   "category": "primary",
+  "autoAccept": true,
   "title": "Sacred Beast: Nerakyss, the Kraken",
   "description": "One of the two Sacred Beasts that hold the seal. Drag Nerakyss from the deep and end it together.",
   "lore": "Holy things, great and old, and they have done no wrong. Yet the seal in them has thinned, and the hunger waits behind it. Take what must be taken.",
