@@ -1,5 +1,9 @@
 [
   {
+    "dimension": "minecraft:overworld",
+    "result": "deny"
+  },
+  {
     "biome": "realmgates:wasteland",
     "mob": ["realmgates:shade"],
     "result": "default"

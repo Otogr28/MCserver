@@ -1,0 +1,22 @@
+{
+  "id": "secondary_corrupted_crater",
+  "category": "secondary",
+  "title": "The Corrupted Crater",
+  "description": "Travel to the corrupted crater and find the chest hidden at its heart. Only the first wanderer to reach it will claim what lies inside.",
+  "lore": "I have watched that hollow breathe for longer than I care to count. The land never forgave whatever opened it. Stand there first, and the chest is yours. Come late, and you will find only the wound it left.",
+  "giver": { "npcUuid": "d48a3f45-0efd-46c6-9803-5e1256d95d33", "npcName": "the-traveler" },
+  "prerequisites": { "loreStage": 0 },
+  "objectives": [
+    { "type": "reach_location", "dimension": "minecraft:overworld", "x": -1564, "y": 106, "z": -2047,
+      "radius": 4, "waypoint": "Corrupted Crater", "waypointColor": "#7FC23E",
+      "description": "Reach the chest in the corrupted crater" }
+  ],
+  "rewards": [],
+  "onComplete": [
+    { "type": "command", "command": "scoreboard objectives add cm_crater dummy" },
+    { "type": "command", "command": "scoreboard players add crater_chest cm_crater 0" },
+    { "type": "command", "command": "execute if score crater_chest cm_crater matches 0 run give {player} coinsje:copper_coin 5" },
+    { "type": "command", "command": "execute if score crater_chest cm_crater matches 0 run title {player} actionbar {\"text\":\"You reached the crater first. Its coin is yours.\",\"color\":\"gold\"}" },
+    { "type": "command", "command": "scoreboard players set crater_chest cm_crater 1" }
+  ]
+}

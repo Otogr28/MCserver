@@ -1,45 +1,51 @@
-// Bosses'Rise — Sacred Beast "roar" attack: a periodic AoE that INSTANTLY kills every companion near
-// the boss while it is being fought. No animation; just a beast-roar sound + the wipe.
+// Bosses'Rise — Sacred Beast "roar" attack: a periodic AoE that, while the boss is being fought,
+// wipes the party's companions. No animation; just a beast-roar sound + the effect.
 //
 //   * Affects only block_factorys_bosses:yeti (Skor) and block_factorys_bosses:kraken (Nerakyss).
-//   * While a player is within HEAR_RADIUS of the boss (i.e. the encounter is live), every COOLDOWN_TICKS
-//     the boss roars: it plays summerbuddies:beast_roar to nearby players and `/kill`s every
-//     customcompanions:companion / companion_warrior within ROAR_RADIUS. /kill = genericKill, which
-//     bypasses invulnerability, so it is a GUARANTEED insta-death (what "insta" asked for) — at the cost
-//     of an attacker on the death message (a roar + sudden death conveys it; switch to /damage ... by @s
-//     if you ever want "slain by Skor" attribution, but that one respects resistances and may not 1-shot).
+//   * Cadence: ONE roar right when the battle starts (the first tick a player is within HEAR_RADIUS of the
+//     boss), then one more every COOLDOWN_TICKS (100s). Each roar plays summerbuddies:beast_roar and then,
+//     for every customcompanions companion within ROAR_RADIUS:
+//       - SPIRIT companions are NOT killed (they're immortal wisps). Instead they are "scared": we stamp
+//         entity.persistentData.CCScaredUntil = now + SCARE_TICKS, which the CustomCompanions mod reads to
+//         block the Spirit's ability (Envelop / slot casts) while the deadline holds. The owner is told
+//         "<companion> is too scared to battle against <boss>" (once, on the transition into scared).
+//       - every OTHER companion (warrior/mage/summoner) is insta-killed via Entity.kill() (genericKill,
+//         bypasses invulnerability → guaranteed). Each affected owner is told "Your companion can't stand
+//         <boss>" (once per roar, deduped per owner).
 //
-// WHY KubeJS and not a mixin: Bosses'Rise is a third-party jar (no in-house source to weave), and the
-// player installer only syncs mods/ + kubejs/ + fancymenu/. A server_script applies the kill server-side
-// AND the sound asset rides the same kubejs/ sync to every client — a mixin would need its own jar and a
-// client-side companion sound anyway. This mirrors combat_stat_buffs.js (which already buffs these bosses).
+// WHY KubeJS: Bosses'Rise is a third-party jar, and the player installer only syncs mods/ + kubejs/ +
+// fancymenu/. A server_script applies the effect server-side and the sound rides the same kubejs/ sync.
+// The only piece that lives in the mod is the "scared" gate (it has to read CCScaredUntil and deny the
+// Spirit's ability) — see CustomCompanions CompanionEntity#isScared + SpiritEnvelopC2S.
 //
-// SOUND: the actual roar .ogg is dropped at kubejs/assets/summerbuddies/sounds/beast_roar.ogg (see
-// readme there). The server does NOT need the file — `/playsound` ships the id in a direct holder and the
-// CLIENT resolves it from the kubejs resource pack — so the kill works even before the .ogg is added; only
-// the audio is missing until then.
+// SOUND: kubejs/assets/summerbuddies/sounds/beast_roar.ogg (client-side; the kill/scare work without it).
 //
-// ── KubeJS gotchas (same ones documented across the other server_scripts) ──
-//   1. All server_scripts share ONE scope, so this whole file is an IIFE — no const can leak or collide.
-//   2. Bosses are tracked from EntityEvents.spawned (the arena spawner-block summon fires it, same hook
-//      combat_stat_buffs.js relies on). A boss alive ACROSS a full server restart would not re-fire
-//      spawned and so would not roar until it reloads — acceptable for these rare admin-arena encounters.
-//   3. The clock is the local tickCounter (resets on /reload → at worst an immediate first roar after a
-//      reload). No persistent state needed.
+// ── KubeJS gotchas ──
+//   1. All server_scripts share ONE scope → this whole file is an IIFE (no const can leak/collide).
+//   2. Bosses are tracked from EntityEvents.spawned (the arena spawner summon fires it). A boss alive
+//      across a full server restart would not re-fire spawned → no roar until it reloads (rare; fine).
+//   3. The roar cooldown clock is the local tickCounter (resets on /reload). The SCARED deadline uses the
+//      server game-time (server.overworld().getGameTime()) so it matches the clock the mod compares against.
 
 (function () {
-    // boss entity ids that perform the roar
-    const BOSS_IDS = {
-        'block_factorys_bosses:yeti': true,
-        'block_factorys_bosses:kraken': true,
+    // boss entity id -> display name (for the owner messages)
+    const BOSS_NAMES = {
+        'block_factorys_bosses:yeti': 'Skor, the Yeti',
+        'block_factorys_bosses:kraken': 'Nerakyss, the Kraken',
     }
-    // every companion entity type the roar wipes
-    const COMPANION_IDS = ['customcompanions:companion', 'customcompanions:companion_warrior']
+    // companion entity types the roar reaches (warrior is its own type; everything else incl. spirit is :companion)
+    const COMPANION_SET = {
+        'customcompanions:companion': true,
+        'customcompanions:companion_warrior': true,
+    }
 
     const SOUND = 'summerbuddies:beast_roar'
-    const ROAR_RADIUS = 32        // blocks: companions this close to the boss die
+    const ROAR_RADIUS = 32        // blocks: companions this close to the boss are hit
     const HEAR_RADIUS = 64        // blocks: a player must be this close for the roar to fire (and to hear it)
-    const COOLDOWN_TICKS = 300    // 15s between roars (tunable: 200 = 10s, 100 = 5s ...)
+    const COOLDOWN_TICKS = 2000   // 100s between roars. The FIRST roar fires as soon as a player engages
+                                  // (within ~1s of being in HEAR_RADIUS) = "at battle start"; then every 100s.
+    const SCARE_TICKS = 2400      // 120s a Spirit stays scared (> the 100s roar gap, so it's kept scared
+                                  // through the fight and wears off ~120s after the last roar).
     const VOLUME = 8              // >1 widens the audible range (~volume*16 blocks)
     const PITCH = 0.7            // deep beast register
 
@@ -51,14 +57,12 @@
         return typeof m === 'function' ? obj[name]() : m
     }
 
-    // "block_factorys_bosses:yeti" from an entity, robust to property-vs-EntityType exposure.
     function typeId(entity) {
         const t = entity.type
         if (typeof t === 'string') return t
         return String(call0(EntityTypeCls.getKey(t), 'toString'))
     }
 
-    // True once the boss is dead/removed/unloaded (LivingEntity.isAlive() already folds in isRemoved()).
     function isGone(e) {
         try {
             if (typeof e.isAlive === 'function') return !e.isAlive()
@@ -68,13 +72,42 @@
         return false
     }
 
+    // "spirit" / "warrior" / "mage" / "summoner" from the companion's persisted NBT ("" if unreadable).
+    function companionClass(e) {
+        try { return String(e.nbt.getString('CompanionClass')) } catch (err) { return '' }
+    }
+
+    // owner UUID string (for tellraw), or null if the companion is unowned / the key can't be read.
+    function ownerUuid(e) {
+        try {
+            const nbt = e.nbt
+            if (nbt && nbt.hasUUID('Owner')) return String(nbt.getUUID('Owner'))
+        } catch (err) { /* fall through */ }
+        return null
+    }
+
+    // The companion's display name (custom name if set, else its type name).
+    function nameOf(e) {
+        try { return String(call0(e.name, 'getString')) } catch (err) { return 'Your spirit' }
+    }
+
+    function escapeJson(s) {
+        return String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+    }
+
+    // tellraw a single player (by uuid) if online; no-op otherwise.
+    function tell(server, uuid, text, color) {
+        if (!uuid) return
+        server.runCommandSilent(`tellraw ${uuid} {"text":"${escapeJson(text)}","color":"${color}"}`)
+    }
+
     // live bosses we are tracking, and the tick of their last roar — both keyed by uuid string.
     const tracked = {}
     const lastRoar = {}
 
     EntityEvents.spawned(event => {
         const e = event.entity
-        if (e && BOSS_IDS[typeId(e)]) tracked[String(e.uuid)] = e
+        if (e && BOSS_NAMES[typeId(e)]) tracked[String(e.uuid)] = e
     })
 
     // Run the roar for one boss. Returns true only if it actually fired (a player was in range).
@@ -85,16 +118,44 @@
         const server = level.getServer()
         if (!server) return false
 
-        const at = `execute as ${String(boss.uuid)} at @s `
+        const bossSel = `execute as ${String(boss.uuid)} at @s `
         // Gate: only attack while a player is present in the encounter (don't wipe parked companions of
         // someone who walked away). The standalone `if entity` form returns the match count.
-        const near = server.runCommandSilent(at + `if entity @a[distance=..${HEAR_RADIUS}]`)
+        const near = server.runCommandSilent(bossSel + `if entity @a[distance=..${HEAR_RADIUS}]`)
         if (!near || near <= 0) return false
 
+        // The roar itself (audio to everyone nearby).
         server.runCommandSilent(
-            at + `run playsound ${SOUND} hostile @a[distance=..${HEAR_RADIUS}] ~ ~ ~ ${VOLUME} ${PITCH}`)
-        COMPANION_IDS.forEach(cid =>
-            server.runCommandSilent(at + `run kill @e[type=${cid},distance=..${ROAR_RADIUS}]`))
+            bossSel + `run playsound ${SOUND} hostile @a[distance=..${HEAR_RADIUS}] ~ ~ ~ ${VOLUME} ${PITCH}`)
+
+        const bossName = BOSS_NAMES[typeId(boss)] || 'the beast'
+        const now = call0(call0(server, 'overworld'), 'getGameTime') // shared across dims; matches the mod's clock
+        const bx = boss.x, by = boss.y, bz = boss.z
+        const r2 = ROAR_RADIUS * ROAR_RADIUS
+
+        const killedOwners = {}   // owner-uuid -> true (dedupe one "can't stand" line per owner per roar)
+
+        const entities = level.getEntities() // snapshot; safe to kill/edit during the loop
+        for (let i = 0; i < entities.size(); i++) {
+            const e = entities.get(i)
+            if (!COMPANION_SET[typeId(e)]) continue
+            const dx = e.x - bx, dy = e.y - by, dz = e.z - bz
+            if (dx * dx + dy * dy + dz * dz > r2) continue
+
+            const owner = ownerUuid(e)
+            if (companionClass(e) === 'spirit') {
+                // Immortal wisp: don't kill — scare it (the mod blocks its ability while CCScaredUntil holds).
+                let prev = 0
+                try { prev = e.persistentData.getLong('CCScaredUntil') } catch (err) { /* default 0 */ }
+                try { e.persistentData.putLong('CCScaredUntil', now + SCARE_TICKS) } catch (err) { /* ignore */ }
+                if (prev <= now) tell(server, owner, `${nameOf(e)} is too scared to battle against ${bossName}`, 'aqua')
+            } else {
+                if (owner) killedOwners[owner] = true
+                try { e.kill() } catch (err) { try { e.setHealth(0) } catch (e2) { /* leave it */ } }
+            }
+        }
+
+        for (const owner in killedOwners) tell(server, owner, `Your companion can't stand ${bossName}`, 'red')
         return true
     }
 

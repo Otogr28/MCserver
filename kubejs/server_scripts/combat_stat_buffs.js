@@ -2,12 +2,13 @@
 //
 // Applied as stable-UUID MULTIPLY_TOTAL attribute modifiers (idempotent, reload-safe):
 //   * realmgates:shade               (the wasteland's shadow stalker)     HP x2.5, DMG x2
-//   * block_factorys_bosses:yeti     (Skor, The Yeti)        HP x20 (250->5000), DMG x12.5 (18->225)
+//   * block_factorys_bosses:yeti     (Skor, The Yeti)        HP x14 (250->3500), DMG x8.75 (18->157.5; -30% from 225)
 //   * block_factorys_bosses:kraken   (Nerakyss, The Kraken)  HP x12 (500->6000), DMG x22.5 (10->225)
 //
-// NOTE: yeti 5000 / kraken 6000 HP exceed vanilla's MAX_HEALTH cap of 1024 → they only reach those values
+// NOTE: yeti 3500 / kraken 6000 HP exceed vanilla's MAX_HEALTH cap of 1024 → they only reach those values
 // with AttributeFix installed (raises the attribute suprema). Without it, MAX_HEALTH clamps to 1024.
-// The DMG targets (both 225 = 3/4 of the warden's buffed 300 melee) are under the 2048 ATTACK_DAMAGE cap.
+// The DMG targets (kraken 225 = 3/4 of the warden's buffed 300 melee; yeti 157.5 = that minus 30%) are
+// under the 2048 ATTACK_DAMAGE cap.
 //
 // WHY this lives in KubeJS and not in each mod's own config:
 //   - The shade's stats are HARDCODED in the Realm Gates jar (ShadeEntity.createAttributes: 30 HP / 5 ATK),
@@ -33,7 +34,7 @@
     // entity id -> { hp: max-health multiplier, dmg: attack-damage multiplier }
     const BUFFS = {
         'realmgates:shade':             { hp: 2.5,  dmg: 2.0 },
-        'block_factorys_bosses:yeti':   { hp: 20.0, dmg: 12.5 },
+        'block_factorys_bosses:yeti':   { hp: 14.0, dmg: 8.75 },
         'block_factorys_bosses:kraken': { hp: 12.0, dmg: 22.5 },
     }
 

@@ -36,6 +36,12 @@
       "born_in_chaos_v1"
     ]
   },
+  "claims": {
+    "maxClaims": 3,
+    "maxSide": 200,
+    "blockExplosions": true,
+    "denyMessage": "Claimed by %owner%."
+  },
   "sandstorm": {
     "checkInterval": 600,
     "randomChance": 8,
