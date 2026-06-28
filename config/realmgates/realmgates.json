@@ -175,5 +175,17 @@
     "witherSeconds": 5,
     "witherAmplifier": 0,
     "hitDamage": 17.5
+  },
+  "shade": {
+    "maxHealth": 30.0,
+    "attackDamage": 5.0,
+    "spawnAtFullHealth": true
+  },
+  "spawnFullHealth": {
+    "enabled": true,
+    "ids": [
+      "block_factorys_bosses:yeti",
+      "block_factorys_bosses:kraken"
+    ]
   }
 }
