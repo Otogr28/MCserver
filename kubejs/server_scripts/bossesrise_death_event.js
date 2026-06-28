@@ -27,6 +27,23 @@
         return typeof t === 'string' ? t : String(t)
     }
 
+    // The two "Sacred Beasts" whose deaths drive the StoryKit cutscene -> scoreboard fake-player key.
+    // Scoreboard-backed (not in-memory) so the milestone survives a server restart BETWEEN the two
+    // kills: kill one, restart, kill the other -> still resolves to the "both perished" scene.
+    const SACRED = {
+        'block_factorys_bosses:yeti': '#yeti',
+        'block_factorys_bosses:kraken': '#kraken',
+    }
+
+    // KubeJS server wrapper (has scheduleInTicks; the vanilla MinecraftServer does not). Captured on
+    // load; we also (re)create the tracking objective every load — runCommandSilent swallows the
+    // harmless "objective already exists" message, so this is a quiet no-op once it exists.
+    let KSERVER = null
+    ServerEvents.loaded(ev => {
+        KSERVER = ev.server
+        ev.server.runCommandSilent('scoreboard objectives add sb_sacred_beasts dummy')
+    })
+
     EntityEvents.death(event => {
         const e = event.entity
         if (!e) return
@@ -59,9 +76,29 @@
             if (signal) {
                 server.runCommandSilent(`mission signal ${signal} 1 @a`)
             }
-            // Add your own here, e.g.:
-            //   server.runCommandSilent('story play sb:dragon_outro')      // StoryKit
-            //   if (killer) server.runCommandSilent(`give ${killer.username} minecraft:diamond 3`)
+
+            // ---- Sacred Beast cutscene (StoryKit) ----
+            // Mark this beast down, then count how many of the two are dead. First kill -> "one
+            // fallen, one remains"; second kill -> "both perished, bring to the altar". Played for
+            // @a (the kill counts for the whole group, like the mission signal above). The cutscene
+            // has NO camera: just the letterbox bars + the HUD auto-hide StoryKit applies while any
+            // sequence runs, the shrine-revelation sting, and two lines timed to its two db swells.
+            // `scoreboard players get` returns the score (1) when set, or 0 when never set (the silent
+            // failure), so each beast reads as 1 (down) or 0 (alive). Since we set THIS beast first,
+            // `down` is 1 or 2.
+            const beast = SACRED[typeId(e)]
+            if (beast) {
+                server.runCommandSilent(`scoreboard players set ${beast} sb_sacred_beasts 1`)
+                const y = server.runCommandSilent('scoreboard players get #yeti sb_sacred_beasts')
+                const k = server.runCommandSilent('scoreboard players get #kraken sb_sacred_beasts')
+                const down = (y === 1 ? 1 : 0) + (k === 1 ? 1 : 0)
+                const seq = down >= 2 ? 'beasts_both_slain' : 'beast_first_slain'
+                // The boss has its OWN death cinematic — wait 8s (160 ticks) so that one finishes
+                // before our StoryKit cutscene rolls (no overlap).
+                const roll = () => server.runCommandSilent(`story play ${seq} @a`)
+                if (KSERVER) KSERVER.scheduleInTicks(160, () => roll())
+                else roll()
+            }
         }
     })
 })()

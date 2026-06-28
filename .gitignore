@@ -11,6 +11,7 @@ kubejs/assets/summerbuddies/sounds/*.ogg
 !kubejs/assets/summerbuddies/sounds/beast_roar.ogg
 !kubejs/assets/summerbuddies/sounds/chapter11_theme.ogg
 !kubejs/assets/summerbuddies/sounds/chapter12_theme.ogg
+!kubejs/assets/summerbuddies/sounds/shrine_revelation.ogg
 # secretos sueltos (ej. API key de DeepL para el sidecar de voicetrans)
 .secrete
 .secret

@@ -1,0 +1,13 @@
+{
+  "id": "beast_first_slain",
+  "endFadeOutTicks": 20,
+  "actions": [
+    { "type": "letterbox", "coverage": 0.16, "duration": 18, "wait": 0 },
+    { "type": "sound", "sound": "summerbuddies:shrine_revelation", "volume": 1.0, "pitch": 1.0, "wait": 0 },
+    { "type": "wait", "duration": 30 },
+    { "type": "dialogue", "text": "One Sacred Beast has fallen.", "fadeIn": 20, "stay": 45, "fadeOut": 20, "wait": 90 },
+    { "type": "dialogue", "text": "One still carries the seal.", "fadeIn": 20, "stay": 50, "fadeOut": 25, "wait": 95 },
+    { "type": "wait", "duration": 10 },
+    { "type": "letterbox", "coverage": 0.0, "duration": 30, "wait": 0 }
+  ]
+}

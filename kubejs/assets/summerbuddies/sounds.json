@@ -22,5 +22,11 @@
     "sounds": [
       { "name": "summerbuddies:chapter12_theme", "stream": true }
     ]
+  },
+  "shrine_revelation": {
+    "category": "master",
+    "sounds": [
+      { "name": "summerbuddies:shrine_revelation", "stream": false }
+    ]
   }
 }
