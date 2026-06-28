@@ -12,6 +12,10 @@
 //       - every OTHER companion (warrior/mage/summoner) is insta-killed via Entity.kill() (genericKill,
 //         bypasses invulnerability → guaranteed). Each affected owner is told "Your companion can't stand
 //         <boss>" (once per roar, deduped per owner).
+//   * It also stamps every PLAYER engaged in the fight (within HEAR_RADIUS of the boss) with
+//     entity.persistentData.CCDuelistBlockedUntil = now + DUELIST_BLOCK_TICKS. CustomCompanions reads that tag to
+//     SUPPRESS the legendary "Hitless Duelist" picto for the duration (the 1-heart glass-cannon owner build goes
+//     inert vs the Sacred Beasts) — see OwnerPictoEffects.tickHitlessDuelist / DUELIST_BLOCKED_TAG.
 //
 // WHY KubeJS: Bosses'Rise is a third-party jar, and the player installer only syncs mods/ + kubejs/ +
 // fancymenu/. A server_script applies the effect server-side and the sound rides the same kubejs/ sync.
@@ -46,6 +50,9 @@
                                   // (within ~1s of being in HEAR_RADIUS) = "at battle start"; then every 100s.
     const SCARE_TICKS = 2400      // 120s a Spirit stays scared (> the 100s roar gap, so it's kept scared
                                   // through the fight and wears off ~120s after the last roar).
+    const DUELIST_BLOCK_TICKS = 2400 // 120s the Hitless Duelist picto stays suppressed for an engaged player. Same
+                                  // logic as SCARE_TICKS (> the 100s roar gap), so it holds through the fight and
+                                  // lapses ~120s after the last roar / once the player leaves or wins.
     const VOLUME = 8              // >1 widens the audible range (~volume*16 blocks)
     const PITCH = 0.7            // deep beast register
 
@@ -132,6 +139,18 @@
         const now = call0(call0(server, 'overworld'), 'getGameTime') // shared across dims; matches the mod's clock
         const bx = boss.x, by = boss.y, bz = boss.z
         const r2 = ROAR_RADIUS * ROAR_RADIUS
+
+        // Sacred Beast gate for the Hitless Duelist picto: stamp every player engaged in this fight (within
+        // HEAR_RADIUS of the boss) with a future-game-time deadline. CustomCompanions reads this Forge persistent
+        // tag (OwnerPictoEffects.tickHitlessDuelist / DUELIST_BLOCKED_TAG) and suppresses the picto while it holds —
+        // the player twin of the CCScaredUntil gate below, so the duelist build "can't be used" vs yeti/kraken.
+        const hearSq = HEAR_RADIUS * HEAR_RADIUS
+        const players = level.players()
+        for (let i = 0; i < players.size(); i++) {
+            const p = players.get(i)
+            if (p.distanceToSqr(boss) > hearSq) continue
+            try { p.persistentData.putLong('CCDuelistBlockedUntil', now + DUELIST_BLOCK_TICKS) } catch (err) { /* ignore */ }
+        }
 
         const killedOwners = {}   // owner-uuid -> true (dedupe one "can't stand" line per owner per roar)
 

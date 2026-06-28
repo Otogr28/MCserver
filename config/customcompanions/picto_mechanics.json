@@ -10,10 +10,15 @@
     "resistanceAmplifier": 1
   },
   "hitlessDuelist": {
-    "ownerMaxHealth": 2.0,
+    "ownerMaxHealth": 1.0,        // half a heart — the game's minimum max-health (the MAX_HEALTH attribute clamps at 1.0)
     "weaponDamageBonus": 0.99,
-    "strengthAmplifier": 1,
-    "strengthRefreshTicks": 40
+    "strengthAmplifier": 255,     // Strength amplifier at the byte maximum (the strongest "fury" the game can store)
+    "strengthRefreshTicks": 40,
+    // while true the picto goes inert during the Yeti/Kraken (Sacred Beast) boss fights. This is the mod-side
+    // switch only; the block DURATION (how long the picto stays disabled after each roar) lives in the roar script
+    // kubejs/server_scripts/bossesrise_beast_roar.js (DUELIST_BLOCK_TICKS, default 2400 ticks = 120s), mirroring how
+    // scared.json governs the mod's reaction while bossesrise_beast_roar.js owns the scare duration.
+    "disabledByBeastRoar": true
   },
   "minionBuffs": {
     "championsHealthPct": 30.0,

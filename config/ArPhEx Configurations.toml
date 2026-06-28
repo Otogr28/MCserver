@@ -17,7 +17,7 @@
 	#Maximum colony tamed ants per player (furthest ants despawn, 20 default)
 	"Max tamed ants per player" = 20.0
 	#Option to limit all natural ArPhEx spawning to the Crawling dimension. Note that you won't be able to craft a crawling compass, so a mod like traveller's compass is recommended
-	"Crawling-restrict all mobs" = false
+	"Crawling-restrict all mobs" = true
 	#Specifically disables the Tormentor boss entirely. It will be unable to be spawned in any form if this is enabled.
 	"Disable Tormentor" = false
 	#Disabled by default. If enabled, most mobs will become able to spawn in any dimension, including dimensions from other mods - may cause issues with some mod dimensions. Note, however, that the mobs will have a low spawn weight in other dimensions.

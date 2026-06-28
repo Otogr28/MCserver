@@ -163,14 +163,16 @@
   "wastelandSpiders": {
     "enabled": true,
     "spiderIds": [
-      "arphex:spider_lurker",
-      "arphex:long_legs"
+      "arphex:spider_ambusher",
+      "arphex:spider_lunger"
     ],
-    "intervalSeconds": 15,
-    "maxNearby": 3,
+    "intervalSeconds": 8,
+    "maxNearby": 10,
     "checkRadius": 48,
-    "spawnRadiusMin": 24,
+    "spawnRadiusMin": 16,
     "spawnRadiusMax": 44,
-    "attempts": 8
+    "attempts": 8,
+    "witherSeconds": 5,
+    "witherAmplifier": 0
   }
 }
