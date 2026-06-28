@@ -126,7 +126,7 @@
       "keys": ""
     },
     "openGuiMainMenu": {
-      "keys": "M"
+      "keys": "KP_ADD"
     },
     "openGuiMaterialList": {
       "keys": "M,L"
