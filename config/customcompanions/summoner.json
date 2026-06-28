@@ -29,10 +29,13 @@
   },
 
   "drops": {
-    // What a summoned minion drops when it dies. Both off by default: a conjured minion isn't a real
-    // kill, so dropping XP/loot would let you farm it by re-summoning. Set true to re-enable.
-    "experience": false,        // drop XP orbs when a summon dies?
-    "items": false              // drop loot items when a summon dies?
+    // What killing a summoned minion yields. All off by default: a conjured minion isn't a real kill, and the
+    // army respawns forever, so any of these would be a free re-summon farm. Set true to re-enable.
+    "experience": false,        // drop vanilla XP orbs when a summon dies?
+    "items": false,             // drop loot items when a summon dies?
+    "companionXp": false        // grant the killer companion (or the owner's nearby companions / the mage via
+                                //   its assist) LEVELING XP for killing a summon? Off = no companion (incl. the
+                                //   mage) can level up off the summoner's disposable army. (distinct from "experience")
   },
 
   "summonAi": {
