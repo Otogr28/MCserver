@@ -173,6 +173,7 @@
     "spawnRadiusMax": 44,
     "attempts": 8,
     "witherSeconds": 5,
-    "witherAmplifier": 0
+    "witherAmplifier": 0,
+    "hitDamage": 17.5
   }
 }
