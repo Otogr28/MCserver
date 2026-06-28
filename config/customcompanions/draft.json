@@ -3,7 +3,17 @@
   // spending it opens a "pick 1 of N" chooser drawn from that class's ability nodes, gated by level bands so
   // strong nodes can't appear early. All live-tunable (re-read on /reload).
   "startingUnlocks": 2,     // tokens a freshly created companion starts with (draft its opening kit at level 1)
-  "unlockEveryLevels": 5,   // grant one unlock token every N levels (0 = never)
+  "unlockEveryLevels": 5,   // global fallback: grant one unlock token every N levels (0 = never)
+  // Per-class cadence (0 = use unlockEveryLevels above). Bigger trees draft faster so they fill their kit before
+  // the level-50 cap: the MAGE has 25 glyphs (warrior 16, spirit 9), so on the global 5 it could never unlock half
+  // — it drafts every level. The back-pay reconciles existing companions to whatever you set here the next time
+  // they load / open the panel / level up (idempotent, never double-grants). Live-tunable on /reload.
+  "unlockEveryLevelsByClass": {
+    "warrior": 3,
+    "mage": 1,
+    "summoner": 0,
+    "spirit": 0
+  },
   "choicesPerDraft": 3,     // how many nodes each draft offers — you pick one
   "rerollEnabled": false,   // reserved: allow re-rolling the current offer (not wired yet)
   "showRequiredLevelOnCards": false,  // draw "Unlocks at level N" on each draft card — redundant (the offer is

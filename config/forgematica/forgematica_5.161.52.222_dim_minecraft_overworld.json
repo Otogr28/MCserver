@@ -5,33 +5,40 @@
   "placements": {
     "placements": [
       {
-        "schematic": "/home/oto/.local/share/ModrinthApp/profiles/Forge 1.20.1/schematics/Vermilion Pagoda - Map/WORLD \u0026 SCHEMATIC/Vermilion Manor.schem",
-        "name": "Vermilion Manor (Converted Structure)",
+        "schematic": "/home/oto/.local/share/ModrinthApp/profiles/Forge 1.20.1/schematics/Velmora Manor - Map/Velmora Manor 1.21.1.schem",
+        "name": "Velmora Manor 1.21.1 (Converted Structure)",
         "origin": [
-          986,
-          116,
-          1506
+          926,
+          123,
+          1517
         ],
         "rotation": "NONE",
         "mirror": "NONE",
         "ignore_entities": false,
-        "enabled": false,
+        "enabled": true,
         "enable_render": true,
         "render_enclosing_box": false,
-        "locked": false,
+        "locked": true,
         "locked_coords": 0,
         "bb_color": 16757504,
         "verifier_type": "all",
+        "material_list": {
+          "type": "all",
+          "sort_criteria": "COUNT_TOTAL",
+          "sort_reverse": false,
+          "hide_available": false,
+          "multiplier": 1
+        },
         "placements": [
           {
-            "name": "Vermilion Manor (Converted Structure)",
+            "name": "Velmora Manor 1.21.1 (Converted Structure)",
             "placement": {
               "pos": [
                 0,
                 0,
                 0
               ],
-              "name": "Vermilion Manor (Converted Structure)",
+              "name": "Velmora Manor 1.21.1 (Converted Structure)",
               "rotation": "NONE",
               "mirror": "NONE",
               "locked_coords": 0,
@@ -51,7 +58,7 @@
   "render_range": {
     "mode": "ALL",
     "axis": "y",
-    "layer_single": 0,
+    "layer_single": 116,
     "layer_above": 0,
     "layer_below": 0,
     "layer_range_min": 0,
@@ -65,14 +72,14 @@
     "boxes": [
       {
         "pos1": [
-          985,
+          981,
           115,
-          1491
+          1554
         ],
         "pos2": [
-          985,
+          981,
           115,
-          1491
+          1554
         ],
         "name": "Unnamed"
       }

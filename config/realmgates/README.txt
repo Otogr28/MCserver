@@ -51,17 +51,21 @@ The "wildcard" block of realmgates.json tunes it; /realmgates reload applies it 
   excludeNamespaces  item namespaces removed from the prize pool (default ["born_in_chaos_v1"]); minecraft:air
                      is always excluded. Add more ids here to keep other mods' items out of the pool.
 
-Player land claims (/claim): any player can claim land that only they (and ops) may build in -- the
-player-facing twin of the op /realmgates protect zones. /claim add <from> <to> [name] (full height,
-current dimension) | list | here | remove <name>. The "claims" block of realmgates.json tunes it;
-/realmgates reload applies it live (no recompile):
+Player land claims (/claim): any player can claim land that only they (plus anyone they trust, and ops)
+may build in -- the player-facing twin of the op /realmgates protect zones. /claim add <from> <to> [name]
+(full height, current dimension) | list | here | remove <name>. You can let teammates or housemates build
+in your claim too: /claim trust <claim> <player> | untrust <claim> <player> | trusted <claim>. The trusted
+player need not be online (resolved via online -> profile cache -> offline UUID, so case matters for a name
+never seen before). The "claims" block of realmgates.json tunes it; /realmgates reload applies it live (no
+recompile):
   maxClaims        max claims one player may own at once (default 3)
   maxSide          max side length in blocks on either horizontal axis -- a footprint up to maxSide x maxSide
                    (default 200). Claims may not overlap each other or an op protected zone.
   blockExplosions  true = explosions (creeper/TNT) can't destroy claimed blocks (default true)
   denyMessage      action-bar shown to someone who can't build here; %owner% -> the owner's name
-                   (default "Claimed by %owner%."). Only the owner + ops can break/place inside a claim;
-                   mob spawning and non-player machinery (pistons/dispensers/farms) are left alone.
+                   (default "Claimed by %owner%."). Only the owner + trusted players + ops can break/place
+                   inside a claim; mob spawning and non-player machinery (pistons/dispensers/farms) are left alone.
+  maxTrusted       max trusted players the owner may add to a single claim (default 10)
 
 Custom portals: add a "portal" block to a dimension's JSON to let players light a gated
 portal INTO it, e.g.:

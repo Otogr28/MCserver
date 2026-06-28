@@ -40,7 +40,8 @@
     "maxClaims": 3,
     "maxSide": 200,
     "blockExplosions": true,
-    "denyMessage": "Claimed by %owner%."
+    "denyMessage": "Claimed by %owner%.",
+    "maxTrusted": 10
   },
   "sandstorm": {
     "checkInterval": 600,
@@ -158,5 +159,18 @@
     "defaultFogBand": 48,
     "pushOutBlocks": 4.0,
     "backstopMargin": 24.0
+  },
+  "wastelandSpiders": {
+    "enabled": true,
+    "spiderIds": [
+      "arphex:spider_lurker",
+      "arphex:long_legs"
+    ],
+    "intervalSeconds": 15,
+    "maxNearby": 3,
+    "checkRadius": 48,
+    "spawnRadiusMin": 24,
+    "spawnRadiusMax": 44,
+    "attempts": 8
   }
 }
