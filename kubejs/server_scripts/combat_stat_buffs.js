@@ -59,7 +59,11 @@
     function typeId(entity) {
         const t = entity.type
         if (typeof t === 'string') return t
-        return String(call0(EntityTypeCls.getKey(t), 'toString'))
+        // `entity.type` is normally the registry-id string; some mods (e.g. Creeper Overhaul) expose a
+        // public `type` field that shadows it in Rhino → getKey() on a non-EntityType threw a
+        // ResourceLocationException on EVERY spawn (this spawned handler runs typeId on every entity).
+        // Resolve via the canonical getType() instead, and treat anything unresolvable as '' (matches nothing).
+        try { return String(call0(EntityTypeCls.getKey(call0(entity, 'getType')), 'toString')) } catch (err) { return '' }
     }
 
     // Resolve a vanilla Attribute object from its id (avoids relying on a getAttribute(String) wrapper).
