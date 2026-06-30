@@ -29,7 +29,9 @@
 //   2. Bosses are tracked from EntityEvents.spawned (the arena spawner summon fires it). A boss alive
 //      across a full server restart would not re-fire spawned → no roar until it reloads (rare; fine).
 //   3. The roar cooldown clock is the local tickCounter (resets on /reload). The SCARED deadline uses the
-//      server game-time (server.overworld().getGameTime()) so it matches the clock the mod compares against.
+//      server game-time (level.getGameTime(), shared across dims) so it matches the clock the mod compares
+//      against. (Earlier this read server.overworld().getGameTime(), but level.getServer() is the KubeJS-bound
+//      server with no overworld() → it threw every tick: sound looped and companions were never reached.)
 
 (function () {
     // boss entity id -> display name (for the owner messages)
@@ -135,46 +137,59 @@
         server.runCommandSilent(
             bossSel + `run playsound ${SOUND} hostile @a[distance=..${HEAR_RADIUS}] ~ ~ ~ ${VOLUME} ${PITCH}`)
 
-        const bossName = BOSS_NAMES[typeId(boss)] || 'the beast'
-        const now = call0(call0(server, 'overworld'), 'getGameTime') // shared across dims; matches the mod's clock
-        const bx = boss.x, by = boss.y, bz = boss.z
-        const r2 = ROAR_RADIUS * ROAR_RADIUS
+        // Past the sound, every step is guarded: if anything below throws, we STILL fall through to
+        // `return true` so the caller records the cooldown (`lastRoar[key] = tickCounter`). Without this
+        // guard a single throw after the sound skips the cooldown, so the roar re-fires — replaying the
+        // sound — EVERY tick: the "roar that never stops and never kills anything" bug.
+        try {
+            const bossName = BOSS_NAMES[typeId(boss)] || 'the beast'
+            // Server game-time, read off the boss's OWN level. Every dimension shares the overworld's game
+            // clock (a derived level just delegates getGameTime), so this equals what CustomCompanions
+            // compares CCScaredUntil / CCDuelistBlockedUntil against. Do NOT use `server.overworld()` here:
+            // `level.getServer()` is the KubeJS-bound server, which has no `overworld()`, so that call threw
+            // on every roar (sound replayed, the companion loop below was never reached). That WAS the bug.
+            const now = level.getGameTime()
+            const bx = boss.x, by = boss.y, bz = boss.z
+            const r2 = ROAR_RADIUS * ROAR_RADIUS
 
-        // Sacred Beast gate for the Hitless Duelist picto: stamp every player engaged in this fight (within
-        // HEAR_RADIUS of the boss) with a future-game-time deadline. CustomCompanions reads this Forge persistent
-        // tag (OwnerPictoEffects.tickHitlessDuelist / DUELIST_BLOCKED_TAG) and suppresses the picto while it holds —
-        // the player twin of the CCScaredUntil gate below, so the duelist build "can't be used" vs yeti/kraken.
-        const hearSq = HEAR_RADIUS * HEAR_RADIUS
-        const players = level.players()
-        for (let i = 0; i < players.size(); i++) {
-            const p = players.get(i)
-            if (p.distanceToSqr(boss) > hearSq) continue
-            try { p.persistentData.putLong('CCDuelistBlockedUntil', now + DUELIST_BLOCK_TICKS) } catch (err) { /* ignore */ }
-        }
-
-        const killedOwners = {}   // owner-uuid -> true (dedupe one "can't stand" line per owner per roar)
-
-        const entities = level.getEntities() // snapshot; safe to kill/edit during the loop
-        for (let i = 0; i < entities.size(); i++) {
-            const e = entities.get(i)
-            if (!COMPANION_SET[typeId(e)]) continue
-            const dx = e.x - bx, dy = e.y - by, dz = e.z - bz
-            if (dx * dx + dy * dy + dz * dz > r2) continue
-
-            const owner = ownerUuid(e)
-            if (companionClass(e) === 'spirit') {
-                // Immortal wisp: don't kill — scare it (the mod blocks its ability while CCScaredUntil holds).
-                let prev = 0
-                try { prev = e.persistentData.getLong('CCScaredUntil') } catch (err) { /* default 0 */ }
-                try { e.persistentData.putLong('CCScaredUntil', now + SCARE_TICKS) } catch (err) { /* ignore */ }
-                if (prev <= now) tell(server, owner, `${nameOf(e)} is too scared to battle against ${bossName}`, 'aqua')
-            } else {
-                if (owner) killedOwners[owner] = true
-                try { e.kill() } catch (err) { try { e.setHealth(0) } catch (e2) { /* leave it */ } }
+            // Sacred Beast gate for the Hitless Duelist picto: stamp every player engaged in this fight (within
+            // HEAR_RADIUS of the boss) with a future-game-time deadline. CustomCompanions reads this Forge persistent
+            // tag (OwnerPictoEffects.tickHitlessDuelist / DUELIST_BLOCKED_TAG) and suppresses the picto while it holds —
+            // the player twin of the CCScaredUntil gate below, so the duelist build "can't be used" vs yeti/kraken.
+            const hearSq = HEAR_RADIUS * HEAR_RADIUS
+            const players = level.players()
+            for (let i = 0; i < players.size(); i++) {
+                const p = players.get(i)
+                if (p.distanceToSqr(boss) > hearSq) continue
+                try { p.persistentData.putLong('CCDuelistBlockedUntil', now + DUELIST_BLOCK_TICKS) } catch (err) { /* ignore */ }
             }
-        }
 
-        for (const owner in killedOwners) tell(server, owner, `Your companion can't stand ${bossName}`, 'red')
+            const killedOwners = {}   // owner-uuid -> true (dedupe one "can't stand" line per owner per roar)
+
+            const entities = level.getEntities() // snapshot; safe to kill/edit during the loop
+            for (let i = 0; i < entities.size(); i++) {
+                const e = entities.get(i)
+                if (!COMPANION_SET[typeId(e)]) continue
+                const dx = e.x - bx, dy = e.y - by, dz = e.z - bz
+                if (dx * dx + dy * dy + dz * dz > r2) continue
+
+                const owner = ownerUuid(e)
+                if (companionClass(e) === 'spirit') {
+                    // Immortal wisp: don't kill — scare it (the mod blocks its ability while CCScaredUntil holds).
+                    let prev = 0
+                    try { prev = e.persistentData.getLong('CCScaredUntil') } catch (err) { /* default 0 */ }
+                    try { e.persistentData.putLong('CCScaredUntil', now + SCARE_TICKS) } catch (err) { /* ignore */ }
+                    if (prev <= now) tell(server, owner, `${nameOf(e)} is too scared to battle against ${bossName}`, 'aqua')
+                } else {
+                    if (owner) killedOwners[owner] = true
+                    try { e.kill() } catch (err) { try { e.setHealth(0) } catch (e2) { /* leave it */ } }
+                }
+            }
+
+            for (const owner in killedOwners) tell(server, owner, `Your companion can't stand ${bossName}`, 'red')
+        } catch (err) {
+            console.warn('[bossesrise] beast roar effect failed (sound still played): ' + err)
+        }
         return true
     }
 
