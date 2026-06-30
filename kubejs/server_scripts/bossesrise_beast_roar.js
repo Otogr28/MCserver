@@ -184,17 +184,14 @@
     let tickCounter = 0
     ServerEvents.tick(event => {
         if (++tickCounter % 20 !== 0) return   // ~once a second
-        const clearEffects = (tickCounter % CLEAR_EFFECTS_TICKS === 0) // every 5s
         for (const key in tracked) {
             const boss = tracked[key]
             if (isGone(boss)) { delete tracked[key]; delete lastRoar[key]; continue }
             // Every 5s: wipe ALL potion effects off the boss so players can't hold it down with debuffs.
-            if (clearEffects) {
-                try {
-                    const lvl = boss.level
-                    const srv = lvl && !lvl.isClientSide() ? lvl.getServer() : null
-                    if (srv) srv.runCommandSilent(`execute as ${key} run effect clear @s`)
-                } catch (err) { /* ignore */ }
+            // NOTE: no new block-scoped declarations inside this loop — KubeJS/Rhino throws
+            // "redeclaration of var boss" if the for-in body holds more than the original consts.
+            if (tickCounter % CLEAR_EFFECTS_TICKS === 0) {
+                try { boss.level.getServer().runCommandSilent(`execute as ${key} run effect clear @s`) } catch (err) { /* ignore */ }
             }
             const last = lastRoar[key]
             if (last != null && (tickCounter - last) < COOLDOWN_TICKS) continue
