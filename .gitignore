@@ -104,3 +104,23 @@ versions/
 #   mods/  config/  defaultconfigs/  kubejs/  scripts/
 #   server.properties  *.toml  resourcepacks/  datapacks de modpack
 # =====
+Trial.md
+
+# diario de admin (infra/deploy/IPs/spoilers) — NUNCA público
+changes.md
+
+# vault interno de lore/NPCs (secretos, spoilers) — NUNCA público
+npcs/
+Story/
+# backups de tooling interno
+*.py.bak.*
+
+# ===== POLITICA DE TRACKING (solo Minecraft + lo que el VPS ocupe via canal privado) =====
+# Notas personales / desarrollo: NUNCA al repo publico.
+pictos-guia/
+pictos/
+media/
+# instalador VIEJO (reemplazado por launcher/)
+install.ps1
+sync.ps1
+sync.bat

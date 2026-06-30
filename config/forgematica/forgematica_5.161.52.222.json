@@ -3,5 +3,5 @@
     "schematic_load": "/home/oto/.local/share/ModrinthApp/profiles/Forge 1.20.1/schematics/Velmora Manor - Map"
   },
   "create_placement_on_load": true,
-  "config_gui_tab": "RENDER_LAYERS"
+  "config_gui_tab": "HOTKEYS"
 }

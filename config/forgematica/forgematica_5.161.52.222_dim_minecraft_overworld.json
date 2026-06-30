@@ -56,9 +56,9 @@
   "schematic_projects_manager": {},
   "operation_mode": "SCHEMATIC_PLACEMENT",
   "render_range": {
-    "mode": "ALL",
+    "mode": "SINGLE_LAYER",
     "axis": "y",
-    "layer_single": 116,
+    "layer_single": 124,
     "layer_above": 0,
     "layer_below": 0,
     "layer_range_min": 0,

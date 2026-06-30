@@ -22,7 +22,7 @@
     "debugLogging": false,
     "easyPlaceFirst": true,
     "easyPlaceHoldEnabled": true,
-    "easyPlaceMode": false,
+    "easyPlaceMode": true,
     "easyPlaceSinglePlayerHandling": true,
     "easyPlaceProtocolVersion": "auto",
     "easyPlaceVanillaReach": false,
@@ -84,7 +84,7 @@
       "keys": "BUTTON_2"
     },
     "easyPlaceToggle": {
-      "keys": ""
+      "keys": "MINUS"
     },
     "executeOperation": {
       "keys": "KP_ENTER"
@@ -102,10 +102,10 @@
       "keys": "M,PAGE_DOWN"
     },
     "layerNext": {
-      "keys": "PAGE_UP"
+      "keys": "UP"
     },
     "layerPrevious": {
-      "keys": "PAGE_DOWN"
+      "keys": "DOWN"
     },
     "layerSetHere": {
       "keys": ""

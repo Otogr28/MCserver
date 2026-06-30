@@ -28,6 +28,15 @@
       "block_factorys_bosses:ice_gauntlet"
     ]
   },
+  "arena": {
+    "bossId": "block_factorys_bosses:yeti",
+    "spawnDistanceMin": 12.0,
+    "spawnDistanceMax": 16.0,
+    "spawnAttempts": 12,
+    "leaveGraceTicks": 40,
+    "emptyGraceTicks": 200,
+    "victoryGraceTicks": 100
+  },
   "wildcard": {
     "winChance": 0.20,
     "rewardCount": 1,
@@ -164,7 +173,9 @@
     "enabled": true,
     "spiderIds": [
       "arphex:spider_ambusher",
-      "arphex:spider_lunger"
+      "arphex:spider_lunger",
+      "arphex:centipede_evictor",
+      "arphex:centipede_stalker"
     ],
     "intervalSeconds": 8,
     "maxNearby": 10,
