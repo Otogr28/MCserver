@@ -1,0 +1,6 @@
+{
+  "dimension": "minecraft:the_nether",
+  "tier": 99,
+  "entryMessage": "The way to the Nether is sealed.",
+  "requiresToEnter": { "type": "permission_level", "min": 2 }
+}

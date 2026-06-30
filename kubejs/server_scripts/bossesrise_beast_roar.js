@@ -16,6 +16,8 @@
 //     entity.persistentData.CCDuelistBlockedUntil = now + DUELIST_BLOCK_TICKS. CustomCompanions reads that tag to
 //     SUPPRESS the legendary "Hitless Duelist" picto for the duration (the 1-heart glass-cannon owner build goes
 //     inert vs the Sacred Beasts) — see OwnerPictoEffects.tickHitlessDuelist / DUELIST_BLOCKED_TAG.
+//   * Independently of the roar cadence, every 5s (CLEAR_EFFECTS_TICKS) it runs `effect clear` on each
+//     tracked boss, so Skor/Nerakyss shrug off any potion debuffs players stack on them.
 //
 // WHY KubeJS: Bosses'Rise is a third-party jar, and the player installer only syncs mods/ + kubejs/ +
 // fancymenu/. A server_script applies the effect server-side and the sound rides the same kubejs/ sync.
@@ -55,6 +57,7 @@
                                   // lapses ~120s after the last roar / once the player leaves or wins.
     const VOLUME = 8              // >1 widens the audible range (~volume*16 blocks)
     const PITCH = 0.7            // deep beast register
+    const CLEAR_EFFECTS_TICKS = 100 // 5s: strip ALL potion effects off each tracked boss (can't be debuffed)
 
     const EntityTypeCls = Java.loadClass('net.minecraft.world.entity.EntityType')
 
@@ -181,9 +184,18 @@
     let tickCounter = 0
     ServerEvents.tick(event => {
         if (++tickCounter % 20 !== 0) return   // ~once a second
+        const clearEffects = (tickCounter % CLEAR_EFFECTS_TICKS === 0) // every 5s
         for (const key in tracked) {
             const boss = tracked[key]
             if (isGone(boss)) { delete tracked[key]; delete lastRoar[key]; continue }
+            // Every 5s: wipe ALL potion effects off the boss so players can't hold it down with debuffs.
+            if (clearEffects) {
+                try {
+                    const lvl = boss.level
+                    const srv = lvl && !lvl.isClientSide() ? lvl.getServer() : null
+                    if (srv) srv.runCommandSilent(`execute as ${key} run effect clear @s`)
+                } catch (err) { /* ignore */ }
+            }
             const last = lastRoar[key]
             if (last != null && (tickCounter - last) < COOLDOWN_TICKS) continue
             if (roar(boss)) lastRoar[key] = tickCounter   // consume cooldown only when it really roared

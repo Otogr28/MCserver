@@ -18,8 +18,13 @@
     // switch only; the block DURATION (how long the picto stays disabled after each roar) lives in the roar script
     // kubejs/server_scripts/bossesrise_beast_roar.js (DUELIST_BLOCK_TICKS, default 2400 ticks = 120s), mirroring how
     // scared.json governs the mod's reaction while bossesrise_beast_roar.js owns the scare duration.
-    "disabledByBeastRoar": true
-  },
+    "disabledByBeastRoar": true,
+    // when true the picto is literally "hitless": ANY registered damage tick to the owner kills them instantly
+    // (the kill bypasses armor/absorption/resistance AND the Last Grace revive — one hit, you die). The 1-heart pin
+    // above still applies underneath. A fully blocked/negated hit (0 damage) does NOT count. Suppressed alongside the
+    // rest of the picto during a Sacred Beast roar (see disabledByBeastRoar). Set false to fall back to the old
+    // 1-heart-glass-cannon behaviour with no auto-kill.
+    "instantKillOnDamage": true
   "minionBuffs": {
     "championsHealthPct": 30.0,
     "championsDamagePct": 25.0,
