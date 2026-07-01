@@ -8,6 +8,13 @@
   "spiritEnvelopOverlay": true,   // show the root-tendril frame around the screen while your Spirit envelops you
                                   //   (the X ability). Set false to keep the screen clear when you trigger it.
 
+  // The Spirit has NO model — its wisp body is drawn purely with particles every tick, on YOUR client. Dust
+  // particles are cheap in vanilla but EXPENSIVE under shaders, so a Spirit can cost FPS (only Spirit owners /
+  // people near an enveloped Spirit; the server is unaffected). These scale the particle counts; reopen/relog or
+  // /reload to apply. 1.0 = default look, 0.0 = no particles. Lower them if the Spirit tanks your FPS.
+  "spiritParticleDensity": 1.0,        // idle free-floating wisp (light: ~2 particles/tick)
+  "spiritEnvelopParticleDensity": 1.0, // Envelop aura around you (the heavy one: dense ring every tick). Try 0.3 or 0.
+
   "luminaLabelSource": "picto",   // which name a learned lumina shows (Luminas list + "Lumina learned" chat):
                                   //   "picto"   = the picto's flavour name, so picto and lumina read the same
                                   //               (e.g. Swift / Swift) — default
