@@ -18,14 +18,24 @@
   "rerollEnabled": false,   // reserved: allow re-rolling the current offer (not wired yet)
   "showRequiredLevelOnCards": false,  // draw "Unlocks at level N" on each draft card — redundant (the offer is
                                       // already band-gated), so off by default; set true to bring the line back
-  // Cumulative level bands: each band that has opened (level >= opensAtLevel) raises the pool ceiling. The
-  // offer may include any node whose requiredLevel <= the current ceiling — so the pool widens as you level
-  // ("1-10", then "1-20", then "1-30").
+  // Cumulative level bands (used by classes NOT on the smooth ceiling below): each band that has opened
+  // (level >= opensAtLevel) raises the pool ceiling. The offer may include any node whose requiredLevel <= the
+  // current ceiling — so the pool widens in steps as you level ("1-10", then "1-20", then "1-30").
   "bands": [
     { "opensAtLevel": 1,  "poolCeiling": 10 },
     { "opensAtLevel": 15, "poolCeiling": 20 },
     { "opensAtLevel": 25, "poolCeiling": 30 }
   ],
+  // Per-class ceiling MODE. true = "smooth" per-level ceiling: eligibility is requiredLevel <= the companion's
+  // own level (a fresh node opens every level), ignoring the coarse bands above. false = use the bands.
+  // The MAGE is smooth because it drafts every level (cadence 1) and would otherwise outrun the 3 band jumps and
+  // strand tokens it can't spend (the "N available but the draft won't open" case). Slower classes keep bands.
+  "smoothCeilingByClass": {
+    "warrior": false,
+    "mage": true,
+    "summoner": false,
+    "spirit": false
+  },
   // Rarity -> offer weight (higher = appears more often). Rarer nodes are deliberately scarcer in the draft.
   "rarityWeights": {
     "common": 100,

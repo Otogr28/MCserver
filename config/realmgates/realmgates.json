@@ -35,7 +35,26 @@
     "spawnAttempts": 12,
     "leaveGraceTicks": 40,
     "emptyGraceTicks": 200,
-    "victoryGraceTicks": 100
+    "victoryGraceTicks": 100,
+    "sealLoadout": true,
+    "sealCompanions": true,
+    "spawnBossActive": true
+  },
+  "trial": {
+    "enabled": false,
+    "waveMobs": ["minecraft:zombie", "minecraft:skeleton", "minecraft:spider"],
+    "wavesPerTier": 3,
+    "baseMobsPerWave": 4,
+    "mobGrowthPerWave": 2,
+    "tierBosses": ["block_factorys_bosses:yeti"],
+    "pickTimeoutTicks": 300,
+    "upgrades": [
+      { "id": "vigor", "name": "Vigor", "description": "+2 hearts of max health", "attribute": "minecraft:generic.max_health", "amount": 4.0 },
+      { "id": "might", "name": "Might", "description": "+2 attack damage", "attribute": "minecraft:generic.attack_damage", "amount": 2.0 },
+      { "id": "swiftness", "name": "Swiftness", "description": "faster movement", "attribute": "minecraft:generic.movement_speed", "amount": 0.02 },
+      { "id": "guard", "name": "Guard", "description": "+4 armor", "attribute": "minecraft:generic.armor", "amount": 4.0 },
+      { "id": "ferocity", "name": "Ferocity", "description": "faster attacks", "attribute": "minecraft:generic.attack_speed", "amount": 0.4 }
+    ]
   },
   "wildcard": {
     "winChance": 0.20,

@@ -12,8 +12,8 @@
       "description": "Defeat Skor, the Yeti (counts for the whole group)" }
   ],
   "rewards": [
-    { "type": "item", "item": "minecraft:golden_apple", "count": 3 },
-    { "type": "xp", "amount": 200 },
-    { "type": "item", "item": "coinsje:copper_coin", "count": 8 }
+    { "type": "item", "item": "minecraft:enchanted_golden_apple", "count": 2 },
+    { "type": "item", "item": "minecraft:golden_apple", "count": 30 },
+    { "type": "command", "command": "xp add {player} 10 levels" }
   ]
 }

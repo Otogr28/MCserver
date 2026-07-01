@@ -350,6 +350,11 @@
 		[mobs.ender_guardian.combat_config]
 			#Scale mob health by this value
 			#Range: 0.1 ~ 1000000.0
+			health_mult
+
+		[mobs.ender_guardian.combat_config]
+			#Scale mob health by this value
+			#Range: 0.1 ~ 1000000.0
 			health_multiplier = 1.0
 			#Scale mob attack damage by this value
 			#Range: 0.1 ~ 1000000.0
@@ -973,13 +978,6 @@
 			#Nature Heal
 			#Range: 0.0 ~ 1000000.0
 			nature_heal = 25.0
-
-[blocks]
-
-	[blocks.cursed_tombstone]
-		#Cursed Tombstone Cooldown
-		#Range: 0 ~ 30
-		cursed_tombstone_cooldown = 1
 
 [spawning]
 	#Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn

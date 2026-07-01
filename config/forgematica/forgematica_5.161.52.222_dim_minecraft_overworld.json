@@ -54,11 +54,11 @@
     "origin_selected": true
   },
   "schematic_projects_manager": {},
-  "operation_mode": "SCHEMATIC_PLACEMENT",
+  "operation_mode": "AREA_SELECTION",
   "render_range": {
     "mode": "SINGLE_LAYER",
     "axis": "y",
-    "layer_single": 124,
+    "layer_single": 138,
     "layer_above": 0,
     "layer_below": 0,
     "layer_range_min": 0,

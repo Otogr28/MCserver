@@ -38,7 +38,13 @@
     "aboveHead": true,          // hover directly ABOVE your head (sits on top of you, never lands in the crosshair —
                                 // it used to float at face height and block your hits/mining/block placement).
                                 // false = old side-float at head height (uses followDistance).
-    "aboveHeadOffset": 0.7      // blocks of clearance kept above your head when aboveHead is on
+    "aboveHeadOffset": 0.7,     // blocks of clearance kept above your head when aboveHead is on
+    // The Spirit has NO model — its body is drawn purely with particles every tick (client-side). Dust particles
+    // are cheap in vanilla but EXPENSIVE under shaders, so a Spirit could cost FPS (only Spirit owners / people
+    // near an enveloped Spirit lag; the server tick is unaffected). These two scale the particle counts live
+    // (/reload). 1.0 = default look, 0.0 = no particles. Lower them if the Spirit tanks your FPS.
+    "particleDensity": 1.0,        // idle free-floating wisp (light: ~2 particles/tick)
+    "envelopParticleDensity": 1.0  // Envelop aura around the owner (the heavy one: dense ring every tick). Try 0.3 or 0.
   },
   // modes: the ACTIVE modes (Equip > Actives). One selected; its effect is applied ONLY during the Envelop
   // (press X), on top of the base burst. The wisp's tone shifts slightly toward the active's colour (kept

@@ -16,7 +16,7 @@ firstRun = false
 	#DO NOT TOUCH!
 	#This is not for you.
 	#Range: 0 ~ 5
-	radius = 2
+	radius = 3
 	#Memory value for if you're currently wanting Lava to be rendered into the mix
 	lavaActive = false
 

@@ -91,3 +91,53 @@ nether/End from V1 with a command, e.g.:
 
 The bundled example dimension realmgates:red_waste reaches from V1; test it with:
   /execute in realmgates:red_waste run tp @s 0 120 0
+
+------------------------------------------------------------------------------
+ARENA / THE TRIAL  ("arena" block in realmgates.json)
+------------------------------------------------------------------------------
+The op command /realmgates arena enter|leave drops a player into a freshly
+instanced flat-white boss arena (foundation of THE TRIAL). Tunables (hot-
+reloadable with /realmgates reload):
+
+  bossId             entity id of the boss to face (default
+                     "block_factorys_bosses:yeti").
+  spawnDistanceMin   / spawnDistanceMax  how far (blocks) from the player the
+                     boss is placed (default 12 / 16).
+  spawnAttempts      placement retries before giving up (the boss is large).
+  leaveGraceTicks    / emptyGraceTicks / victoryGraceTicks  how long (ticks)
+                     the instance lingers before it fades after a leave/fail,
+                     after it empties, and after a win (default 40 / 200 / 100).
+  spawnBossActive    true (default): spawn the boss already awake & fightable.
+                     Bosses'Rise bosses spawned "frozen" (STRUCTURE) wait for a
+                     player to break their structure's ice to wake — which this
+                     empty arena has none of, so true is required here. Set
+                     false only for a boss whose awaken trigger exists in-world.
+  sealLoadout        true (default): THE TRIAL loadout vault — strip the player
+                     bare on entry and return everything intact on every exit
+                     (leave / death / disconnect / crash). false = keep your
+                     gear inside (pure boss-arena test).
+  sealCompanions     true (default): also disable the player's CustomCompanions
+                     companion for the run. Only applies when sealLoadout is on.
+
+"trial" block in realmgates.json  (THE TRIAL wave gauntlet, Phase 2):
+  enabled            false (default): /realmgates arena enter is the single-boss
+                     arena. true: it becomes a wave run.
+  waveMobs           entity ids the waves draw from at random
+                     (default zombie / skeleton / spider).
+  wavesPerTier       waves per tier (default 3).
+  baseMobsPerWave    mobs in a tier's first wave (default 4).
+  mobGrowthPerWave   extra mobs each later wave (default 2 -> 4, 6, 8...).
+  tierBosses         boss id per tier (list length = number of tiers). Clearing
+                     a tier's waves spawns its boss; killing it advances; the
+                     last tier's boss ends the run (win -> auto-return).
+                     Default: one tier ending in the yeti.
+  pickTimeoutTicks   how long a between-wave upgrade offer waits before auto-
+                     picking one (default 300 = 15s).
+  upgrades           the "choose 1 of 3" run-upgrade pool. Each entry:
+                       { "id", "name", "description",
+                         "attribute": "minecraft:generic.attack_damage",
+                         "amount": 2.0 }
+                     Between waves the player is offered 3 at random and clicks
+                     one (chat); it stacks that attribute bonus for the run and
+                     is stripped on exit. Default pool: Vigor / Might /
+                     Swiftness / Guard / Ferocity.
