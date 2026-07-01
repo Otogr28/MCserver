@@ -1030,3 +1030,10 @@
 	#Range: > 0
 	ignited_berserker_spawn_rolls = 2
 
+[blocks]
+
+	[blocks.cursed_tombstone]
+		#Cursed Tombstone Cooldown
+		#Range: 0 ~ 30
+		cursed_tombstone_cooldown = 1
+

@@ -96,8 +96,10 @@ The bundled example dimension realmgates:red_waste reaches from V1; test it with
 ARENA / THE TRIAL  ("arena" block in realmgates.json)
 ------------------------------------------------------------------------------
 The op command /realmgates arena enter|leave drops a player into a freshly
-instanced flat-white boss arena (foundation of THE TRIAL). Tunables (hot-
-reloadable with /realmgates reload):
+instanced flat-white boss arena (foundation of THE TRIAL). The instance is
+EPHEMERAL: its on-disk files are wiped each time it is (re)created, so a run
+never inherits a previous run's boss/mobs. Tunables (hot-reloadable with
+/realmgates reload):
 
   bossId             entity id of the boss to face (default
                      "block_factorys_bosses:yeti").
