@@ -119,11 +119,4 @@ pick your mic and a push-to-talk key.
 > Heads-up: if everyone nearby already speaks your language, nothing is translated — that's on
 > purpose, to save resources. Translation kicks in when someone nearby uses a different language.
 
----
 
-## 🛠️ For the admin
-
-- Source of truth: the admin PC (`~/MCserver`).
-- `git push` → GitHub → the server runs `git pull` and restarts (`mc-update`).
-- The translation backend (speech-to-text + DeepL) runs as a separate service on the VPS;
-  no API keys live in this repo or in the mod.
